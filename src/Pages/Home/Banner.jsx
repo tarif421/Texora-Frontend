@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <section className="bg-green-600 w-full h-[350px] relative ">
+    <section className="bg-green-600 mt-10 w-full h-[350px] relative ">
       {/* Background Image */}
       <img
         className="absolute w-full h-full  "
