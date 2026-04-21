@@ -4,10 +4,10 @@ const WorkFlow = () => {
   return (
     <>
       <div >
-        <h1 className="font-bold text-4xl  text-[#384bb4] mt-15 font-serif">
+        <h1 className="font-bold text-4xl  text-center text-[#384bb4] mt-15 font-serif">
           Production Workflow
         </h1>
-        <p className="text-xs mt-2"> Transparent process from order to delivery</p>
+        <p className="text-xs mt-2 text-center"> Transparent process from order to delivery</p>
       </div>
       <section className="mt-15 grid grid-cols-2 lg:grid-cols-4 gap-6 px-9 ">
         <div className=" flex flex-col bg-[#e0e5fe]  rounded-2xl p-3 ">
