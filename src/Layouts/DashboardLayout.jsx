@@ -3,6 +3,7 @@ import { AiFillProduct } from "react-icons/ai";
 
 import { MdManageAccounts } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
+import { NavLink, Outlet } from "react-router";
 
 const DashboardLayout = () => {
   return (
@@ -36,7 +37,7 @@ const DashboardLayout = () => {
             <div className="px-4">Navbar Title</div>
           </nav>
           {/* Page content here */}
-          <div className="p-4">Page Content</div>
+          <Outlet></Outlet>
         </div>
 
         <div className="drawer-side is-drawer-close:overflow-visible">
@@ -50,7 +51,7 @@ const DashboardLayout = () => {
             <ul className="menu w-full grow">
               {/* List item */}
               <li>
-                <button
+                <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Homepage"
                 >
@@ -69,48 +70,51 @@ const DashboardLayout = () => {
                     <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   </svg>
                   <span className="is-drawer-close:hidden">Homepage</span>
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
+                <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Homepage"
+                  data-tip="Manage Users"
+                  to = "/dashboard/manage-users"
                 >
                   {/* Home icon */}
                   <span className="text-2xl">
                     <MdManageAccounts />
                   </span>
                   <span className="is-drawer-close:hidden">Manage Users</span>
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
+                <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Homepage"
+                  data-tip="All Products"
+                  to = "/dashboard/all-products"
                 >
                   {/* Home icon */}
                   <span className="text-2xl">
                     <AiFillProduct />
                   </span>
                   <span className="is-drawer-close:hidden">All Products</span>
-                </button>
+                </NavLink>
               </li>
               <li>
-                <button
+                <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Homepage"
+                  data-tip="All Orders"
+                  to = "/dashboard/all-orders"
                 >
                   {/* Home icon */}
                   <span className="text-2xl ">
                     <TbTruckDelivery />
                   </span>
                   <span className="is-drawer-close:hidden">All Orders</span>
-                </button>
+                </NavLink>
               </li>
 
               {/* List item */}
               <li>
-                <button
+                <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Settings"
                 >
@@ -131,7 +135,7 @@ const DashboardLayout = () => {
                     <circle cx="7" cy="7" r="3"></circle>
                   </svg>
                   <span className="is-drawer-close:hidden">Settings</span>
-                </button>
+                </NavLink>
               </li>
             </ul>
           </div>
