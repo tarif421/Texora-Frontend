@@ -38,15 +38,13 @@ const AddNewProducts = () => {
       minimumOrder: parseInt(formData.minimumOrder),
     };
 
-    try{
-      // axios post requist
-    }
+    
   };
 
   return (
     <div className="min-h-screen bg-white text-ray-900 py-12 px-4">
       <div className="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 shadow-xl border-gray-200">
-        <h2 className="text-3xl font-bold mb-8 text-center ">
+        <h2 className="text-3xl  text-[#384bb4] font-bold mb-9 text-center ">
           Add New Product
         </h2>
 
