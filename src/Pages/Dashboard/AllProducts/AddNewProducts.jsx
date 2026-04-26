@@ -1,4 +1,6 @@
 import { useState } from "react";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddNewProducts = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ const AddNewProducts = () => {
     features: "",
     paymentOptions: [],
   });
+  const axiosSecure = useAxiosSecure();
 
   const paymentMethods = [
     "Cash on Delivery",
@@ -19,6 +22,11 @@ const AddNewProducts = () => {
     "Stripe",
     "Online Payment",
   ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handlePaymentChange = (method) => {
     const updatedOptions = formData.paymentOptions.includes(method)
@@ -38,9 +46,28 @@ const AddNewProducts = () => {
       minimumOrder: parseInt(formData.minimumOrder),
     };
 
-    
+    try {
+      const res = await axiosSecure.post("/all-products", finalData);
+      if (res.data.insertedId) {
+        Swal.fire("success!", "Product added successfully", "success");
+        setFormData({
+          productName: "",
+          productImage: "",
+          price: "",
+          description: "",
+          category: "",
+          availableQuantity: "",
+          minimumOrder: "",
+          features: "",
+          paymentOptions: [],
+        });
+        e.target.reset();
+      }
+    } catch (error) {
+      console.log("post error", error);
+      Swal.fire("Error", "Failed to add product", "error");
+    }
   };
-
   return (
     <div className="min-h-screen bg-white text-ray-900 py-12 px-4">
       <div className="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 shadow-xl border-gray-200">
@@ -92,7 +119,10 @@ const AddNewProducts = () => {
                 name={field.name}
                 step={field.step}
                 placeholder={field.placeholder}
+                value={formData[field.name]} 
+                onChange={handleChange}
                 className="p-3 rounded-xl bg-white text-gray-80 border border-gray-300 outline-none "
+                required
               />
             </div>
           ))}
@@ -117,6 +147,7 @@ const AddNewProducts = () => {
             <textarea
               name="description"
               rows="4"
+              onChange={handleChange}
               className="p-3 rounded-xl bg-white text-gray-800 border border-gray-400 outline-none "
             ></textarea>
           </div>
