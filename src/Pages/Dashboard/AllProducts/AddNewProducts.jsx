@@ -119,10 +119,10 @@ const AddNewProducts = () => {
                 name={field.name}
                 step={field.step}
                 placeholder={field.placeholder}
-                value={formData[field.name]} 
+                value={formData[field.name]}
                 onChange={handleChange}
                 className="p-3 rounded-xl bg-white text-gray-80 border border-gray-300 outline-none "
-                required
+          required
               />
             </div>
           ))}
@@ -135,6 +135,7 @@ const AddNewProducts = () => {
             <input
               type="text"
               name="features"
+              onChange={handleChange}
               placeholder="Water-resistant, Lightweight, Outdoon-friendly"
               className="p-3 bg-white rounded-xl text-gray-800 border border-gray-300 outline-none "
             />
@@ -176,7 +177,7 @@ const AddNewProducts = () => {
 
           <button
             type="submit"
-            className="md:col-span-2 mt-8 py-4 rounded-xl bg-gradient-to-r from-sky-800 via-blue-400 text-white to-sky-800"
+            className="md:col-span-2 mt-8 py-4 rounded-xl bg-linear-to-r from-sky-800 via-blue-400 text-white to-sky-800"
           >
             Create Product Listing
           </button>
