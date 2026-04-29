@@ -33,7 +33,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/dashboard"
+          to="/dashboard/all-products"
           className={({ isActive }) =>
             isActive ? "text-[#27379b] font-semibold" : "hover:text-[#27379b]"
           }

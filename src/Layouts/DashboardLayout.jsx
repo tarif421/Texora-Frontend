@@ -4,10 +4,15 @@ import { AiFillProduct } from "react-icons/ai";
 import { MdManageAccounts } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router";
+import Navbar from "../Shared/Navbar/Navbar";
+import Footer from "../Shared/Footer/Footer";
 
 const DashboardLayout = () => {
-  return (
-    <div>
+  return <>
+    
+      <Navbar></Navbar>
+   
+    <div className="mt-15">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -34,7 +39,7 @@ const DashboardLayout = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4">Navbar Title</div>
+            <div className="px-4 text-2xl text-sky-700 font-bold rounded-xl">DASHBOARD</div>
           </nav>
           {/* Page content here */}
           <Outlet></Outlet>
@@ -54,6 +59,7 @@ const DashboardLayout = () => {
                 <NavLink
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Homepage"
+                  to = "/"
                 >
                   {/* Home icon */}
                   <svg
@@ -142,7 +148,8 @@ const DashboardLayout = () => {
         </div>
       </div>
     </div>
-  );
+    <Footer></Footer>
+  </>;
 };
 
 export default DashboardLayout;

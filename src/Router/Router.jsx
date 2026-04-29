@@ -8,6 +8,7 @@ import AllProducts from "../Pages/Dashboard/AllProducts/AllProducts";
 import AllOrders from "../Pages/Dashboard/AllOrders/AllOrders";
 import AddNewProducts from "../Pages/Dashboard/AllProducts/AddNewProducts";
 
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
         index: true,
         Component: HomePage,
       },
+      
     ],
   },
   {
