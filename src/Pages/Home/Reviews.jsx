@@ -1,6 +1,6 @@
 import React, { use } from "react";
 
-import { EffectCoverflow, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 
 import "swiper/css";
@@ -13,11 +13,14 @@ const Reviews = ({ reviewsPromise }) => {
   console.log(reviews);
   return (
     <div>
-       <div  className="mb-15 text-center">
+      <div className="mb-15 text-center">
         <h1 className="font-bold text-4xl  text-[#384bb4] mt-15 font-serif">
           Customers Feedback
         </h1>
-        <p className="text-xs mt-2"> Crafting excellence through the eyes of our customers</p>
+        <p className="text-xs mt-2">
+          {" "}
+          Crafting excellence through the eyes of our customers
+        </p>
       </div>
       <>
         <Swiper
@@ -25,6 +28,10 @@ const Reviews = ({ reviewsPromise }) => {
           grabCursor={true}
           centeredSlides={true}
           slidesPerView={"3"}
+          autoplay={{
+            delay: 1000,
+            disableOnInteraction: false, 
+          }}
           coverflowEffect={{
             rotate: 30,
             stretch: "20%",
@@ -34,7 +41,7 @@ const Reviews = ({ reviewsPromise }) => {
             slideShadows: true,
           }}
           pagination={true}
-          modules={[EffectCoverflow, Pagination]}
+          modules={[EffectCoverflow, Pagination, Autoplay]}
           className="mySwiper"
         >
           {reviews.map((review) => (
