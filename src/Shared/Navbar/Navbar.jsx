@@ -1,14 +1,7 @@
-
 import { GiRolledCloth } from "react-icons/gi";
 import { Link, NavLink } from "react-router";
 
-
 const Navbar = () => {
-
-
-
-
-
   const links = (
     <>
       <li>
@@ -104,25 +97,20 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
 
-      {/* END */}
-      <div className="navbar-end ml-2 flex gap-2">
-        {/* {!user ? (
-          <>
-            <Link to="/auth/register">
-              <button className="btn bg-[#192586] text-white">Register</button>
-            </Link>
-            <Link to="/auth/login">
-              <button className="btn bg-[#192586] text-white">Login</button>
-            </Link>
-          </>
-        ) : (
-          <button
-           
-            className="btn bg-[#192586] text-white"
-          >
-            Logout
-          </button>
-        )} */}
+      {/* end */}
+      <div className="navbar-end gap-2">
+        <Link
+          to="/login"
+          className="btn btn-ghost text-[#192586] font-semibold border-[#192586] hover:bg-[#19258610]"
+        >
+          Log In
+        </Link>
+        <Link
+          to="/register"
+          className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none"
+        >
+          Register
+        </Link>
       </div>
     </div>
   );
