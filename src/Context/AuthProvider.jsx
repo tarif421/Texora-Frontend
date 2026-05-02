@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
   };
 
   // obser uer state
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
   //   ////////////////////
   const authInfo = {
     user,
