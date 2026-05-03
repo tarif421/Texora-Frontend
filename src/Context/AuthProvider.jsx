@@ -4,6 +4,7 @@ import { auth } from "../firebase/firebase.init";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
@@ -29,7 +30,14 @@ const AuthProvider = ({ children }) => {
   };
 
   // obser uer state
-  // useEffect(() => {}, []);
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, []);
   //   ////////////////////
   const authInfo = {
     user,
