@@ -33,6 +33,7 @@ const AuthProvider = ({ children }) => {
   //   ////////////////////
   const authInfo = {
     user,
+    loading,
     registerUser,
     signInUser,
     signInGoogle,
