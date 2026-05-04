@@ -7,11 +7,11 @@ const AllProducts = () => {
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
-  // ১. ডাটাবেস থেকে সব ডাটা নিয়ে আসা
+  
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const res = await axiosSecure.get("/all-Products"); // নিশ্চিত করুন ব্যাকএন্ডে এই রাউট আছে
+        const res = await axiosSecure.get("/all-Products"); 
         setProducts(res.data);
       } catch (error) {
         console.error("Error loading products:", error);
