@@ -1,7 +1,19 @@
 import { GiRolledCloth } from "react-icons/gi";
 import { Link, NavLink } from "react-router";
+import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("logout successfull");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const links = (
     <>
       <li>
@@ -98,19 +110,41 @@ const Navbar = () => {
       </div>
 
       {/* end */}
-      <div className="navbar-end gap-2">
-        <Link
-          to="/login"
-          className="btn btn-ghost text-[#192586] font-semibold border-[#192586] hover:bg-[#19258610]"
-        >
-          Log In
-        </Link>
-        <Link
-          to="/register"
-          className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none"
-        >
-          Register
-        </Link>
+      <div className="navbar-end ml-2 flex gap-2">
+        {user ? (
+          <>
+            
+            <button
+              onClick={handleLogOut}
+              className="btn bg-blue-800 hover:bg-blue-600 text-white border-none"
+            >
+              Log Out
+            </button>
+            {/* circle/ */}
+          
+            <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
+      <div className="w-10 h-10">
+        <img
+          src={user?.photoURL || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} 
+          alt="User Profile"
+          className="w-full h-full rounded-full object-cover border-2 border-[#192586]"
+        />
+      </div>
+    </div>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className="btn btn-ghost text-[#192586] font-semibold border-[#192586] hover:bg-[#19258610]"
+            >
+              Log In
+            </Link>
+            <Link className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

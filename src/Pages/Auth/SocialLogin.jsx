@@ -17,6 +17,7 @@ const SocialLogin = () => {
       <p className="mb-2">OR</p>
       <button
       onClick={handleGoogleSingIn}
+      type="button"
       
       
       className="btn w- bg-white text-black border-[#e5e5e5]">
