@@ -31,7 +31,8 @@ const Login = () => {
       >
          <h3 className="text-3xl text-center font-bold text-[#384bb4] font-serif">Please Login!</h3>
         <fieldset className="fieldset">
-          {/* email */}
+            
+          {/* email field */}
           <label className="label">Email</label>
           <input
             {...register("email", { required: true })}

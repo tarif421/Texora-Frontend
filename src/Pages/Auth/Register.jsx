@@ -4,7 +4,6 @@ import useAuth from "../../Hooks/useAuth";
 import { Link } from "react-router";
 import SocialLogin from "./SocialLogin";
 
-
 const Register = () => {
   const {
     register,
@@ -14,10 +13,12 @@ const Register = () => {
   const { registerUser } = useAuth();
 
   const handleRegistration = (data) => {
-    console.log("fter register", data);
+    console.log("fter register", data.photo[0]);
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        // store the image and get the photo url
+        // update user profile
       })
       .catch((error) => {
         console.log(error);
@@ -36,6 +37,29 @@ const Register = () => {
           Please Register!
         </p>
         <fieldset className="fieldset">
+          {/* Name field */}
+          <label className="label">Name</label>
+          <input
+            {...register("email", { required: true })}
+            type="text"
+            className="input"
+            placeholder="name"
+          />
+          {errors.email?.type === "required" && (
+            <p className="text-red-500">Name is required</p>
+          )}
+          {/* Image field */}
+          <label className="label">Photo</label>
+          <input
+            {...register("photo", { required: true })}
+            type="file"
+            className="file-input "
+            placeholder="Your Photo"
+          />
+          {errors.email?.type === "required" && (
+            <p className="text-red-500">Photo is required</p>
+          )}
+          {/* email field */}
           <label className="label">Email</label>
           <input
             type="email"
@@ -86,10 +110,8 @@ const Register = () => {
             Login
           </Link>
         </p>
-           <SocialLogin></SocialLogin>
+        <SocialLogin></SocialLogin>
       </form>
-   
-    
     </div>
   );
 };
