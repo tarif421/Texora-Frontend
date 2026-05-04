@@ -20,7 +20,7 @@ const SocialLogin = () => {
       type="button"
       
       
-      className="btn w- bg-white text-black border-[#e5e5e5]">
+      className="btn w-full bg-gray-200 text-black border-[#e5e5e5]">
         <svg
           aria-label="Google logo"
           width="16"
