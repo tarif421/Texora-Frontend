@@ -28,10 +28,10 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:3000/productsDetails/${params.id}`),
         element: <ProductDetails />,
       },
-      {
-        path: "/booking",
-        Component: BookingPage
-      }
+      // {
+      //   path: "/booking",
+      //   Component: BookingPage
+      // }
     ],
   },
   {
