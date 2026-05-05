@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Card = ({ product }) => {
   const {
@@ -45,9 +46,9 @@ const Card = ({ product }) => {
         </div>
 
         {/* Button */}
-        <button className="btn bg-[#5c6dc9] text-[#ffffff] w-full mt-4">
+       <Link to={`/Details/${product._id}`}> <button  className="btn bg-[#5c6dc9] text-[#ffffff] w-full mt-4">
           View Details →
-        </button>
+        </button></Link>
       </div>
 
       

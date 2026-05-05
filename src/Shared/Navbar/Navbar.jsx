@@ -140,7 +140,7 @@ const Navbar = () => {
             >
               Log In
             </Link>
-            <Link className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none">
+            <Link to="register" className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none">
               Register
             </Link>
           </>

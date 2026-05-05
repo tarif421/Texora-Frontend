@@ -10,6 +10,7 @@ import AddNewProducts from "../Pages/Dashboard/AllProducts/AddNewProducts";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
+import ProductDetails from "../Pages/Home/Products/ProductDetails";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,12 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: HomePage,
+      },
+       {
+        path: "/Details/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/productsDetails/${params.id}`),
+        element: <ProductDetails />,
       },
     ],
   },
