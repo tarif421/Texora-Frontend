@@ -11,6 +11,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ProductDetails from "../Pages/Home/Products/ProductDetails";
+import BookingPage from "../Pages/Home/Products/BookingPage";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:3000/productsDetails/${params.id}`),
         element: <ProductDetails />,
       },
+      {
+        path: "/booking",
+        Component: BookingPage
+      }
     ],
   },
   {
