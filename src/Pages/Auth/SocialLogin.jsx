@@ -1,26 +1,31 @@
 import React from "react";
 import useAuth from "../../Hooks/useAuth";
+import { useLocation, useNavigate } from "react-router";
 
 const SocialLogin = () => {
-  const {signInGoogle} = useAuth();
+  const { signInGoogle } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+
   const handleGoogleSingIn = () => {
     signInGoogle()
-    .then(result => {
-        console.log(result.user)
-    })
-      .catch(error => {
-      console.log(error)
-    })
-  }
+      .then((result) => {
+        console.log(result.user);
+        navigate(location.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="text-center pb-6 pt-4">
       <p className="mb-2">OR</p>
       <button
-      onClick={handleGoogleSingIn}
-      type="button"
-      
-      
-      className="btn w-full bg-gray-200 text-black border-[#e5e5e5]">
+        onClick={handleGoogleSingIn}
+        type="button"
+        className="btn w-full bg-gray-200 text-black border-[#e5e5e5]"
+      >
         <svg
           aria-label="Google logo"
           width="16"

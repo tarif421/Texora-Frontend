@@ -76,12 +76,12 @@ const Register = () => {
           {/* Name field */}
           <label className="label">Name</label>
           <input
-            {...register("email", { required: true })}
+            {...register("name", { required: true })}
             type="text"
             className="input"
             placeholder="name"
           />
-          {errors.email?.type === "required" && (
+          {errors.name?.type === "required" && (
             <p className="text-red-500">Name is required</p>
           )}
           {/* Image field */}
@@ -92,7 +92,7 @@ const Register = () => {
             className="file-input "
             placeholder="Your Photo"
           />
-          {errors.email?.type === "required" && (
+          {errors.photo?.type === "required" && (
             <p className="text-red-500">Photo is required</p>
           )}
           {/* email field */}
