@@ -13,6 +13,12 @@ import Register from "../Pages/Auth/Register";
 import ProductDetails from "../Pages/Home/Products/ProductDetails";
 import BookingPage from "../Pages/Home/Products/BookingPage";
 import AdminRoute from "./AdminRoute";
+import ManageRoute from "./ManagerRoute";
+import AddProduct from "../Pages/Dashboard/Manager/AddProduct";
+import ApproveOrders from "../Pages/Dashboard/Manager/ApproveOrders";
+import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
+import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
+import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
 
 export const router = createBrowserRouter([
   {
@@ -63,15 +69,63 @@ export const router = createBrowserRouter([
       },
       {
         path: "all-products",
-        Component: AllProducts,
+        element: (
+          <AdminRoute>
+            <AllProducts />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-orders",
-        Component: AllOrders,
+        element: (
+          <AdminRoute>
+            <AllOrders />
+          </AdminRoute>
+        ),
       },
       {
         path: "add-products",
         Component: AddNewProducts,
+      },
+      {
+        path: "add-products",
+        element: (
+          <ManageRoute>
+            <AddProduct />
+          </ManageRoute>
+        ),
+      },
+      {
+        path: "approve-orders",
+        element: (
+          <ManageRoute>
+            <ApproveOrders />
+          </ManageRoute>
+        ),
+      },
+      {
+        path: "manage-product",
+        element: (
+          <ManageRoute>
+            <ManageProducts />
+          </ManageRoute>
+        ),
+      },
+      {
+        path: "my-profile",
+        element: (
+          <ManageRoute>
+            <MyProfile />
+          </ManageRoute>
+        ),
+      },
+      {
+        path: "pending-orders",
+        element: (
+          <ManageRoute>
+            <PendingOrders />
+          </ManageRoute>
+        ),
       },
     ],
   },
