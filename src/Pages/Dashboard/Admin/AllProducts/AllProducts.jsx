@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
-  
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
-        const res = await axiosSecure.get("/all-Products"); 
+        const res = await axiosSecure.get("/all-Products");
         setProducts(res.data);
       } catch (error) {
         console.error("Error loading products:", error);
@@ -22,7 +21,7 @@ const AllProducts = () => {
     fetchAllProducts();
   }, [axiosSecure]);
 
-   if (loading) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
@@ -34,7 +33,9 @@ const AllProducts = () => {
     <div className="bg-white rounded-lg shadow p-6">
       {/* Page Header */}
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">All Products (Total: {products.length})</h2>
+        <h2 className="text-2xl font-bold">
+          All Products (Total: {products.length})
+        </h2>
         <NavLink to="/dashboard/add-products" className="btn btn-primary">
           + Add New Product
         </NavLink>
@@ -57,7 +58,10 @@ const AllProducts = () => {
 
           <tbody>
             {products.map((product) => (
-              <tr key={product._id} className="hover:bg-gray-50 transition-colors">
+              <tr
+                key={product._id}
+                className="hover:bg-gray-50 transition-colors"
+              >
                 <td>
                   <div className="avatar">
                     <div className="w-14 h-14 rounded-lg">
@@ -69,18 +73,22 @@ const AllProducts = () => {
                     </div>
                   </div>
                 </td>
-                <td className="font-semibold text-gray-800">{product.productName}</td>
+                <td className="font-semibold text-gray-800">
+                  {product.productName}
+                </td>
                 <td className="font-bold text-indigo-600">${product.price}</td>
                 <td>
-                  <span className="badge badge-ghost badge-sm">{product.category}</span>
+                  <span className="badge badge-ghost badge-sm">
+                    {product.category}
+                  </span>
                 </td>
                 <td>{product.availableQuantity} pcs</td>
                 <td>
                   {/* এখানে আপনি চাইলে পরবর্তীতে লজিক যোগ করতে পারেন */}
-                  <input 
-                    type="checkbox" 
-                    className="toggle toggle-success toggle-sm" 
-                    defaultChecked 
+                  <input
+                    type="checkbox"
+                    className="toggle toggle-success toggle-sm"
+                    defaultChecked
                   />
                 </td>
                 <td className="text-right space-x-2">
@@ -103,8 +111,6 @@ const AllProducts = () => {
           No products found in the database.
         </div>
       )}
-
-      
     </div>
   );
 };

@@ -3,10 +3,10 @@ import RootLayout from "../Layouts/RootLayout";
 
 import HomePage from "../Pages/Home/HomePage";
 import DashboardLayout from "../Layouts/DashboardLayout";
-import ManageUsers from "../Pages/Dashboard/ManageUsers/ManageUsers";
-import AllProducts from "../Pages/Dashboard/AllProducts/AllProducts";
-import AllOrders from "../Pages/Dashboard/AllOrders/AllOrders";
-import AddNewProducts from "../Pages/Dashboard/AllProducts/AddNewProducts";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import AllProducts from "../Pages/Dashboard/Admin/AllProducts/AllProducts";
+import AllOrders from "../Pages/Dashboard/Admin/AllOrders/AllOrders";
+import AddNewProducts from "../Pages/Dashboard/Admin/AllProducts/AddNewProducts";
 import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";

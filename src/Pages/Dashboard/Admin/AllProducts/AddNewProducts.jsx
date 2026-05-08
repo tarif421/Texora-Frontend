@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const AddNewProducts = () => {
@@ -122,7 +122,7 @@ const AddNewProducts = () => {
                 value={formData[field.name]}
                 onChange={handleChange}
                 className="p-3 rounded-xl bg-white text-gray-80 border border-gray-300 outline-none "
-          required
+                required
               />
             </div>
           ))}
