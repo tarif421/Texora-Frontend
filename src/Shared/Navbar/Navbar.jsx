@@ -38,7 +38,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/dashboard/all-products"
+          to="/dashboard"
           className={({ isActive }) =>
             isActive ? "text-[#27379b] font-semibold" : "hover:text-[#27379b]"
           }
@@ -113,7 +113,6 @@ const Navbar = () => {
       <div className="navbar-end ml-2 flex gap-2">
         {user ? (
           <>
-            
             <button
               onClick={handleLogOut}
               className="btn bg-blue-800 hover:bg-blue-600 text-white border-none"
@@ -121,16 +120,22 @@ const Navbar = () => {
               Log Out
             </button>
             {/* circle/ */}
-          
-            <div className="tooltip tooltip-bottom" data-tip={user?.displayName}>
-      <div className="w-10 h-10">
-        <img
-          src={user?.photoURL || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} 
-          alt="User Profile"
-          className="w-full h-full rounded-full object-cover border-2 border-[#192586]"
-        />
-      </div>
-    </div>
+
+            <div
+              className="tooltip tooltip-bottom"
+              data-tip={user?.displayName}
+            >
+              <div className="w-10 h-10">
+                <img
+                  src={
+                    user?.photoURL ||
+                    "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                  }
+                  alt="User Profile"
+                  className="w-full h-full rounded-full object-cover border-2 border-[#192586]"
+                />
+              </div>
+            </div>
           </>
         ) : (
           <>
@@ -140,7 +145,10 @@ const Navbar = () => {
             >
               Log In
             </Link>
-            <Link to="register" className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none">
+            <Link
+              to="register"
+              className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none"
+            >
               Register
             </Link>
           </>
