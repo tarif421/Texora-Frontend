@@ -12,6 +12,7 @@ import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ProductDetails from "../Pages/Home/Products/ProductDetails";
 import BookingPage from "../Pages/Home/Products/BookingPage";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
         index: true,
         Component: HomePage,
       },
-       {
+      {
         path: "/Details/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:3000/productsDetails/${params.id}`),
@@ -54,7 +55,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "manage-users",
-        Component: ManageUsers,
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "all-products",
