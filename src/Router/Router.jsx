@@ -11,7 +11,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ProductDetails from "../Pages/Home/Products/ProductDetails";
-// import BookingPage from "../Pages/Home/Products/BookingPage";
+import BookingPage from "../Pages/Home/Products/BookingPage";
 import AdminRoute from "./AdminRoute";
 import ManageRoute from "./ManagerRoute";
 import AddProduct from "../Pages/Dashboard/Manager/AddProduct";
@@ -19,6 +19,7 @@ import ApproveOrders from "../Pages/Dashboard/Manager/ApproveOrders";
 import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
 import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
+
 
 export const router = createBrowserRouter([
   {
@@ -35,12 +36,13 @@ export const router = createBrowserRouter([
           fetch(`http://localhost:3000/productsDetails/${params.id}`),
         element: <ProductDetails />,
       },
-      // {
-      //   path: "/booking/:id",
-      //   element: <BookingPage />,
-      //   loader: ({ params }) =>
-      //     fetch(`http://localhost:3000/productsDetails/${params.id}`),
-      // },
+      {
+        path: "/booking/:id",
+        element: <BookingPage />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/productsDetails/${params.id}`),
+      },
+
     ],
   },
   {
