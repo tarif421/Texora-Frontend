@@ -19,7 +19,7 @@ import ApproveOrders from "../Pages/Dashboard/Manager/ApproveOrders";
 import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
 import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
-
+import CheckoutPage from "../Pages/Home/Products/CheckoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +42,10 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/productsDetails/${params.id}`),
       },
-
+      {
+        path: "/checkout-page/:id",
+        element: <CheckoutPage></CheckoutPage>,
+      },
     ],
   },
   {

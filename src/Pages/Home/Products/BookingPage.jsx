@@ -13,15 +13,12 @@ const BookingPage = () => {
 
   const [quantity, setQuantity] = useState(product?.minimumOrder || 1);
 
-  // ✅ Auto price
+
   const totalPrice = quantity * product.price;
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value);
-    // if (quantity < product.minimumOrder) {
-    //   toast.error(`Minimum ${product.minimumOrder}`);
-    //   return;
-    // }
+
     if (value < product.minimumOrder) {
       toast.error(`Minimum ${product.minimumOrder}`);
       return;

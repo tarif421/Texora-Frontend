@@ -1,39 +1,27 @@
 import React from "react";
-import { Link, useLoaderData, useNavigate } from "react-router";
+import { Link, useLoaderData, useNavigate, NavLink } from "react-router";
 
 import Swal from "sweetalert2";
 import useRole from "../../../Hooks/useRole";
 import useAuth from "../../../Hooks/useAuth";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const ProductDetails = () => {
   const product = useLoaderData();
   const { user } = useAuth();
   const { role } = useRole();
   const navigate = useNavigate();
-  const axiosSecure = useAxiosSecure();
-
-
 
   const handleOrderClick = async () => {
-    try{
-     const res = await axiosSecure.get('all-products')
-     if(res.data.paymentOptions === 'stripe')
-      navigate()
-    }catch (error){
-      console.log(error)
+    if (!user) {
+      // Not logged in
+      await Swal.fire({
+        icon: "info",
+        title: "Please login to continue",
+      });
 
+      navigate("/login");
+      return;
     }
-      if (!user) {
-        // Not logged in
-        await Swal.fire({
-          icon: "info",
-          title: "Please login to continue",
-        });
-
-        navigate("/login");
-        return;
-      }
 
     // Admin / Manager blocked
     if (role === "admin" || role === "manager") {
@@ -57,6 +45,12 @@ const ProductDetails = () => {
 
     // Buyer allowed
     if (role === "buyer") {
+      navigate(`/booking/${product._id}`);
+    }
+    const isStripeOnly = product.paymentOptions?.includes("Stripe");
+    if (isStripeOnly) {
+      navigate(`/checkout-page/${product._id}`);
+    } else {
       navigate(`/booking/${product._id}`);
     }
   };
@@ -115,17 +109,19 @@ const ProductDetails = () => {
             ))}
           </div>
 
-          <button
-            type="button"
-            onClick={handleOrderClick}
-            className={`w-full py-4 rounded-xl font-bold transition-all active:scale-95 ${
-              role === "admin" || role === "manager"
-                ? "bg-gray-500 cursor-pointer"
-                : "bg-gradient-to-r from-indigo-500 to-pink-500 cursor-pointer"
-            }`}
-          >
-            Order / Book Now
-          </button>
+         
+            <button
+              type="button"
+              onClick={handleOrderClick}
+              className={`w-full py-4 rounded-xl font-bold transition-all active:scale-95 ${
+                role === "admin" || role === "manager"
+                  ? "bg-gray-500 cursor-pointer"
+                  : "bg-gradient-to-r from-indigo-500 to-pink-500 cursor-pointer"
+              }`}
+            >
+              Order / Book Now
+            </button>
+        
         </div>
       </section>
     </div>
