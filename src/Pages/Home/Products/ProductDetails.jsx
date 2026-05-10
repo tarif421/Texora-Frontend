@@ -1,31 +1,54 @@
 import React from "react";
 import { Link, useLoaderData, useNavigate } from "react-router";
-import { toast } from "react-toastify";
+
+import Swal from "sweetalert2";
+import useRole from "../../../Hooks/useRole";
 import useAuth from "../../../Hooks/useAuth";
 
 const ProductDetails = () => {
   const product = useLoaderData();
   const { user } = useAuth();
+  const { role } = useRole();
   const navigate = useNavigate();
 
-  const canOrder =
-    user && user.role !== "admin" && user.role !== "manager";
+  const canOrder = user && user.role !== "admin" && user.role !== "manager";
 
-    
-
-  const handleOrderClick = () => {
+  const handleOrderClick = async () => {
+    // Not logged in
     if (!user) {
-      toast.error("Please login to continue");
-      navigate("/auth/login");
+      await Swal.fire({
+        icon: "info",
+        title: "Please login to continue",
+      });
+
+      navigate("/login");
       return;
     }
 
-    if (!canOrder) {
-      toast.error("Admins and Managers cannot place orders");
+    // Admin / Manager blocked
+    if (role === "admin" || role === "manager") {
+      Swal.fire({
+        icon: "warning",
+        title: "Access Denied",
+        text: "Admins and Managers cannot place orders",
+      });
       return;
     }
 
-    navigate(`/booking/${product._id}`);
+    // Pending user
+    if (role === "user") {
+      Swal.fire({
+        icon: "info",
+        title: "Account Pending",
+        text: "You are pending. Please wait for approval.",
+      });
+      return;
+    }
+
+    // Buyer allowed
+    if (role === "buyer") {
+      navigate(`/booking/${product._id}`);
+    }
   };
 
   if (!product) return null;
@@ -73,25 +96,26 @@ const ProductDetails = () => {
           <div className="mb-6">
             <p className="font-semibold mb-2">Payment Options:</p>
             {product.paymentOptions?.map((p, i) => (
-              <span key={i} className="mr-3 px-3 py-1 bg-indigo-600 rounded-full">
+              <span
+                key={i}
+                className="mr-3 px-3 py-1 bg-indigo-600 rounded-full"
+              >
                 {p}
               </span>
             ))}
           </div>
 
-      
           <button
-            disabled={!canOrder}
+            type="button"
             onClick={handleOrderClick}
-            className={`w-full py-4 rounded-xl font-bold ${
-              canOrder
-                ? "bg-gradient-to-r from-indigo-500 to-pink-500"
-                : "bg-gray-600 cursor-not-allowed"
+            className={`w-full py-4 rounded-xl font-bold transition-all active:scale-95 ${
+              user?.role === "admin" || user?.role === "manager"
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-indigo-500 to-pink-500 cursor-pointer"
             }`}
           >
             Order / Book Now
           </button>
-      
         </div>
       </section>
     </div>

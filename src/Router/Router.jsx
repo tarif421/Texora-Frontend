@@ -11,7 +11,7 @@ import AuthLayout from "../Layouts/AuthLayout";
 import Login from "../Pages/Auth/Login";
 import Register from "../Pages/Auth/Register";
 import ProductDetails from "../Pages/Home/Products/ProductDetails";
-import BookingPage from "../Pages/Home/Products/BookingPage";
+// import BookingPage from "../Pages/Home/Products/BookingPage";
 import AdminRoute from "./AdminRoute";
 import ManageRoute from "./ManagerRoute";
 import AddProduct from "../Pages/Dashboard/Manager/AddProduct";
@@ -36,9 +36,11 @@ export const router = createBrowserRouter([
         element: <ProductDetails />,
       },
       // {
-      //   path: "/booking",
-      //   Component: BookingPage
-      // }
+      //   path: "/booking/:id",
+      //   element: <BookingPage />,
+      //   loader: ({ params }) =>
+      //     fetch(`http://localhost:3000/productsDetails/${params.id}`),
+      // },
     ],
   },
   {
