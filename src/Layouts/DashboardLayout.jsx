@@ -125,6 +125,75 @@ const DashboardLayout = () => {
                 </li>
                 </>)
                }
+               {
+                role === 'manager' && (<>
+                 <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Add Product"
+                    to="/dashboard/manage-users"
+                  >
+                    {/* Home icon */}
+                    <span className="text-2xl">
+                      <MdManageAccounts />
+                    </span>
+                    <span className="is-drawer-close:hidden">Add Product</span>
+                  </NavLink>
+                </li>
+                 <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Approve Order"
+                    to="/dashboard/all-products"
+                  >
+                    {/* Home icon */}
+                    <span className="text-2xl">
+                      <AiFillProduct />
+                    </span>
+                    <span className="is-drawer-close:hidden">Approve Order</span>
+                  </NavLink>
+                </li>
+                  <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Manage Products"
+                    to="/dashboard/all-orders"
+                  >
+                    {/* Home icon */}
+                    <span className="text-2xl ">
+                      <TbTruckDelivery />
+                    </span>
+                    <span className="is-drawer-close:hidden">Manage Products</span>
+                  </NavLink>
+                </li>
+                  <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Pending Orders"
+                    to="/dashboard/all-orders"
+                  >
+                    {/* Home icon */}
+                    <span className="text-2xl ">
+                      <TbTruckDelivery />
+                    </span>
+                    <span className="is-drawer-close:hidden">Pending Orders</span>
+                  </NavLink>
+                </li>
+                  <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="My Profile"
+                    to="/dashboard/all-orders"
+                  >
+                    {/* Home icon */}
+                    <span className="text-2xl ">
+                      <TbTruckDelivery />
+                    </span>
+                    <span className="is-drawer-close:hidden">My Profile</span>
+                  </NavLink>
+                </li>
+                </>)
+               }
                
               
 

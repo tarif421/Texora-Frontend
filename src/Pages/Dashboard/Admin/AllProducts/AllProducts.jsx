@@ -6,6 +6,7 @@ const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
+  
 
   useEffect(() => {
     const fetchAllProducts = async () => {
