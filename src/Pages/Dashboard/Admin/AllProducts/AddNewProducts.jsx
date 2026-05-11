@@ -14,11 +14,12 @@ const AddNewProducts = () => {
     features: "",
     paymentOptions: [],
   });
+
   const axiosSecure = useAxiosSecure();
 
   const paymentMethods = [
     "Cash on Delivery",
-    "Bank Transper",
+    "Bank Transfer",
     "Stripe",
     "Online Payment",
   ];
@@ -28,19 +29,25 @@ const AddNewProducts = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handlePaymentChange = (method) => {
-    const updatedOptions = formData.paymentOptions.includes(method)
-      ? formData.paymentOptions.filter((m) => m !== method)
-      : [...formData.paymentOptions, method];
-    setFormData({ ...formData, paymentOptions: updatedOptions });
+  // Only one payment method can be selected
+  const handlePaymentChange = (e) => {
+    const selectedMethod = e.target.value;
+
+    setFormData({
+      ...formData,
+      paymentOptions: selectedMethod ? [selectedMethod] : [],
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //  data formatting
+
     const finalData = {
       ...formData,
-      features: formData.features.split(",").map((f) => f.trim()),
+      features: formData.features
+        .split(",")
+        .map((f) => f.trim())
+        .filter((f) => f),
       price: parseFloat(formData.price),
       availableQuantity: parseInt(formData.availableQuantity),
       minimumOrder: parseInt(formData.minimumOrder),
@@ -48,8 +55,10 @@ const AddNewProducts = () => {
 
     try {
       const res = await axiosSecure.post("/all-products", finalData);
+
       if (res.data.insertedId) {
-        Swal.fire("success!", "Product added successfully", "success");
+        Swal.fire("Success!", "Product added successfully", "success");
+
         setFormData({
           productName: "",
           productImage: "",
@@ -61,6 +70,7 @@ const AddNewProducts = () => {
           features: "",
           paymentOptions: [],
         });
+
         e.target.reset();
       }
     } catch (error) {
@@ -68,10 +78,11 @@ const AddNewProducts = () => {
       Swal.fire("Error", "Failed to add product", "error");
     }
   };
+
   return (
-    <div className="min-h-screen bg-white text-ray-900 py-12 px-4">
+    <div className="min-h-screen bg-white text-gray-900 py-12 px-4">
       <div className="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 shadow-xl border-gray-200">
-        <h2 className="text-3xl  text-[#384bb4] font-bold mb-9 text-center ">
+        <h2 className="text-3xl text-[#384bb4] font-bold mb-9 text-center">
           Add New Product
         </h2>
 
@@ -93,7 +104,7 @@ const AddNewProducts = () => {
               placeholder: "https://image-link.com",
             },
             {
-              label: "Price ",
+              label: "Price",
               name: "price",
               type: "number",
               step: "0.01",
@@ -109,11 +120,17 @@ const AddNewProducts = () => {
               name: "availableQuantity",
               type: "number",
             },
-            { label: "Minimum Order", name: "minimumOrder", type: "number" },
+            {
+              label: "Minimum Order",
+              name: "minimumOrder",
+              type: "number",
+            },
           ].map((field) => (
             <div key={field.name} className="flex flex-col">
-              {" "}
-              <label>{field.label}</label>
+              <label className="text-sm font-semibold mb-2 text-gray-700">
+                {field.label}
+              </label>
+
               <input
                 type={field.type}
                 name={field.name}
@@ -121,7 +138,7 @@ const AddNewProducts = () => {
                 placeholder={field.placeholder}
                 value={formData[field.name]}
                 onChange={handleChange}
-                className="p-3 rounded-xl bg-white text-gray-80 border border-gray-300 outline-none "
+                className="p-3 rounded-xl bg-white text-gray-800 border border-gray-300 outline-none"
                 required
               />
             </div>
@@ -132,47 +149,54 @@ const AddNewProducts = () => {
             <label className="text-sm font-semibold mb-2 text-gray-700">
               Features
             </label>
+
             <input
               type="text"
               name="features"
+              value={formData.features}
               onChange={handleChange}
-              placeholder="Water-resistant, Lightweight, Outdoon-friendly"
-              className="p-3 bg-white rounded-xl text-gray-800 border border-gray-300 outline-none "
+              placeholder="Water-resistant, Lightweight, Outdoor-friendly"
+              className="p-3 bg-white rounded-xl text-gray-800 border border-gray-300 outline-none"
             />
           </div>
+
           {/* description */}
           <div className="flex flex-col md:col-span-2">
             <label className="text-sm font-semibold mb-2 text-gray-700">
               Description
             </label>
+
             <textarea
               name="description"
               rows="4"
+              value={formData.description}
               onChange={handleChange}
-              className="p-3 rounded-xl bg-white text-gray-800 border border-gray-400 outline-none "
+              className="p-3 rounded-xl bg-white text-gray-800 border border-gray-400 outline-none"
+              required
             ></textarea>
           </div>
-          {/* payment options */}
-          <div className="md:col-span-2">
-            <label className=" text-sm font-semibold mb-4 text-indigo-600 block">
-              Enable Payment Options:
+
+          {/* payment option dropdown */}
+          <div className="md:col-span-2 flex flex-col">
+            <label className="text-sm font-semibold mb-2 text-indigo-600">
+              Payment Method
             </label>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+            <select
+              name="paymentOptions"
+              value={formData.paymentOptions[0] || ""}
+              onChange={handlePaymentChange}
+              required
+              className="p-3 rounded-xl bg-white text-gray-800 border border-gray-300 outline-none"
+            >
+              <option value="">Select Payment Method</option>
+
               {paymentMethods.map((method) => (
-                <button
-                  type="button"
-                  key={method}
-                  onClick={() => handlePaymentChange(method)}
-                  className={`p-3 rounded-xl text-xs font-bold transition-all duration-300 border ${
-                    formData.paymentOptions.includes(method)
-                      ? "bg-indigo-600 border-indigo-400 text-white shadow-[0_0_15px_rgba(79,70,229,0.5)]"
-                      : "bg-white border-gray-700 opacity-60"
-                  }`}
-                >
+                <option key={method} value={method}>
                   {method}
-                </button>
+                </option>
               ))}
-            </div>
+            </select>
           </div>
 
           <button

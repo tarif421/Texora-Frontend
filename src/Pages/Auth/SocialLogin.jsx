@@ -21,7 +21,7 @@ const SocialLogin = () => {
           photoURL: result.user.photoURL,
         };
         axiosSecure.post("/users", userInfo).then((res) => {
-          console.log("user data has been restored", res.data);
+          // console.log("user data has been restored", res.data);
           navigate(location.state || "/");
         });
       })
