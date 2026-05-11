@@ -58,22 +58,12 @@ const ProductDetails = () => {
   if (!product) return null;
 
   return (
-    <div className="min-h-screen bg-[#0b0f1a] text-white my-10">
+    <div className=" py-15 rounded-2xl shadow-2xl my-30 bg-[#121842] text-white my-10">
       {/* HERO */}
-      <section className="relative h-[60vh] flex items-center justify-center">
-        <img
-          src={product.productImage}
-          alt={product.productName}
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
-        />
-        <div className="relative text-center">
-          <h1 className="text-5xl font-bold">{product.productName}</h1>
-          <p className="text-2xl text-indigo-400 mt-2">$ {product.price}</p>
-        </div>
-      </section>
+    
 
       {/* CONTENT */}
-      <section className="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-10">
+      <section className="max-w-7xl mx-auto p-6 grid md:grid-cols-2 gap-10">
         <img
           src={product.productImage}
           alt={product.productName}
@@ -81,12 +71,14 @@ const ProductDetails = () => {
         />
 
         <div>
+          <p className="mb-4 font-bols text-4xl text-[#2891ed]">{product.productName}</p>
           <p className="mb-4 text-gray-300">{product.description}</p>
 
           <ul className="space-y-2 mb-4">
-            <li>Category: {product.category}</li>
-            <li>Available Quantity: {product.availableQuantity}</li>
-            <li>Minimum Order: {product?.minimumOrder}</li>
+            <li className="text-gray-300">Category: {product.category}</li>
+            <li className="text-gray-300">Available Quantity: {product.availableQuantity}</li>
+            <li className="text-gray-300">Minimum Order: {product?.minimumOrder}</li>
+            <li className="text-[#2891ed] text-2xl">Price: {product.price}</li>
           </ul>
 
           <div className="flex flex-wrap gap-2 mb-6">
@@ -98,7 +90,7 @@ const ProductDetails = () => {
           </div>
 
           <div className="mb-6">
-            <p className="font-semibold mb-2">Payment Options:</p>
+            <p className="text-gray-200 font-semibold mb-2">Payment Options:</p>
             {product.paymentOptions?.map((p, i) => (
               <span
                 key={i}
@@ -115,12 +107,11 @@ const ProductDetails = () => {
             className={`w-full py-4 rounded-xl font-bold transition-all active:scale-95 ${
               role === "admin" || role === "manager"
                 ? "bg-gray-500"
-                : "bg-gradient-to-r from-indigo-500 to-pink-500 cursor-pointer"
+                : "md:col-span-2  py-4 rounded-xl bg-linear-to-r from-sky-800 via-blue-400 text-white to-sky-800"
             }`}
           >
-           
             {product.paymentOptions?.[0] === "Stripe"
-              ? "Pay Now"
+              ? "Proceed to pay"
               : "Booking Order"}
           </button>
         </div>

@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AiFillProduct } from "react-icons/ai";
 
 import { MdManageAccounts } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
-  const { role } = useRole();
+  const { role, isLoading } = useRole();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Auto-redirect logic
+  useEffect(() => {
+    if (!isLoading && location.pathname === "/dashboard") {
+      if (role === "admin")
+        navigate("/dashboard/manage-users", { replace: true });
+      else if (role === "manager")
+        navigate("/dashboard/manage-users", { replace: true });
+      else if (role === "buyer")
+        navigate("/dashboard/all-orders", { replace: true });
+    }
+  }, [role, isLoading, location.pathname, navigate]);
+
+  if (isLoading)
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        Loading...
+      </div>
+    );
   return (
     <>
       <Navbar></Navbar>
@@ -82,120 +103,134 @@ const DashboardLayout = () => {
                     <span className="is-drawer-close:hidden">Homepage</span>
                   </NavLink>
                 </li>
-               {
-                role === 'admin' && (<>
-                 <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Manage Users"
-                    to="/dashboard/manage-users"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl">
-                      <MdManageAccounts />
-                    </span>
-                    <span className="is-drawer-close:hidden">Manage Users</span>
-                  </NavLink>
-                </li>
-                 <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="All Products"
-                    to="/dashboard/all-products"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl">
-                      <AiFillProduct />
-                    </span>
-                    <span className="is-drawer-close:hidden">All Products</span>
-                  </NavLink>
-                </li>
-                  <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="All Orders"
-                    to="/dashboard/all-orders"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl ">
-                      <TbTruckDelivery />
-                    </span>
-                    <span className="is-drawer-close:hidden">All Orders</span>
-                  </NavLink>
-                </li>
-                </>)
-               }
-               {
-                role === 'manager' && (<>
-                 <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Add Product"
-                    to="/dashboard/manage-users"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl">
-                      <MdManageAccounts />
-                    </span>
-                    <span className="is-drawer-close:hidden">Add Product</span>
-                  </NavLink>
-                </li>
-                 <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Approve Order"
-                    to="/dashboard/all-products"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl">
-                      <AiFillProduct />
-                    </span>
-                    <span className="is-drawer-close:hidden">Approve Order</span>
-                  </NavLink>
-                </li>
-                  <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Manage Products"
-                    to="/dashboard/all-orders"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl ">
-                      <TbTruckDelivery />
-                    </span>
-                    <span className="is-drawer-close:hidden">Manage Products</span>
-                  </NavLink>
-                </li>
-                  <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Pending Orders"
-                    to="/dashboard/all-orders"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl ">
-                      <TbTruckDelivery />
-                    </span>
-                    <span className="is-drawer-close:hidden">Pending Orders</span>
-                  </NavLink>
-                </li>
-                  <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="My Profile"
-                    to="/dashboard/all-orders"
-                  >
-                    {/* Home icon */}
-                    <span className="text-2xl ">
-                      <TbTruckDelivery />
-                    </span>
-                    <span className="is-drawer-close:hidden">My Profile</span>
-                  </NavLink>
-                </li>
-                </>)
-               }
-               
-              
+                {role === "admin" && (
+                  <>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Manage Users"
+                        to="/dashboard/manage-users"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl">
+                          <MdManageAccounts />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Manage Users
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="All Products"
+                        to="/dashboard/all-products"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl">
+                          <AiFillProduct />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          All Products
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="All Orders"
+                        to="/dashboard/all-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl ">
+                          <TbTruckDelivery />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          All Orders
+                        </span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
+                {role === "manager" && (
+                  <>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Add Product"
+                        to="/dashboard/manage-users"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl">
+                          <MdManageAccounts />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Add Product
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Approve Order"
+                        to="/dashboard/all-products"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl">
+                          <AiFillProduct />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Approve Order
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Manage Products"
+                        to="/dashboard/all-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl ">
+                          <TbTruckDelivery />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Manage Products
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Pending Orders"
+                        to="/dashboard/all-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl ">
+                          <TbTruckDelivery />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Pending Orders
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="My Profile"
+                        to="/dashboard/all-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl ">
+                          <TbTruckDelivery />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          My Profile
+                        </span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
 
                 {/* List item */}
                 <li>

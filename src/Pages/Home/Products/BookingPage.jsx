@@ -186,9 +186,12 @@ const BookingPage = () => {
             />
 
             {/* Submit */}
-            <button type="submit" className="btn btn-primary w-full">
+            <button
+              type="submit"
+              className="md:col-span-2 mt-8 py-4 rounded-xl bg-linear-to-r from-sky-800 via-blue-400 text-white to-sky-800"
+            >
               {product.paymentOptions?.[0] === "Stripe"
-                ? "Proceed to Pay"
+                ? "Pay Now"
                 : "Confirm Order"}
             </button>
           </form>
