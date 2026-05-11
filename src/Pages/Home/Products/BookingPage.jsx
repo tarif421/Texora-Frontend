@@ -13,7 +13,6 @@ const BookingPage = () => {
 
   const [quantity, setQuantity] = useState(product?.minimumOrder || 1);
 
-
   const totalPrice = quantity * product.price;
 
   const handleQuantityChange = (e) => {
@@ -90,7 +89,7 @@ const BookingPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}
-            <label >Email:</label>
+            <label>Email:</label>
             <input
               type="email"
               value={user?.email}
@@ -99,7 +98,7 @@ const BookingPage = () => {
             />
 
             {/* Product */}
-             <label >Category:</label>
+            <label>Category:</label>
             <input
               type="text"
               value={product.productName}
@@ -108,7 +107,7 @@ const BookingPage = () => {
             />
 
             {/* Price */}
-             <label >Price:</label>
+            <label>Price:</label>
             <input
               type="text"
               value={`$${product.price}`}
@@ -136,7 +135,7 @@ const BookingPage = () => {
 
             {/* Quantity */}
             <div>
-                 <label > Order Peace:</label>
+              <label> Order Peace:</label>
               <input
                 type="number"
                 placeholder={quantity}
@@ -151,7 +150,7 @@ const BookingPage = () => {
             </div>
 
             {/* Total Price */}
-            <label >Total Price:</label>
+            <label>Total Price:</label>
             <input
               type="text"
               value={`$${totalPrice}`}
@@ -160,7 +159,7 @@ const BookingPage = () => {
             />
 
             {/* Contact */}
-            <label >Phone:</label>
+            <label>Phone:</label>
             <input
               name="contact"
               type="text"
@@ -179,7 +178,7 @@ const BookingPage = () => {
             />
 
             {/* Notes */}
-            <label >Your Opinion:</label>
+            <label>Your Opinion:</label>
             <textarea
               name="notes"
               placeholder="opinion"
@@ -187,7 +186,11 @@ const BookingPage = () => {
             />
 
             {/* Submit */}
-            <button className="btn btn-primary w-full">Place Order</button>
+            <button type="submit" className="btn btn-primary w-full">
+              {product.paymentOptions?.[0] === "Stripe"
+                ? "Proceed to Pay"
+                : "Confirm Order"}
+            </button>
           </form>
         </div>
       </div>

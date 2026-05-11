@@ -47,12 +47,12 @@ const ProductDetails = () => {
     if (role === "buyer") {
       navigate(`/booking/${product._id}`);
     }
-    const isStripeOnly = product.paymentOptions?.includes("Stripe");
-    if (isStripeOnly) {
-      navigate(`/checkout-page/${product._id}`);
-    } else {
-      navigate(`/booking/${product._id}`);
-    }
+    // const isStripeOnly = product.paymentOptions?.includes("Stripe");
+    // if (isStripeOnly) {
+    //   navigate(`/checkout-page/${product._id}`);
+    // } else {
+    //   navigate(`/booking/${product._id}`);
+    // }
   };
 
   if (!product) return null;
@@ -109,19 +109,20 @@ const ProductDetails = () => {
             ))}
           </div>
 
-         
-            <button
-              type="button"
-              onClick={handleOrderClick}
-              className={`w-full py-4 rounded-xl font-bold transition-all active:scale-95 ${
-                role === "admin" || role === "manager"
-                  ? "bg-gray-500 cursor-pointer"
-                  : "bg-gradient-to-r from-indigo-500 to-pink-500 cursor-pointer"
-              }`}
-            >
-              Order / Book Now
-            </button>
-        
+          <button
+            type="button"
+            onClick={handleOrderClick}
+            className={`w-full py-4 rounded-xl font-bold transition-all active:scale-95 ${
+              role === "admin" || role === "manager"
+                ? "bg-gray-500"
+                : "bg-gradient-to-r from-indigo-500 to-pink-500 cursor-pointer"
+            }`}
+          >
+           
+            {product.paymentOptions?.[0] === "Stripe"
+              ? "Pay Now"
+              : "Booking Order"}
+          </button>
         </div>
       </section>
     </div>
