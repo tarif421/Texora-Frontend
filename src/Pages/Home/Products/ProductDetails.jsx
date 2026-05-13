@@ -63,14 +63,14 @@ const ProductDetails = () => {
     
 
       {/* CONTENT */}
-      <section className="max-w-7xl mx-auto p-6 grid md:grid-cols-2 gap-10">
+      <section className="max-w-7xl ml-4 place-items-center mx-auto p-6 grid md:grid-cols-2 gap-10">
         <img
           src={product.productImage}
           alt={product.productName}
           className="rounded-xl"
         />
 
-        <div>
+        <div >
           <p className="mb-4 font-bols text-4xl text-[#2891ed]">{product.productName}</p>
           <p className="mb-4 text-gray-300">{product.description}</p>
 

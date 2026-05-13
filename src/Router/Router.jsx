@@ -19,6 +19,7 @@ import ApproveOrders from "../Pages/Dashboard/Manager/ApproveOrders";
 import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
 import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
+import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
 
 export const router = createBrowserRouter([
   {
@@ -128,6 +129,10 @@ export const router = createBrowserRouter([
             <PendingOrders />
           </ManageRoute>
         ),
+      },
+      {
+        path: "my-orders",
+        element: <MyOrders></MyOrders>
       },
     ],
   },

@@ -40,7 +40,6 @@ const BookingPage = () => {
     }
 
     const form = e.target;
-
     const orderData = {
       email: user.email,
       productId: product._id,
@@ -59,23 +58,41 @@ const BookingPage = () => {
     };
 
     try {
+      // ১. প্রথমে অর্ডারটি ডাটাবেসে সেভ করুন
       const res = await axiosSecure.post("/orders", orderData);
 
       if (res.data.insertedId) {
-        const requiresPayment = product.paymentOptions?.some((p) =>
-          ["Stripe", "cash on Delivery"].includes(p.toLowerCase()),
-        );
+        const orderId = res.data.insertedId;
+        const selectedPayment = product.paymentOptions?.[0];
 
-        if (requiresPayment) {
-          toast.success("Proceed to Payment");
-          navigate(`/payment/${res.data.insertedId}`);
+        // ২. যদি পেমেন্ট অপশন Stripe হয়
+        if (selectedPayment === "Stripe") {
+          toast.info("Redirecting to Stripe...");
+
+          // ৩. Stripe চেকআউট সেশন তৈরি করার কল দিন
+          const checkoutRes = await axiosSecure.post(
+            "/create-checkout-session",
+            {
+              orderId: orderId,
+              totalPrice: totalPrice,
+              productTitle: product.productName,
+              email: user.email,
+            },
+          );
+
+          // ৪. সরাসরি Stripe-এর পেমেন্ট পেজে পাঠিয়ে দিন
+          if (checkoutRes.data.url) {
+            window.location.replace(checkoutRes.data.url);
+          }
         } else {
-          toast.success("Order Confirmed (Cash on Delivery)");
+          // Cash on delivery হলে সরাসরি ড্যাশবোর্ডে
+          toast.success("Order Confirmed (COD)");
           navigate("/dashboard/my-orders");
         }
       }
     } catch (error) {
-      toast.error("Failed to place order");
+      console.error(error);
+      toast.error("Something went wrong!");
     }
   };
 
@@ -188,7 +205,7 @@ const BookingPage = () => {
             {/* Submit */}
             <button
               type="submit"
-              className="md:col-span-2 mt-8 py-4 rounded-xl bg-linear-to-r from-sky-800 via-blue-400 text-white to-sky-800"
+              className="md:col-span-2 w-full mt-8 py-4 rounded-xl bg-linear-to-r from-sky-800 text-2xl via-blue-400 text-white to-sky-800"
             >
               {product.paymentOptions?.[0] === "Stripe"
                 ? "Pay Now"
