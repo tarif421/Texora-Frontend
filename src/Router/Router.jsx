@@ -20,6 +20,7 @@ import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
 import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
 import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -60,7 +61,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: <PrivateRoute><DashboardLayout></DashboardLayout>,</PrivateRoute>,
     children: [
       {
         path: "manage-users",

@@ -15,22 +15,24 @@ const DashboardLayout = () => {
 
   // Auto-redirect logic
   useEffect(() => {
+   
     if (!isLoading && location.pathname === "/dashboard") {
       if (role === "admin")
         navigate("/dashboard/manage-users", { replace: true });
       else if (role === "manager")
         navigate("/dashboard/manage-users", { replace: true });
       else if (role === "buyer")
-        navigate("/dashboard/all-orders", { replace: true });
+        navigate("/dashboard/my-orders", { replace: true });
     }
   }, [role, isLoading, location.pathname, navigate]);
-
-  if (isLoading)
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        Loading...
-      </div>
-    );
+  
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-64">
+  //       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+  //     </div>
+  //   );
+  // }
   return (
     <>
       <Navbar></Navbar>
@@ -166,6 +168,85 @@ const DashboardLayout = () => {
                         </span>
                         <span className="is-drawer-close:hidden">
                           Add Product
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Approve Order"
+                        to="/dashboard/all-products"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl">
+                          <AiFillProduct />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Approve Order
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Manage Products"
+                        to="/dashboard/all-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl ">
+                          <TbTruckDelivery />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Manage Products
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="Pending Orders"
+                        to="/dashboard/all-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl ">
+                          <TbTruckDelivery />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          Pending Orders
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="My Profile"
+                        to="/dashboard/all-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl ">
+                          <TbTruckDelivery />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          My Profile
+                        </span>
+                      </NavLink>
+                    </li>
+                  </>
+                )}
+                {role === "buyer" && (
+                  <>
+                    <li>
+                      <NavLink
+                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="My Orders"
+                        to="/dashboard/my-orders"
+                      >
+                        {/* Home icon */}
+                        <span className="text-2xl">
+                          <MdManageAccounts />
+                        </span>
+                        <span className="is-drawer-close:hidden">
+                          My Orders
                         </span>
                       </NavLink>
                     </li>

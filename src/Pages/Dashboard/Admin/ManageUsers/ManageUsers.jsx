@@ -4,10 +4,12 @@ import { FaEdit } from "react-icons/fa";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { MdPersonRemoveAlt1 } from "react-icons/md";
+import useRole from "../../../../Hooks/useRole";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
   const updateModalRef = useRef();
+  const { isLoading } = useRole();
 
   // modal state
   const [selectedUser, setSelectedUser] = useState(null);
@@ -59,6 +61,51 @@ const ManageUsers = () => {
       });
     }
   };
+  if (isLoading) {
+    return (
+      <div className="bg-white rounded-lg shadow p-6 space-y-4">
+        {/* Header Skeleton */}
+        <div className="flex justify-between items-center mb-6">
+          <div className="h-8 w-48 bg-gray-200 animate-pulse rounded"></div>
+          <div className="h-10 w-32 bg-gray-200 animate-pulse rounded"></div>
+        </div>
+
+        {/* Table Skeleton */}
+        <div className="overflow-x-auto">
+          <table className="table w-full">
+            <thead>
+              <tr className="bg-gray-100">
+                {[
+                  "Image",
+                  "Name",
+                  "Price",
+                  "Category",
+                  "Stock",
+                  "Home",
+                  "Actions",
+                ].map((h) => (
+                  <th key={h} className="h-12 bg-gray-50"></th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {[1, 2, 3, 4, 5].map((n) => (
+                <tr key={n}>
+                  {Array(7)
+                    .fill(0)
+                    .map((_, i) => (
+                      <td key={i}>
+                        <div className="h-8 bg-gray-100 animate-pulse rounded"></div>
+                      </td>
+                    ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

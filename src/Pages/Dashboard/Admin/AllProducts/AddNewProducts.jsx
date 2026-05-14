@@ -77,6 +77,7 @@ const AddNewProducts = () => {
       console.log("post error", error);
       Swal.fire("Error", "Failed to add product", "error");
     }
+    
   };
 
   return (
