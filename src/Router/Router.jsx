@@ -21,6 +21,7 @@ import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
 import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
 import PrivateRoute from "./PrivateRoute";
+import OrderDetails from "../Pages/Dashboard/Admin/AllOrders/OrderDetails";
 
 export const router = createBrowserRouter([
   {
@@ -61,7 +62,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <PrivateRoute><DashboardLayout></DashboardLayout>,</PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>,
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "manage-users",
@@ -133,7 +138,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-orders",
-        element: <MyOrders></MyOrders>
+        element: (
+          <AdminRoute>
+            <MyOrders></MyOrders>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "order-details/:id",
+        element: (
+          <AdminRoute>
+            <OrderDetails />
+          </AdminRoute>
+        ),
       },
     ],
   },
