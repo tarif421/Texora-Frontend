@@ -92,7 +92,7 @@ const AllOrders = () => {
         </div>
 
         {/* DaisyUI Table */}
-        <div className="bg-base-100 rounded-2xl shadow overflow-hidden">
+        <div className="bg-base-100 rounded-2xl shadow ">
           <div className="overflow-x-auto">
             <table className="table table-zebra w-full">
               <thead className="bg-base-300 text-base-content">
@@ -195,7 +195,7 @@ const AllOrders = () => {
                       <td>
                         <span
                           className={`badge ${getStatusBadge(
-                            order.status || order.orderStatus
+                            order.status
                           )} font-semibold`}
                         >
                           {order.status || order.orderStatus || "Pending"}

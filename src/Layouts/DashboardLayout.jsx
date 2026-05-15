@@ -15,17 +15,16 @@ const DashboardLayout = () => {
 
   // Auto-redirect logic
   useEffect(() => {
-   
     if (!isLoading && location.pathname === "/dashboard") {
       if (role === "admin")
         navigate("/dashboard/manage-users", { replace: true });
       else if (role === "manager")
-        navigate("/dashboard/manage-users", { replace: true });
+        navigate("/dashboard/add-products", { replace: true });
       else if (role === "buyer")
         navigate("/dashboard/my-orders", { replace: true });
     }
   }, [role, isLoading, location.pathname, navigate]);
-  
+
   // if (isLoading) {
   //   return (
   //     <div className="flex justify-center items-center h-64">
@@ -160,7 +159,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="Add Product"
-                        to="/dashboard/manage-users"
+                        to=""
                       >
                         {/* Home icon */}
                         <span className="text-2xl">
@@ -175,7 +174,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="Approve Order"
-                        to="/dashboard/all-products"
+                        to=""
                       >
                         {/* Home icon */}
                         <span className="text-2xl">
@@ -190,7 +189,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="Manage Products"
-                        to="/dashboard/all-orders"
+                        to=""
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
@@ -205,7 +204,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="Pending Orders"
-                        to="/dashboard/all-orders"
+                        to="s"
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
@@ -220,7 +219,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="My Profile"
-                        to="/dashboard/all-orders"
+                        to=""
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
