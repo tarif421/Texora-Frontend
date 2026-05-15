@@ -61,6 +61,8 @@ const ManageUsers = () => {
       });
     }
   };
+  //  delete user
+
   if (isLoading) {
     return (
       <div className="bg-white rounded-lg shadow p-6 space-y-4">
@@ -106,7 +108,23 @@ const ManageUsers = () => {
       </div>
     );
   }
-
+  const handleDeleteUser = async (user) => {
+    try {
+      const res = await axiosSecure.delete(`/users/${user}`);
+      if (res.data.deletedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User deleted successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    } catch (error) {
+      console.error("delete error", error);
+    }
+  };
   return (
     <div>
       <h2 className="text-3xl font-bold mb-5">Manage Users</h2>
@@ -169,7 +187,10 @@ const ManageUsers = () => {
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-sm btn-outline ">
+                  <button
+                    onClick={() => handleDeleteUser(user)}
+                    className="btn btn-sm btn-outline "
+                  >
                     {" "}
                     <MdPersonRemoveAlt1 />
                   </button>

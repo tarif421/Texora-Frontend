@@ -74,7 +74,7 @@ const AllProducts = () => {
         <h2 className="text-2xl font-bold">
           All Products (Total: {products.length})
         </h2>
-        <NavLink to="/dashboard/add-products" className="btn btn-primary">
+        <NavLink to="/dashboard/add-NewProducts" className="btn btn-primary">
           + Add New Product
         </NavLink>
       </div>

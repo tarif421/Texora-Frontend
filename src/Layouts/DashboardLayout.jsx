@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { AiFillProduct } from "react-icons/ai";
-
+import { RiFunctionAddLine } from "react-icons/ri";
 import { MdManageAccounts } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router";
@@ -159,11 +159,11 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="Add Product"
-                        to=""
+                        to="add-products"
                       >
                         {/* Home icon */}
                         <span className="text-2xl">
-                          <MdManageAccounts />
+                          <RiFunctionAddLine />
                         </span>
                         <span className="is-drawer-close:hidden">
                           Add Product
@@ -173,15 +173,15 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Approve Order"
-                        to=""
+                        data-tip="Manage Products"
+                        to="manage-product"
                       >
                         {/* Home icon */}
                         <span className="text-2xl">
                           <AiFillProduct />
                         </span>
                         <span className="is-drawer-close:hidden">
-                          Approve Order
+                          Manage Products
                         </span>
                       </NavLink>
                     </li>
@@ -189,14 +189,14 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="Manage Products"
-                        to=""
+                        to="manage-products"
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
                           <TbTruckDelivery />
                         </span>
                         <span className="is-drawer-close:hidden">
-                          Manage Products
+                          
                         </span>
                       </NavLink>
                     </li>

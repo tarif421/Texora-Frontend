@@ -1,8 +1,11 @@
 import { useState } from "react";
-import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AddNewProducts = () => {
+  const axiosSecure = useAxiosSecure();
+
   const [formData, setFormData] = useState({
     productName: "",
     productImage: "",
@@ -14,8 +17,6 @@ const AddNewProducts = () => {
     features: "",
     paymentOptions: [],
   });
-
-  const axiosSecure = useAxiosSecure();
 
   const paymentMethods = [
     "Cash on Delivery",
@@ -77,14 +78,20 @@ const AddNewProducts = () => {
       console.log("post error", error);
       Swal.fire("Error", "Failed to add product", "error");
     }
-    
   };
+  //  if (loading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-64">
+  //       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen bg-white text-gray-900 py-12 px-4">
       <div className="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 shadow-xl border-gray-200">
         <h2 className="text-3xl text-[#384bb4] font-bold mb-9 text-center">
-          Add New Product
+          Add Product
         </h2>
 
         <form

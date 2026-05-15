@@ -15,7 +15,7 @@ import BookingPage from "../Pages/Home/Products/BookingPage";
 import AdminRoute from "./AdminRoute";
 import ManageRoute from "./ManagerRoute";
 import AddProduct from "../Pages/Dashboard/Manager/AddProduct";
-import ApproveOrders from "../Pages/Dashboard/Manager/ApproveOrders";
+
 import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
 import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
@@ -92,9 +92,25 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+          {
+        path: "my-orders",
+        element: (
+          <AdminRoute>
+            <MyOrders></MyOrders>
+          </AdminRoute>
+        ),
+      },
       {
-        path: "add-products",
-        Component: AddNewProducts,
+        path: "order-details/:id",
+        element: (
+          <AdminRoute>
+            <OrderDetails />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "add-NewProducts",
+        element: <AdminRoute><AddNewProducts></AddNewProducts></AdminRoute>
       },
       {
         path: "add-products",
@@ -104,14 +120,7 @@ export const router = createBrowserRouter([
           </ManageRoute>
         ),
       },
-      {
-        path: "approve-orders",
-        element: (
-          <ManageRoute>
-            <ApproveOrders />
-          </ManageRoute>
-        ),
-      },
+   
       {
         path: "manage-product",
         element: (
@@ -136,22 +145,8 @@ export const router = createBrowserRouter([
           </ManageRoute>
         ),
       },
-      {
-        path: "my-orders",
-        element: (
-          <AdminRoute>
-            <MyOrders></MyOrders>
-          </AdminRoute>
-        ),
-      },
-      {
-        path: "order-details/:id",
-        element: (
-          <AdminRoute>
-            <OrderDetails />
-          </AdminRoute>
-        ),
-      },
+  
+  
     ],
   },
 ]);
