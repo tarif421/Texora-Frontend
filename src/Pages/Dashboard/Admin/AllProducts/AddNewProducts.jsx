@@ -16,6 +16,7 @@ const AddNewProducts = () => {
     minimumOrder: "",
     features: "",
     paymentOptions: [],
+    showOnHome: false,
   });
 
   const paymentMethods = [

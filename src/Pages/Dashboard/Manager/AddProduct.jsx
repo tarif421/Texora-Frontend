@@ -2,10 +2,11 @@ import { useState } from "react";
 
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAuth from "../../../Hooks/useAuth";
 
 const AddProducts = () => {
- 
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     productName: "",
@@ -46,6 +47,7 @@ const AddProducts = () => {
 
     const finalData = {
       ...formData,
+      managerEmail: user?.email,
       features: formData.features
         .split(",")
         .map((f) => f.trim())
@@ -78,7 +80,7 @@ const AddProducts = () => {
     } catch (error) {
       console.log("post error", error);
       Swal.fire("Error", "Failed to add product", "error");
-    } 
+    }
   };
   //  if (loading) {
   //   return (

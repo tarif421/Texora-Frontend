@@ -121,6 +121,7 @@ const AllProducts = () => {
                   </span>
                 </td>
                 <td>{product.availableQuantity} pcs</td>
+                {/*  toggle */}
                 <td>
                   <input
                     type="checkbox"

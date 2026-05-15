@@ -108,22 +108,34 @@ const ManageUsers = () => {
       </div>
     );
   }
-  const handleDeleteUser = async (user) => {
-    try {
-      const res = await axiosSecure.delete(`/users/${user}`);
-      if (res.data.deletedCount > 0) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "User deleted successfully",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+  const handleDeleteUser = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to remove the User?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(`/users/${user._id}`);
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "User has been removed.",
+              icon: "success",
+              timer: 1500,
+              showConfirmButton: false,
+            });
+          }
+        } catch (error) {
+          Swal.fire("Error", "Something went wrong!", "error");
+        }
       }
-    } catch (error) {
-      console.error("delete error", error);
-    }
+    });
   };
   return (
     <div>
@@ -188,7 +200,7 @@ const ManageUsers = () => {
                 </td>
                 <td>
                   <button
-                    onClick={() => handleDeleteUser(user)}
+                    onClick={() => handleDeleteUser(user._id)}
                     className="btn btn-sm btn-outline "
                   >
                     {" "}
