@@ -227,9 +227,10 @@ const PendingOrders = () => {
                           >
                             Reject
                           </button>
+
                           <Link
                             to={`/dashboard/order-details/${order._id}`}
-                            className="btn btn-sm btn-info text-white"
+                            className="btn btn-xs btn-info text-white"
                           >
                             View
                           </Link>

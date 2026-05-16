@@ -7,6 +7,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from "react-router";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 import useRole from "../Hooks/useRole";
+import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
@@ -203,14 +204,16 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Pending Orders"
-                        to="s"
+                        data-tip="Approve Orders"
+                        to="approve-orders"
                       >
                         {/* Home icon */}
-                        <span className="text-2xl ">
-                          <TbTruckDelivery />
+                        <span className="text-3xl  ">
+                          <IoCheckmarkDoneCircleSharp />
                         </span>
-                        <span className="is-drawer-close:hidden"></span>
+                        <span className="is-drawer-close:hidden">
+                          Approve Orders
+                        </span>
                       </NavLink>
                     </li>
                     <li>

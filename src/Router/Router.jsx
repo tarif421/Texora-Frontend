@@ -24,6 +24,7 @@ import PrivateRoute from "./PrivateRoute";
 
 import OrderDetails from "../Pages/Dashboard/Admin/AllOrders/OrderDetails";
 import AdminManagerRoute from "../Router/AdminManagerRoute";
+import ApproveOrders from "../Pages/Dashboard/Manager/ApproveOrders";
 
 export const router = createBrowserRouter([
   {
@@ -158,6 +159,14 @@ export const router = createBrowserRouter([
           <AdminManagerRoute>
             <OrderDetails />
           </AdminManagerRoute>
+        ),
+      },
+      {
+        path: "approved-orders",
+        element: (
+          <ManagerRoute>
+            <ApproveOrders />
+          </ManagerRoute>
         ),
       },
     ],
