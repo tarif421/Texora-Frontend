@@ -8,12 +8,18 @@ const AdminRoute = ({ children }) => {
   const { role, isLoading } = useRole();
 
   if (loading || isLoading) {
-    return <p>Loading....</p>;
+    return <p>Loading...</p>;
   }
-  if (user && role === "admin") {
+
+  if (!user) {
+    return <Navigate to="/auth/login" />;
+  }
+
+  if (role === "admin") {
     return children;
   }
-  return <Navigate to="/"></Navigate>;
+
+  return <Navigate to="/unauthorized" />;
 };
 
 export default AdminRoute;

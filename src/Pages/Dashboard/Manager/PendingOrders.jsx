@@ -162,9 +162,7 @@ const PendingOrders = () => {
                     <td colSpan="7" className="text-center py-12">
                       <div className="flex flex-col items-center">
                         <div className="text-5xl mb-3">✅</div>
-                        <h3 className="text-xl font-bold">
-                          No Pending Orders
-                        </h3>
+                        <h3 className="text-xl font-bold">No Pending Orders</h3>
                         <p className="text-base-content/60 mt-1">
                           All orders are already reviewed.
                         </p>
@@ -229,10 +227,9 @@ const PendingOrders = () => {
                           >
                             Reject
                           </button>
-
                           <Link
                             to={`/dashboard/order-details/${order._id}`}
-                            className="btn btn-xs btn-info text-white"
+                            className="btn btn-sm btn-info text-white"
                           >
                             View
                           </Link>

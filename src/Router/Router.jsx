@@ -13,7 +13,7 @@ import Register from "../Pages/Auth/Register";
 import ProductDetails from "../Pages/Home/Products/ProductDetails";
 import BookingPage from "../Pages/Home/Products/BookingPage";
 import AdminRoute from "./AdminRoute";
-import ManageRoute from "./ManagerRoute";
+import ManagerRoute from "./ManagerRoute";
 import AddProduct from "../Pages/Dashboard/Manager/AddProduct";
 
 import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
@@ -21,7 +21,9 @@ import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
 import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
 import PrivateRoute from "./PrivateRoute";
+
 import OrderDetails from "../Pages/Dashboard/Admin/AllOrders/OrderDetails";
+import AdminManagerRoute from "../Router/AdminManagerRoute";
 
 export const router = createBrowserRouter([
   {
@@ -92,7 +94,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-          {
+      {
         path: "my-orders",
         element: (
           <AdminRoute>
@@ -100,54 +102,64 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+      // {
+      //   path: "order-details/:id",
+      //   element: (
+      //     <AdminRoute>
+      //       <OrderDetails />
+      //     </AdminRoute>
+      //   ),
+      // },
       {
-        path: "order-details/:id",
+        path: "add-NewProducts",
         element: (
           <AdminRoute>
-            <OrderDetails />
+            <AddNewProducts></AddNewProducts>
           </AdminRoute>
         ),
       },
       {
-        path: "add-NewProducts",
-        element: <AdminRoute><AddNewProducts></AddNewProducts></AdminRoute>
-      },
-      {
         path: "add-products",
         element: (
-          <ManageRoute>
+          <ManagerRoute>
             <AddProduct />
-          </ManageRoute>
+          </ManagerRoute>
         ),
       },
-   
+
       {
         path: "manage-product",
         element: (
-          <ManageRoute>
+          <ManagerRoute>
             <ManageProducts />
-          </ManageRoute>
+          </ManagerRoute>
         ),
       },
       {
         path: "pending-orders",
         element: (
-          <ManageRoute>
+          <ManagerRoute>
             <PendingOrders></PendingOrders>
-          </ManageRoute>
+          </ManagerRoute>
         ),
       },
       {
         path: "my-profile",
         element: (
-          <ManageRoute>
+          <ManagerRoute>
             <MyProfile />
-          </ManageRoute>
+          </ManagerRoute>
         ),
       },
-    
-  
-  
+
+      {
+        path: "order-details/:id",
+        element: (
+          <AdminManagerRoute>
+            <OrderDetails />
+          </AdminManagerRoute>
+        ),
+      },
     ],
   },
 ]);

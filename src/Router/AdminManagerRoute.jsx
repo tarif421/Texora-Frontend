@@ -1,9 +1,9 @@
 import React from "react";
+
 import useAuth from "../Hooks/useAuth";
 import useRole from "../Hooks/useRole";
-import { Navigate } from "react-router";
 
-const ManagerRoute = ({ children }) => {
+const AdminManagerRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const { role, isLoading } = useRole();
 
@@ -15,11 +15,10 @@ const ManagerRoute = ({ children }) => {
     return <Navigate to="/auth/login" />;
   }
 
-  if (role === "manager") {
+  if (role === "admin" || role === "manager") {
     return children;
   }
 
-  return <Navigate to="/unauthorized" />;
+  return <Navigate to="/" />;
 };
-
-export default ManagerRoute;
+export default AdminManagerRoute;
