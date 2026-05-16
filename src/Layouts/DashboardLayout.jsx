@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AiFillProduct } from "react-icons/ai";
+import { AiFillProduct, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { RiFunctionAddLine } from "react-icons/ri";
 import { MdManageAccounts } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -36,7 +36,7 @@ const DashboardLayout = () => {
     <>
       <Navbar></Navbar>
 
-      <div className="mt-15">
+      <div className="">
         <div className="drawer lg:drawer-open">
           <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
@@ -188,15 +188,15 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Manage Products"
-                        to="manage-products"
+                        data-tip="Pending Orders"
+                        to="pending-orders"
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
-                          <TbTruckDelivery />
+                          <AiOutlineLoading3Quarters />
                         </span>
                         <span className="is-drawer-close:hidden">
-                          
+                          Pending Orders
                         </span>
                       </NavLink>
                     </li>
@@ -210,9 +210,7 @@ const DashboardLayout = () => {
                         <span className="text-2xl ">
                           <TbTruckDelivery />
                         </span>
-                        <span className="is-drawer-close:hidden">
-                          Pending Orders
-                        </span>
+                        <span className="is-drawer-close:hidden"></span>
                       </NavLink>
                     </li>
                     <li>

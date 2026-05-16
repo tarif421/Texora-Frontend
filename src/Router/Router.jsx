@@ -130,6 +130,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "pending-orders",
+        element: (
+          <ManageRoute>
+            <PendingOrders></PendingOrders>
+          </ManageRoute>
+        ),
+      },
+      {
         path: "my-profile",
         element: (
           <ManageRoute>
@@ -137,14 +145,7 @@ export const router = createBrowserRouter([
           </ManageRoute>
         ),
       },
-      {
-        path: "pending-orders",
-        element: (
-          <ManageRoute>
-            <PendingOrders />
-          </ManageRoute>
-        ),
-      },
+    
   
   
     ],

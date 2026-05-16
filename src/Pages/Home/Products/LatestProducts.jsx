@@ -47,7 +47,7 @@ const LatestProducts = () => {
           <Card key={product._id} product={product} />
         ))}
       </div>
-      <div>
+      <div className="text-center">
         <Link to="/allProducts">
           <button className="font-semibold  text-xl text-[#384bb4] btn">
             View All Products →
