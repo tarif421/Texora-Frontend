@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { AiFillProduct, AiOutlineLoading3Quarters } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
 import { RiFunctionAddLine } from "react-icons/ri";
 import { MdManageAccounts } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -205,7 +206,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="Approve Orders"
-                        to="approve-orders"
+                        to="approved-orders"
                       >
                         {/* Home icon */}
                         <span className="text-3xl  ">
@@ -220,11 +221,11 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="My Profile"
-                        to=""
+                        to="my-profile"
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
-                          <TbTruckDelivery />
+                          <CgProfile />
                         </span>
                         <span className="is-drawer-close:hidden">
                           My Profile
@@ -299,7 +300,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="My Profile"
-                        to="/dashboard/all-orders"
+                        to=""
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
