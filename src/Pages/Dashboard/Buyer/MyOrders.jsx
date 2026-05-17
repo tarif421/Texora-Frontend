@@ -48,7 +48,7 @@ const MyOrders = () => {
 
     if (s === "approved") return "badge-success";
     if (s === "rejected") return "badge-error";
-    if (s === "cancelled") return "badge-neutral";
+    if (s === "cancelled") return "badge-error";
     return "badge-warning";
   };
 

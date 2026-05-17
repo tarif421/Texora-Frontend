@@ -9,6 +9,7 @@ import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 import useRole from "../Hooks/useRole";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
+import { FaMapLocationDot } from "react-icons/fa6";
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
@@ -259,7 +260,7 @@ const DashboardLayout = () => {
                       >
                         {/* Home icon */}
                         <span className="text-2xl">
-                          <MdManageAccounts />
+                          <FaMapLocationDot />
                         </span>
                         <span className="is-drawer-close:hidden">
                           Track Orders
@@ -271,11 +272,11 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="My Profile"
-                        to=""
+                        to="my-profile"
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
-                          <TbTruckDelivery />
+                          <CgProfile />
                         </span>
                         <span className="is-drawer-close:hidden">
                           My Profile
