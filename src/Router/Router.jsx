@@ -30,6 +30,7 @@ import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
 import DetailsOrder from "../Pages/Dashboard/Buyer/DetailsOrders";
 import TrackOrders from "../Pages/Dashboard/Buyer/TrackOrders";
 import TrackOrder from "../Pages/Dashboard/Buyer/TrackOrder";
+import AllProduct from "../Pages/AllProducts/AllProduct";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
         element: <BookingPage />,
         loader: ({ params }) =>
           fetch(`http://localhost:3000/productsDetails/${params.id}`),
+      },
+      {
+        path: "/allProducts",
+        element: <AllProduct></AllProduct>,
       },
     ],
   },
@@ -151,11 +156,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-profile",
-        element: (
-          
-            <MyProfile />
-          
-        ),
+        element: <MyProfile />,
       },
 
       {
