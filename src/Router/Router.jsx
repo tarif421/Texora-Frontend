@@ -19,12 +19,17 @@ import AddProduct from "../Pages/Dashboard/Manager/AddProduct";
 import ManageProducts from "../Pages/Dashboard/Manager/ManageProducts";
 import MyProfile from "../Pages/Dashboard/Manager/MyProfile";
 import PendingOrders from "../Pages/Dashboard/Manager/PendingOrders";
-import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
+
 import PrivateRoute from "./PrivateRoute";
 
 import OrderDetails from "../Pages/Dashboard/Admin/AllOrders/OrderDetails";
 import AdminManagerRoute from "../Router/AdminManagerRoute";
 import ApproveOrders from "../Pages/Dashboard/Manager/ApproveOrders";
+import BuyerRoute from "./BuyerRoute";
+import MyOrders from "../Pages/Dashboard/Buyer/MyOrders";
+import DetailsOrder from "../Pages/Dashboard/Buyer/DetailsOrders";
+import TrackOrders from "../Pages/Dashboard/Buyer/TrackOrders";
+import TrackOrder from "../Pages/Dashboard/Buyer/TrackOrder";
 
 export const router = createBrowserRouter([
   {
@@ -95,14 +100,14 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
-      {
-        path: "my-orders",
-        element: (
-          <AdminRoute>
-            <MyOrders></MyOrders>
-          </AdminRoute>
-        ),
-      },
+      // {
+      //   path: "my-orders",
+      //   element: (
+      //     <AdminRoute>
+      //       <MyOrders></MyOrders>
+      //     </AdminRoute>
+      //   ),
+      // },
       // {
       //   path: "order-details/:id",
       //   element: (
@@ -168,6 +173,32 @@ export const router = createBrowserRouter([
             <ApproveOrders />
           </ManagerRoute>
         ),
+      },
+      {
+        path: "my-orders",
+        element: (
+          <BuyerRoute>
+            <MyOrders />
+          </BuyerRoute>
+        ),
+      },
+      {
+        path: "details-order/:id",
+        element: (
+          <BuyerRoute>
+            <DetailsOrder />
+          </BuyerRoute>
+        ),
+      },
+
+      {
+        path: "track-orders",
+        element: <TrackOrders />,
+      },
+
+      {
+        path: "track-order/:orderId",
+        element: <TrackOrder />,
       },
     ],
   },

@@ -240,7 +240,7 @@ const DashboardLayout = () => {
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                         data-tip="My Orders"
-                        to="/dashboard/my-orders"
+                        to="my-orders"
                       >
                         {/* Home icon */}
                         <span className="text-2xl">
@@ -254,48 +254,19 @@ const DashboardLayout = () => {
                     <li>
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Approve Order"
-                        to="/dashboard/all-products"
+                        data-tip="Track Orders"
+                        to="track-orders"
                       >
                         {/* Home icon */}
                         <span className="text-2xl">
-                          <AiFillProduct />
+                          <MdManageAccounts />
                         </span>
                         <span className="is-drawer-close:hidden">
-                          Approve Order
+                          Track Orders
                         </span>
                       </NavLink>
                     </li>
-                    <li>
-                      <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Manage Products"
-                        to="/dashboard/all-orders"
-                      >
-                        {/* Home icon */}
-                        <span className="text-2xl ">
-                          <TbTruckDelivery />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Manage Products
-                        </span>
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Pending Orders"
-                        to="/dashboard/all-orders"
-                      >
-                        {/* Home icon */}
-                        <span className="text-2xl ">
-                          <TbTruckDelivery />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Pending Orders
-                        </span>
-                      </NavLink>
-                    </li>
+
                     <li>
                       <NavLink
                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
