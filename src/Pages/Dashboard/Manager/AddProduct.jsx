@@ -22,8 +22,7 @@ const AddProducts = () => {
 
   const paymentMethods = [
     "Cash on Delivery",
-    "Bank Transfer",
-    "Stripe",
+   
     "Online Payment",
   ];
 
@@ -200,7 +199,7 @@ const AddProducts = () => {
               required
               className="p-3 rounded-xl bg-white text-gray-800 border border-gray-300 outline-none"
             >
-              <option value="">Select Payment Method</option>
+              <option value=""></option>
 
               {paymentMethods.map((method) => (
                 <option key={method} value={method}>

@@ -1,6 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link } from "react-router";
+
+import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AllOrders = () => {
@@ -9,11 +12,15 @@ const AllOrders = () => {
 
   const axiosSecure = useAxiosSecure();
 
-  const { data: orders = [], isLoading } = useQuery({
+  const {
+    data: orders = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["all-orders", filterStatus, searchTerm],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/all-orders?status=${filterStatus}&search=${searchTerm}`
+        `/all-orders?status=${filterStatus}&search=${searchTerm}`,
       );
       return res.data;
     },
@@ -22,9 +29,35 @@ const AllOrders = () => {
   const getStatusBadge = (status) => {
     if (status === "Approved") return "badge-success";
     if (status === "Rejected") return "badge-error";
-    if (status === "Delivered") return "badge-primary";
-    if (status === "Shipped") return "badge-info";
     return "badge-warning";
+  };
+
+  // delete handler
+  const handleDelete = async (id) => {
+    const confirm = await Swal.fire({
+      title: "Delete this order?",
+      text: "This action cannot be undone!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ef4444",
+      confirmButtonText: "Yes, Delete",
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    try {
+      const res = await axiosSecure.delete(`/all-orders/${id}`);
+
+      if (res.data.deletedCount > 0) {
+        Swal.fire("Deleted!", "Order has been deleted.", "success");
+        refetch(); 
+      } else {
+        Swal.fire("Error!", "Could not delete the order.", "error");
+      }
+    } catch (error) {
+      console.error("Delete Error:", error);
+      Swal.fire("Error!", "Something went wrong on the server.", "error");
+    }
   };
 
   return (
@@ -41,7 +74,6 @@ const AllOrders = () => {
                 Manage and view all customer orders from here.
               </p>
             </div>
-
             <div className="badge badge-primary badge-lg p-4 font-semibold">
               Total Orders: {orders.length}
             </div>
@@ -66,7 +98,6 @@ const AllOrders = () => {
                   d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
                 />
               </svg>
-
               <input
                 type="text"
                 className="grow"
@@ -85,16 +116,15 @@ const AllOrders = () => {
               <option value="Pending">Pending</option>
               <option value="Approved">Approved</option>
               <option value="Rejected">Rejected</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Delivered">Delivered</option>
             </select>
           </div>
         </div>
 
         {/* DaisyUI Table */}
-        <div className="bg-base-100 rounded-2xl shadow ">
+        <div className="bg-base-100 rounded-2xl shadow">
           <div className="overflow-x-auto">
             <table className="table table-zebra w-full">
+              {/* ✅ হেডার কলাম ঠিক করা হলো (মোট ৮টি কলাম) */}
               <thead className="bg-base-300 text-base-content">
                 <tr>
                   <th>#</th>
@@ -103,6 +133,7 @@ const AllOrders = () => {
                   <th>Product</th>
                   <th>Quantity</th>
                   <th>Status</th>
+                  <th className="text-center">View</th>
                   <th className="text-center">Actions</th>
                 </tr>
               </thead>
@@ -112,6 +143,7 @@ const AllOrders = () => {
                   <>
                     {[1, 2, 3, 4, 5].map((item) => (
                       <tr key={item}>
+                        {/* ✅ স্কেলিটনেও ৮টি কলাম পূর্ণ করা হলো */}
                         <td>
                           <div className="skeleton h-5 w-6"></div>
                         </td>
@@ -136,12 +168,16 @@ const AllOrders = () => {
                         <td>
                           <div className="skeleton h-8 w-16 mx-auto"></div>
                         </td>
+                        <td>
+                          <div className="skeleton h-8 w-10 mx-auto"></div>
+                        </td>
                       </tr>
                     ))}
                   </>
                 ) : orders.length === 0 ? (
                   <tr>
-                    <td colSpan="7" className="text-center py-12">
+                    {/* ✅ colSpan ৮ করা হলো */}
+                    <td colSpan="8" className="text-center py-12">
                       <div className="flex flex-col items-center">
                         <div className="text-5xl mb-3">📦</div>
                         <h3 className="text-xl font-bold">No Orders Found</h3>
@@ -168,9 +204,7 @@ const AllOrders = () => {
                       <td>
                         <div className="font-bold">
                           {order.userName ||
-                            `${order.firstName || ""} ${
-                              order.lastName || ""
-                            }` ||
+                            `${order.firstName || ""} ${order.lastName || ""}` ||
                             "Unknown User"}
                         </div>
                         <div className="text-sm opacity-60">
@@ -194,9 +228,7 @@ const AllOrders = () => {
 
                       <td>
                         <span
-                          className={`badge ${getStatusBadge(
-                            order.status
-                          )} font-semibold`}
+                          className={`badge ${getStatusBadge(order.status)} font-semibold`}
                         >
                           {order.status || order.orderStatus || "Pending"}
                         </span>
@@ -209,6 +241,17 @@ const AllOrders = () => {
                         >
                           View
                         </Link>
+                      </td>
+
+                      {/* ✅ সমাধান: Link এর বদলে প্রপার Button এলিমেন্ট এবং টেক্সট কালার রেড (text-error) করা হলো */}
+                      <td className="text-center">
+                        <button
+                          onClick={() => handleDelete(order._id)}
+                          className="btn btn-ghost btn-sm text-2xl text-error hover:bg-error/10"
+                          title="Delete Order"
+                        >
+                          <MdDeleteForever />
+                        </button>
                       </td>
                     </tr>
                   ))

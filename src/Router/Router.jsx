@@ -34,11 +34,13 @@ import AllProduct from "../Pages/AllProducts/AllProduct";
 import AboutUs from "../AboutUs/AboutUs";
 import ContactUs from "../ContactUs/ContactUs";
 import UpdateProduct from "../Pages/Dashboard/Admin/UpdateProduct";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -88,7 +90,7 @@ export const router = createBrowserRouter([
     path: "dashboard",
     element: (
       <PrivateRoute>
-        <DashboardLayout></DashboardLayout>,
+        <DashboardLayout />
       </PrivateRoute>
     ),
     children: [
@@ -178,12 +180,10 @@ export const router = createBrowserRouter([
           </AdminManagerRoute>
         ),
       },
-    {
-      
-  path: "update-product/:id",
-  element: <UpdateProduct />,
-
-    },
+      {
+        path: "update-product/:id",
+        element: <UpdateProduct />,
+      },
       {
         path: "approved-orders",
         element: (

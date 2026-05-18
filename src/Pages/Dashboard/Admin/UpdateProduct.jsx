@@ -22,7 +22,7 @@ const UpdateProduct = () => {
 
   const paymentMethods = ["Cash on Delivery", "Stripe"];
 
-  /* ✅ Load existing data */
+  /* Load existing data */
   useEffect(() => {
     const loadProduct = async () => {
       const res = await axiosSecure.get(`/products/${id}`);
@@ -36,7 +36,7 @@ const UpdateProduct = () => {
     loadProduct();
   }, [id, axiosSecure]);
 
-  /* ✅ Handle change */
+  /*  Handle change */
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -46,7 +46,7 @@ const UpdateProduct = () => {
     }));
   };
 
-  /* ✅ Payment */
+  /*  Payment */
   const handlePaymentChange = (e) => {
     const selected = e.target.value;
 
@@ -56,7 +56,7 @@ const UpdateProduct = () => {
     });
   };
 
-  /* ✅ Submit update */
+  /*  Submit update */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -80,7 +80,7 @@ const UpdateProduct = () => {
       }
     } catch (error) {
       console.error(error);
-      Swal.fire("Error", "Update failed ❌", "error");
+      Swal.fire("Error", "Update failed ", "error");
     }
   };
 

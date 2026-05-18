@@ -39,7 +39,7 @@ const AllProducts = () => {
       const res = await axiosSecure.delete(`/all-products/${id}`);
 
       if (res.data.deletedCount > 0) {
-        Swal.fire("Deleted!", "Product removed successfully", "success");
+        Swal.fire("Deleted!", "Product deleted successfully", "success");
 
         // ✅ update UI
         setProducts((prev) => prev.filter((p) => p._id !== id));

@@ -60,7 +60,7 @@ const OrderDetails = () => {
             : "badge-warning";
 
   // ✅ Tracking Steps
-  const steps = ["pending", "approved", "shipped", "delivered"];
+  const steps = ["pending", "approved"];
 
   const currentIndex = steps.indexOf(status);
 
