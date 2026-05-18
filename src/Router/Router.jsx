@@ -31,6 +31,9 @@ import DetailsOrder from "../Pages/Dashboard/Buyer/DetailsOrders";
 import TrackOrders from "../Pages/Dashboard/Buyer/TrackOrders";
 import TrackOrder from "../Pages/Dashboard/Buyer/TrackOrder";
 import AllProduct from "../Pages/AllProducts/AllProduct";
+import AboutUs from "../AboutUs/AboutUs";
+import ContactUs from "../ContactUs/ContactUs";
+import UpdateProduct from "../Pages/Dashboard/Admin/UpdateProduct";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +73,14 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/aboutUS",
+        Component: AboutUs,
+      },
+      {
+        path: "/contactUS",
+        Component: ContactUs,
       },
     ],
   },
@@ -167,6 +178,12 @@ export const router = createBrowserRouter([
           </AdminManagerRoute>
         ),
       },
+    {
+      
+  path: "update-product/:id",
+  element: <UpdateProduct />,
+
+    },
       {
         path: "approved-orders",
         element: (

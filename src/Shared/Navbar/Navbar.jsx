@@ -48,7 +48,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/my-event"
+          to="/aboutUS"
           className={({ isActive }) =>
             isActive ? "text-[#27379b] font-semibold" : "hover:text-[#27379b]"
           }
@@ -58,7 +58,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/my-event"
+          to="/contactUS"
           className={({ isActive }) =>
             isActive ? "text-[#27379b] font-semibold" : "hover:text-[#27379b]"
           }

@@ -19,12 +19,7 @@ const AddNewProducts = () => {
     showOnHome: false,
   });
 
-  const paymentMethods = [
-    "Cash on Delivery",
-    "Bank Transfer",
-    "Stripe",
-    "Online Payment",
-  ];
+  const paymentMethods = ["Cash on Delivery", "Stripe"];
 
   const handleChange = (e) => {
     const { name, value } = e.target;

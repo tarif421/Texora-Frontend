@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
+
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
-
   useEffect(() => {
     const fetchAllProducts = async () => {
       try {
@@ -20,6 +21,34 @@ const AllProducts = () => {
     };
     fetchAllProducts();
   }, [axiosSecure]);
+
+  //  handle delete
+  const handleDelete = async (id) => {
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "This product will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    try {
+      const res = await axiosSecure.delete(`/all-products/${id}`);
+
+      if (res.data.deletedCount > 0) {
+        Swal.fire("Deleted!", "Product removed successfully", "success");
+
+        // ✅ update UI
+        setProducts((prev) => prev.filter((p) => p._id !== id));
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Delete failed", "error");
+    }
+  };
 
   if (loading) {
     return (
@@ -130,10 +159,16 @@ const AllProducts = () => {
                   />
                 </td>
                 <td className="text-right space-x-2">
-                  <button className="btn btn-xs btn-outline btn-info">
-                    Update
-                  </button>
-                  <button className="btn btn-xs btn-outline btn-error">
+                  <NavLink to={`/dashboard/update-product/${product._id}`}>
+                    {" "}
+                    <button className="btn btn-xs btn-outline btn-info">
+                      Update
+                    </button>
+                  </NavLink>
+                  <button
+                    onClick={() => handleDelete(product._id)}
+                    className="btn btn-xs btn-outline btn-error"
+                  >
                     Delete
                   </button>
                 </td>

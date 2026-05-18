@@ -4,6 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { RiFunctionAddLine } from "react-icons/ri";
 import { MdManageAccounts } from "react-icons/md";
 import { TbTruckDelivery } from "react-icons/tb";
+import { TiShoppingCart } from "react-icons/ti";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
@@ -147,7 +148,7 @@ const DashboardLayout = () => {
                       >
                         {/* Home icon */}
                         <span className="text-2xl ">
-                          <TbTruckDelivery />
+                          <TiShoppingCart />
                         </span>
                         <span className="is-drawer-close:hidden">
                           All Orders
@@ -287,13 +288,13 @@ const DashboardLayout = () => {
                 )}
 
                 {/* List item */}
-                <li>
+                {/* <li>
                   <NavLink
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                     data-tip="Settings"
                   >
                     {/* Settings icon */}
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       strokeLinejoin="round"
@@ -307,10 +308,10 @@ const DashboardLayout = () => {
                       <path d="M14 17H5"></path>
                       <circle cx="17" cy="17" r="3"></circle>
                       <circle cx="7" cy="7" r="3"></circle>
-                    </svg>
-                    <span className="is-drawer-close:hidden">Settings</span>
-                  </NavLink>
-                </li>
+                    </svg> */}
+                    {/* <span className="is-drawer-close:hidden">Settings</span> */}
+                  {/* </NavLink> */}
+                {/* </li>  */}
               </ul>
             </div>
           </div>
