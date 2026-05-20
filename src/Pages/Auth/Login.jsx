@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { Link, Navigate } from "react-router";
 import SocialLogin from "./SocialLogin";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const [loginError, setLoginError] = useState();
+  // const navigate = useNavigate();
 
   const {
     register,
@@ -15,14 +18,23 @@ const Login = () => {
 
   const handleLogin = (data) => {
     // console.log("after register", data);
+    setLoginError("");
     signInUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
+        Swal.fire({
+          title: "Login Successful!",
+          text: `Welcome back, ${result.user?.displayName || "User"}!`,
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+       
       })
       .catch((error) => {
         console.log(error);
+        setLoginError("password incorrect");
       });
-    
   };
   return (
     <div className=" flex items-center justify-center bg-base-200 p-4  min-h-screen">
@@ -61,6 +73,11 @@ const Login = () => {
           <div>
             <a className="link link-hover">Forgot password?</a>
           </div>
+          {loginError && (
+            <p className="text-red-500 font-medium text-sm mt-2 text-center  p-2   ">
+              password incorrect
+            </p>
+          )}
           <button className="btn btn-neutral mt-4 bg-linear-to-r from-sky-800 via-blue-400 text-white to-sky-800 border-none">
             Login
           </button>

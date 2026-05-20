@@ -23,13 +23,13 @@ const Allproduct = () => {
   //  Loading state
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-60">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="flex min-h-screen justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
       </div>
     );
   }
 
-  // ✅ Error state
+  //  Error state
   if (isError) {
     return (
       <div className="text-center py-10 text-red-500">
@@ -41,7 +41,7 @@ const Allproduct = () => {
   return (
     <>
       {/*  HEADER */}
-      <div className="text-center mt-10">
+      <div className="text-center  mt-10">
         <h1 className="font-bold text-4xl text-[#384bb4] font-serif">
           All Products
         </h1>

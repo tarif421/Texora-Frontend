@@ -9,7 +9,7 @@ const TrackOrder = () => {
   const { data: order = {} } = useQuery({
     queryKey: ["track-order", orderId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/order/${orderId}`);
+      const res = await axiosSecure.get(`/buyer-order/${orderId}`);
       return res.data;
     },
   });

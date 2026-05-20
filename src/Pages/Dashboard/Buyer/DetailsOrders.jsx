@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
   const { data: order = {} } = useQuery({
     queryKey: ["order-details", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/order/${id}`);
+      const res = await axiosSecure.get(`/orders/${id}`);
       return res.data;
     },
   });

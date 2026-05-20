@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+
 import Card from "./Card";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const LatestProducts = () => {
   const [products, setProducts] = useState([]);
