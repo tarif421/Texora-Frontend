@@ -8,12 +8,13 @@ import { TiShoppingCart } from "react-icons/ti";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
-import useRole from "../Hooks/useRole";
+
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 import { FaMapLocationDot } from "react-icons/fa6";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
-  const { role, isLoading } = useRole();
+const { role, isLoading } = useRole();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,13 +30,13 @@ const DashboardLayout = () => {
     }
   }, [role, isLoading, location.pathname, navigate]);
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-64">
-  //       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    );
+  }
   return (
     <>
       <Navbar></Navbar>
@@ -294,7 +295,7 @@ const DashboardLayout = () => {
                     data-tip="Settings"
                   >
                     {/* Settings icon */}
-                    {/* <svg
+                {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       strokeLinejoin="round"
@@ -309,8 +310,8 @@ const DashboardLayout = () => {
                       <circle cx="17" cy="17" r="3"></circle>
                       <circle cx="7" cy="7" r="3"></circle>
                     </svg> */}
-                    {/* <span className="is-drawer-close:hidden">Settings</span> */}
-                  {/* </NavLink> */}
+                {/* <span className="is-drawer-close:hidden">Settings</span> */}
+                {/* </NavLink> */}
                 {/* </li>  */}
               </ul>
             </div>

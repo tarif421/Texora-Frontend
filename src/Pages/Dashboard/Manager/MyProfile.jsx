@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
+
 import useAuth from "../../../Hooks/useAuth";
 import useRole from "../../../Hooks/useRole";
-import Swal from "sweetalert2";
 
 const MyProfile = () => {
   const { user, logOut } = useAuth();
+
   const { role } = useRole();
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -22,66 +25,120 @@ const MyProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 p-4 md:p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-base-200 px-3 py-4 sm:px-5 sm:py-6 lg:px-8">
 
-        <div className="bg-base-100 shadow-xl rounded-2xl p-8">
+      <div className="max-w-5xl mx-auto">
 
-          {/*  Header */}
-          <div className="flex flex-col md:flex-row items-center gap-6 mb-8">
+        {/* Main Card */}
+        <div className="bg-base-100 rounded-3xl shadow-sm p-5 sm:p-7 lg:p-10">
 
-            <img
-              src={user?.photoURL || "https://i.ibb.co/2kR3R1K/user.png"}
-              alt="profile"
-              className="w-28 h-28 rounded-full border"
-            />
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-center gap-6 lg:gap-8 mb-10">
 
-            <div>
-              <h2 className="text-3xl font-bold">
+            {/* Profile Image */}
+            <div className="flex justify-center md:justify-start">
+
+              <img
+                src={
+                  user?.photoURL ||
+                  "https://i.ibb.co/2kR3R1K/user.png"
+                }
+                alt="profile"
+                className="
+                  w-24 h-24
+                  sm:w-28 sm:h-28
+                  lg:w-32 lg:h-32
+                  rounded-full
+                  border-4 border-base-300
+                  object-cover
+                  shadow-sm
+                "
+              />
+            </div>
+
+            {/* User Info */}
+            <div className="text-center md:text-left">
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
                 {user?.displayName || "No Name"}
               </h2>
-              <p className="text-gray-500">{user?.email}</p>
 
-              <span className="badge badge-primary mt-2 capitalize">
+              <p className="text-sm sm:text-base text-gray-500 mt-2 break-all">
+                {user?.email}
+              </p>
+
+              <span className="badge badge-primary badge-md sm:badge-lg mt-4 capitalize px-4 py-3">
                 {role || "user"}
               </span>
             </div>
           </div>
 
-          {/*  Info section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Info Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
 
-            <Info label="Full Name" value={user?.displayName} />
-            <Info label="Email" value={user?.email} />
-            <Info label="Role" value={role} />
-            <Info label="Account Status" value="Active" />
+            <Info
+              label="Full Name"
+              value={user?.displayName}
+            />
 
+            <Info
+              label="Email"
+              value={user?.email}
+            />
+
+            <Info
+              label="Role"
+              value={role}
+            />
+
+            <Info
+              label="Account Status"
+              value="Active"
+            />
           </div>
 
-          {/*  Logout Button */}
-          <div className="mt-10 text-center">
+          {/* Logout */}
+          <div className="mt-10 flex justify-center">
 
             <button
               onClick={handleLogout}
-              className="btn btn-error text-white px-6"
+              className="
+                btn btn-error
+                text-white
+                rounded-2xl
+                px-6 sm:px-8
+                btn-sm sm:btn-md
+                shadow-sm
+              "
             >
               Logout
             </button>
-
           </div>
-
         </div>
       </div>
     </div>
   );
 };
 
-/*  reusable info component */
+/* Reusable Info Component */
 const Info = ({ label, value }) => {
   return (
-    <div className="bg-base-200 p-4 rounded-xl">
-      <p className="text-xs opacity-60">{label}</p>
-      <p className="font-semibold">{value || "N/A"}</p>
+    <div
+      className="
+        bg-base-200
+        rounded-2xl
+        p-4 sm:p-5
+        transition
+        hover:shadow-sm
+      "
+    >
+      <p className="text-xs sm:text-sm text-gray-500 mb-2">
+        {label}
+      </p>
+
+      <p className="font-semibold text-sm sm:text-base lg:text-lg text-gray-800 break-all">
+        {value || "N/A"}
+      </p>
     </div>
   );
 };

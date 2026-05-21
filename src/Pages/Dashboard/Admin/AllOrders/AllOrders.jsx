@@ -20,7 +20,7 @@ const AllOrders = () => {
     queryKey: ["all-orders", filterStatus, searchTerm],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/all-orders?status=${filterStatus}&search=${searchTerm}`,
+        `/all-orders?status=${filterStatus}&search=${searchTerm}`
       );
       return res.data;
     },
@@ -32,7 +32,6 @@ const AllOrders = () => {
     return "badge-warning";
   };
 
-  // delete handler
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Delete this order?",
@@ -50,7 +49,7 @@ const AllOrders = () => {
 
       if (res.data.deletedCount > 0) {
         Swal.fire("Deleted!", "Order has been deleted.", "success");
-        refetch(); 
+        refetch();
       } else {
         Swal.fire("Error!", "Could not delete the order.", "error");
       }
@@ -61,54 +60,47 @@ const AllOrders = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 p-4 md:p-6">
+    <div className="min-h-screen bg-base-200 px-3 py-4 sm:px-5 sm:py-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
+
         {/* Header */}
-        <div className="bg-base-100 rounded-2xl shadow p-6 mb-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-base-100 rounded-3xl shadow-sm p-4 sm:p-6 lg:p-8 mb-6">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+
             <div>
-              <h2 className="text-3xl font-bold text-base-content">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
                 All Orders
               </h2>
-              <p className="text-base-content/60 mt-1">
-                Manage and view all customer orders from here.
+
+              <p className="text-sm sm:text-base opacity-60 mt-2">
+                Manage and monitor all customer orders smoothly.
               </p>
             </div>
-            <div className="badge badge-primary badge-lg p-4 font-semibold">
+
+            <div className="badge badge-primary badge-lg px-4 py-4 font-medium self-start md:self-center">
               Total Orders: {orders.length}
             </div>
           </div>
         </div>
 
-        {/* Search and Filter */}
-        <div className="bg-base-100 rounded-2xl shadow p-5 mb-6">
+        {/* Search & Filter */}
+        <div className="bg-base-100 rounded-3xl shadow-sm p-4 sm:p-6 mb-6">
           <div className="flex flex-col md:flex-row gap-4">
-            <label className="input input-bordered flex items-center gap-2 w-full md:max-w-sm">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 opacity-70"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
-                />
-              </svg>
+
+            {/* Search */}
+            <label className="input input-bordered flex items-center gap-2 w-full md:flex-1 h-12 rounded-2xl">
               <input
                 type="text"
-                className="grow"
+                className="grow text-sm sm:text-base"
                 placeholder="Search by Order ID..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </label>
 
+            {/* Filter */}
             <select
-              className="select select-bordered w-full md:max-w-xs"
+              className="select select-bordered w-full md:w-60 rounded-2xl text-sm sm:text-base"
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
             >
@@ -120,143 +112,165 @@ const AllOrders = () => {
           </div>
         </div>
 
-        {/* DaisyUI Table */}
-        <div className="bg-base-100 rounded-2xl shadow">
+        {/* Table Section */}
+        <div className="bg-base-100 rounded-3xl shadow-sm overflow-hidden">
+
           <div className="overflow-x-auto">
-            <table className="table table-zebra w-full">
-              {/* ✅ হেডার কলাম ঠিক করা হলো (মোট ৮টি কলাম) */}
+
+            <table className="table table-zebra min-w-[900px] lg:min-w-full">
+
+              {/* Table Head */}
               <thead className="bg-base-300 text-base-content">
                 <tr>
-                  <th>#</th>
-                  <th>Order ID</th>
-                  <th>User</th>
-                  <th>Product</th>
-                  <th>Quantity</th>
-                  <th>Status</th>
-                  <th className="text-center">View</th>
-                  <th className="text-center">Actions</th>
+                  <th className="text-xs sm:text-sm">#</th>
+                  <th className="text-xs sm:text-sm">Order ID</th>
+                  <th className="text-xs sm:text-sm">User</th>
+                  <th className="text-xs sm:text-sm hidden lg:table-cell">
+                    Product
+                  </th>
+                  <th className="text-xs sm:text-sm">Qty</th>
+                  <th className="text-xs sm:text-sm">Status</th>
+                  <th className="text-center text-xs sm:text-sm">View</th>
+                  <th className="text-center text-xs sm:text-sm">Delete</th>
                 </tr>
               </thead>
 
               <tbody>
                 {isLoading ? (
-                  <>
-                    {[1, 2, 3, 4, 5].map((item) => (
-                      <tr key={item}>
-                        {/* ✅ স্কেলিটনেও ৮টি কলাম পূর্ণ করা হলো */}
-                        <td>
-                          <div className="skeleton h-5 w-6"></div>
-                        </td>
-                        <td>
-                          <div className="skeleton h-5 w-36"></div>
-                        </td>
-                        <td>
-                          <div className="space-y-2">
-                            <div className="skeleton h-5 w-32"></div>
-                            <div className="skeleton h-4 w-44"></div>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="skeleton h-5 w-36"></div>
-                        </td>
-                        <td>
-                          <div className="skeleton h-5 w-12"></div>
-                        </td>
-                        <td>
-                          <div className="skeleton h-6 w-20 rounded-full"></div>
-                        </td>
-                        <td>
-                          <div className="skeleton h-8 w-16 mx-auto"></div>
-                        </td>
-                        <td>
-                          <div className="skeleton h-8 w-10 mx-auto"></div>
-                        </td>
-                      </tr>
-                    ))}
-                  </>
+                  [1, 2, 3, 4].map((item) => (
+                    <tr key={item}>
+                      <td>
+                        <div className="skeleton h-4 w-6"></div>
+                      </td>
+
+                      <td>
+                        <div className="skeleton h-4 w-28"></div>
+                      </td>
+
+                      <td>
+                        <div className="space-y-2">
+                          <div className="skeleton h-4 w-24"></div>
+                          <div className="skeleton h-3 w-36"></div>
+                        </div>
+                      </td>
+
+                      <td className="hidden lg:table-cell">
+                        <div className="skeleton h-4 w-28"></div>
+                      </td>
+
+                      <td>
+                        <div className="skeleton h-5 w-12"></div>
+                      </td>
+
+                      <td>
+                        <div className="skeleton h-5 w-16 rounded-full"></div>
+                      </td>
+
+                      <td>
+                        <div className="skeleton h-8 w-14 mx-auto"></div>
+                      </td>
+
+                      <td>
+                        <div className="skeleton h-8 w-8 mx-auto"></div>
+                      </td>
+                    </tr>
+                  ))
                 ) : orders.length === 0 ? (
                   <tr>
-                    {/* ✅ colSpan ৮ করা হলো */}
-                    <td colSpan="8" className="text-center py-12">
+                    <td colSpan="8" className="py-16 text-center">
                       <div className="flex flex-col items-center">
-                        <div className="text-5xl mb-3">📦</div>
-                        <h3 className="text-xl font-bold">No Orders Found</h3>
-                        <p className="text-base-content/60 mt-1">
-                          There are no orders matching your search or filter.
+                        <h2 className="text-xl sm:text-2xl font-bold">
+                          No Orders Found
+                        </h2>
+
+                        <p className="text-sm opacity-60 mt-2">
+                          Try changing the search or filter option.
                         </p>
                       </div>
                     </td>
                   </tr>
                 ) : (
                   orders.map((order, index) => (
-                    <tr key={order._id} className="hover">
-                      <td className="font-bold">{index + 1}</td>
+                    <tr
+                      key={order._id}
+                      className="hover transition duration-200"
+                    >
+                      {/* Index */}
+                      <td className="font-semibold text-xs sm:text-sm">
+                        {index + 1}
+                      </td>
 
+                      {/* Order ID */}
                       <td>
-                        <div className="font-mono text-xs font-semibold">
+                        <div className="font-mono text-[11px] sm:text-xs break-all max-w-[180px]">
                           #{order._id}
                         </div>
-                        <div className="text-xs opacity-50">
-                          Short: #{order._id?.slice(-6).toUpperCase()}
+
+                        <div className="text-[10px] sm:text-xs opacity-50 mt-1">
+                          {order._id?.slice(-6).toUpperCase()}
                         </div>
                       </td>
 
+                      {/* User */}
                       <td>
-                        <div className="font-bold">
-                          {order.userName ||
-                            `${order.firstName || ""} ${order.lastName || ""}` ||
-                            "Unknown User"}
+                        <div className="font-semibold text-sm sm:text-base">
+                          {order.userName || "Unknown User"}
                         </div>
-                        <div className="text-sm opacity-60">
-                          {order.userEmail || order.email || "No email"}
+
+                        <div className="text-xs opacity-60 break-all">
+                          {order.userEmail}
                         </div>
                       </td>
 
-                      <td>
-                        <div className="font-semibold">
-                          {order.productName ||
-                            order.productTitle ||
-                            "Unknown Product"}
+                      {/* Product */}
+                      <td className="hidden lg:table-cell">
+                        <div className="font-medium">
+                          {order.productName}
                         </div>
                       </td>
 
+                      {/* Quantity */}
                       <td>
-                        <span className="badge badge-outline">
-                          {order.quantity || 0} pcs
+                        <span className="badge badge-outline text-xs sm:text-sm px-3 py-2">
+                          {order.quantity} pcs
                         </span>
                       </td>
 
+                      {/* Status */}
                       <td>
                         <span
-                          className={`badge ${getStatusBadge(order.status)} font-semibold`}
+                          className={`badge ${getStatusBadge(
+                            order.status
+                          )} text-xs sm:text-sm px-3 py-2`}
                         >
-                          {order.status || order.orderStatus || "Pending"}
+                          {order.status}
                         </span>
                       </td>
 
+                      {/* View */}
                       <td className="text-center">
                         <Link
                           to={`/dashboard/order-details/${order._id}`}
-                          className="btn btn-sm btn-info text-white"
+                          className="btn btn-xs sm:btn-sm rounded-xl btn-info text-white"
                         >
                           View
                         </Link>
                       </td>
 
-                      {/* ✅ সমাধান: Link এর বদলে প্রপার Button এলিমেন্ট এবং টেক্সট কালার রেড (text-error) করা হলো */}
+                      {/* Delete */}
                       <td className="text-center">
                         <button
                           onClick={() => handleDelete(order._id)}
-                          className="btn btn-ghost btn-sm text-2xl text-error hover:bg-error/10"
-                          title="Delete Order"
+                          className="btn btn-ghost btn-xs sm:btn-sm rounded-xl text-error hover:bg-error/10 transition"
                         >
-                          <MdDeleteForever />
+                          <MdDeleteForever className="text-lg sm:text-xl" />
                         </button>
                       </td>
                     </tr>
                   ))
                 )}
               </tbody>
+
             </table>
           </div>
         </div>

@@ -23,10 +23,13 @@ const AddNewProducts = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  // Only one payment method can be selected
   const handlePaymentChange = (e) => {
     const selectedMethod = e.target.value;
 
@@ -41,10 +44,12 @@ const AddNewProducts = () => {
 
     const finalData = {
       ...formData,
+
       features: formData.features
         .split(",")
         .map((f) => f.trim())
         .filter((f) => f),
+
       price: parseFloat(formData.price),
       availableQuantity: parseInt(formData.availableQuantity),
       minimumOrder: parseInt(formData.minimumOrder),
@@ -72,27 +77,32 @@ const AddNewProducts = () => {
       }
     } catch (error) {
       console.log("post error", error);
+
       Swal.fire("Error", "Failed to add product", "error");
     }
   };
-  //  if (loading) {
-  //   return (
-  //     <div className="flex justify-center items-center h-64">
-  //       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-  //     </div>
-  //   );
-  // }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 py-12 px-4">
-      <div className="max-w-4xl mx-auto bg-gray-50 rounded-3xl p-8 shadow-xl border-gray-200">
-        <h2 className="text-3xl text-[#384bb4] font-bold mb-9 text-center">
-          Add Product
-        </h2>
+    <div className="min-h-screen bg-base-200 px-3 py-6 sm:px-5 sm:py-8 lg:px-8">
+      
+      {/* Container */}
+      <div className="max-w-5xl mx-auto bg-base-100 rounded-3xl shadow-sm border border-base-300 p-4 sm:p-6 md:p-8 lg:p-10">
 
+        {/* Heading */}
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#384bb4]">
+            Add Product
+          </h2>
+
+          <p className="text-sm sm:text-base text-gray-500 mt-2">
+            Create a clean and professional product listing
+          </p>
+        </div>
+
+        {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6"
         >
           {[
             {
@@ -101,29 +111,34 @@ const AddNewProducts = () => {
               type: "text",
               placeholder: "e.g. Windbreaker Jacket",
             },
+
             {
               label: "Product Image URL",
               name: "productImage",
               type: "text",
               placeholder: "https://image-link.com",
             },
+
             {
               label: "Price",
               name: "price",
               type: "number",
               step: "0.01",
             },
+
             {
               label: "Category",
               name: "category",
               type: "text",
               placeholder: "e.g. Outerwear",
             },
+
             {
               label: "Available Quantity",
               name: "availableQuantity",
               type: "number",
             },
+
             {
               label: "Minimum Order",
               name: "minimumOrder",
@@ -131,7 +146,8 @@ const AddNewProducts = () => {
             },
           ].map((field) => (
             <div key={field.name} className="flex flex-col">
-              <label className="text-sm font-semibold mb-2 text-gray-700">
+              
+              <label className="text-sm sm:text-base font-medium mb-2 text-gray-700">
                 {field.label}
               </label>
 
@@ -142,15 +158,29 @@ const AddNewProducts = () => {
                 placeholder={field.placeholder}
                 value={formData[field.name]}
                 onChange={handleChange}
-                className="p-3 rounded-xl bg-white text-gray-800 border border-gray-300 outline-none"
                 required
+                className="
+                  h-12 sm:h-13
+                  px-4
+                  rounded-2xl
+                  border border-gray-300
+                  bg-white
+                  text-sm sm:text-base
+                  text-gray-800
+                  outline-none
+                  focus:border-[#384bb4]
+                  focus:ring-2
+                  focus:ring-[#384bb4]/20
+                  transition
+                "
               />
             </div>
           ))}
 
-          {/* features */}
+          {/* Features */}
           <div className="md:col-span-2 flex flex-col">
-            <label className="text-sm font-semibold mb-2 text-gray-700">
+            
+            <label className="text-sm sm:text-base font-medium mb-2 text-gray-700">
               Features
             </label>
 
@@ -160,29 +190,57 @@ const AddNewProducts = () => {
               value={formData.features}
               onChange={handleChange}
               placeholder="Water-resistant, Lightweight, Outdoor-friendly"
-              className="p-3 bg-white rounded-xl text-gray-800 border border-gray-300 outline-none"
+              className="
+                h-12 sm:h-13
+                px-4
+                rounded-2xl
+                border border-gray-300
+                bg-white
+                text-sm sm:text-base
+                text-gray-800
+                outline-none
+                focus:border-[#384bb4]
+                focus:ring-2
+                focus:ring-[#384bb4]/20
+                transition
+              "
             />
           </div>
 
-          {/* description */}
-          <div className="flex flex-col md:col-span-2">
-            <label className="text-sm font-semibold mb-2 text-gray-700">
+          {/* Description */}
+          <div className="md:col-span-2 flex flex-col">
+            
+            <label className="text-sm sm:text-base font-medium mb-2 text-gray-700">
               Description
             </label>
 
             <textarea
               name="description"
-              rows="4"
+              rows="5"
               value={formData.description}
               onChange={handleChange}
-              className="p-3 rounded-xl bg-white text-gray-800 border border-gray-400 outline-none"
               required
+              className="
+                p-4
+                rounded-2xl
+                border border-gray-300
+                bg-white
+                text-sm sm:text-base
+                text-gray-800
+                outline-none
+                resize-none
+                focus:border-[#384bb4]
+                focus:ring-2
+                focus:ring-[#384bb4]/20
+                transition
+              "
             ></textarea>
           </div>
 
-          {/* payment option dropdown */}
+          {/* Payment */}
           <div className="md:col-span-2 flex flex-col">
-            <label className="text-sm font-semibold mb-2 text-indigo-600">
+            
+            <label className="text-sm sm:text-base font-medium mb-2 text-gray-700">
               Payment Method
             </label>
 
@@ -191,7 +249,20 @@ const AddNewProducts = () => {
               value={formData.paymentOptions[0] || ""}
               onChange={handlePaymentChange}
               required
-              className="p-3 rounded-xl bg-white text-gray-800 border border-gray-300 outline-none"
+              className="
+                h-12 sm:h-13
+                px-4
+                rounded-2xl
+                border border-gray-300
+                bg-white
+                text-sm sm:text-base
+                text-gray-800
+                outline-none
+                focus:border-[#384bb4]
+                focus:ring-2
+                focus:ring-[#384bb4]/20
+                transition
+              "
             >
               <option value="">Select Payment Method</option>
 
@@ -203,9 +274,26 @@ const AddNewProducts = () => {
             </select>
           </div>
 
+          {/* Button */}
           <button
             type="submit"
-            className="md:col-span-2 mt-8 py-4 rounded-xl bg-linear-to-r from-sky-800 via-blue-400 text-white to-sky-800"
+            className="
+              md:col-span-2
+              mt-4 sm:mt-6
+              h-12 sm:h-14
+              rounded-2xl
+              text-sm sm:text-base
+              font-semibold
+              text-white
+              bg-gradient-to-r
+              from-sky-800
+              via-blue-500
+              to-sky-800
+              hover:scale-[1.01]
+              transition-all
+              duration-300
+              shadow-md
+            "
           >
             Create Product Listing
           </button>

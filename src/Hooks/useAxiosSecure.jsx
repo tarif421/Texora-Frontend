@@ -9,14 +9,18 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const { user } = useAuth();
 
-
   useEffect(() => {
-    //  intercept request
-    axiosSecure.interceptors.request.use((config) => {
-      config.headers.Authorization = `Bearer ${user?.accessToken}`;
+   
+    axiosSecure.interceptors.request.use(async (config) => {
+      if (user) {
+       
+        const token = await user.getIdToken(); 
+        config.headers.Authorization = `Bearer ${token}`;
+      }
       return config;
     });
   }, [user]);
+
   return axiosSecure;
 };
 
