@@ -68,7 +68,14 @@ const Navbar = () => {
       </li>
     </>
   );
-
+  const handleTheme = (checked) => {
+    const html = document.querySelector("html");
+    if (checked) {
+      html.setAttribute("data-theme", "dark");
+    } else {
+      html.setAttribute("data-theme", "light");
+    }
+  };
   return (
     <div className="navbar bg-base-100 shadow-sm">
       {/* START */}
@@ -108,6 +115,14 @@ const Navbar = () => {
       <div className="navbar-center  hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
+  <div className="flex items-center ml-2">
+  <input
+    onChange={(e) => handleTheme(e.target.checked)}
+    type="checkbox"
+    defaultChecked={localStorage.getItem("theme") === "dark"}
+    className="toggle toggle-sm toggle-primary bg-[#f0f1f1]"
+  />
+</div>
 
       {/* end */}
       <div className="navbar-end ml-2 flex gap-2">

@@ -71,7 +71,7 @@ const ManageUsers = () => {
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, remove it!",
+      confirmButtonText: "Yes, remove user!",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -81,7 +81,7 @@ const ManageUsers = () => {
             refetch();
 
             Swal.fire({
-              title: "Deleted!",
+              title: "Removed!",
               text: "User has been removed.",
               icon: "success",
               timer: 1500,
