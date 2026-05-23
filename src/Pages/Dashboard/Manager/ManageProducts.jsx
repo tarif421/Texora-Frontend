@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import {  useState } from "react";
 import { FaEdit, FaTrashAlt, FaSearch } from "react-icons/fa";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
@@ -10,6 +10,7 @@ import useRole from "../../../Hooks/useRole";
 
 const ManageProducts = () => {
   const axiosSecure = useAxiosSecure();
+
 
   const { user } = useAuth();
 
@@ -33,6 +34,8 @@ const ManageProducts = () => {
       return res.data;
     },
   });
+
+
 
   // Delete
   const handleDelete = (id) => {

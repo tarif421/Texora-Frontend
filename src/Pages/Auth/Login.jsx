@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import { Link, Navigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
 import Swal from "sweetalert2";
 
 const Login = () => {
   const [loginError, setLoginError] = useState();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -29,7 +30,7 @@ const Login = () => {
           timer: 2000,
           showConfirmButton: false,
         });
-       
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         console.log(error);

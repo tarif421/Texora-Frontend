@@ -46,7 +46,7 @@ const LatestProducts = () => {
       </div>
 
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-8 grid grid-cols-3 gap-3 sm:gap-4 md:gap-5">
         {products.map((product) => (
           <Card key={product._id} product={product} />
         ))}

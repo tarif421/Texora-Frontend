@@ -23,7 +23,7 @@ const AddProducts = () => {
   const paymentMethods = [
     "Cash on Delivery",
    
-    "Online Payment",
+    "Stripe",
   ];
 
   const handleChange = (e) => {

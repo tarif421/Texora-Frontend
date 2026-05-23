@@ -76,7 +76,7 @@ const UpdateProduct = () => {
 
       if (res.data.modifiedCount > 0) {
         Swal.fire("Success!", "Product updated ✅", "success");
-        navigate("/dashboard/all-products");
+        navigate("/");
       }
     } catch (error) {
       console.error(error);

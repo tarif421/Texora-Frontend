@@ -1,76 +1,166 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 
- const DetailsOrder = () => {
+const DetailsOrder = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
 
-  const { data: order = {} } = useQuery({
+  const { data: order, isLoading } = useQuery({
     queryKey: ["order-details", id],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/orders/${id}`);
+      const res = await axiosSecure.get(`/order/${id}`);
       return res.data;
     },
   });
 
-  const tracking = order?.trackingHistory || [];
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+  if (!order) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <h2 className="text-xl font-bold">Order Not Found</h2>
+      </div>
+    );
+  }
+
+  // ✅ Normalize data (important for reuse)
+  const status = (order.status || "pending").toLowerCase();
+  const productName = order.productTitle || order.productName || "N/A";
+  const quantity = Number(order.quantity || 0);
+  const unitPrice = Number(order.price || order.unitPrice || 0);
+  const totalPrice = Number(order.totalPrice) || quantity * unitPrice;
+
+  const userName =
+    order.userName ||
+    `${order.firstName || ""} ${order.lastName || ""}`.trim() ||
+    "Unknown";
+
+  const email = order.userEmail || order.email;
+
+  const address = order.address || order.deliveryAddress || "N/A";
+  const contact = order.contact || order.contactNumber || "N/A";
+
+  // ✅ Status Color
+  const statusColor =
+    status === "approved"
+      ? "badge-success"
+      : status === "rejected"
+        ? "badge-error"
+        : status === "shipped"
+          ? "badge-info"
+          : status === "delivered"
+            ? "badge-primary"
+            : "badge-warning";
+
+  // ✅ Tracking Steps
+  const steps = ["pending", "approved"];
+
+  const currentIndex = steps.indexOf(status);
 
   return (
     <div className="min-h-screen bg-base-200 p-4 md:p-6">
-      <div className="max-w-5xl mx-auto space-y-6">
-        {/* ✅ ORDER INFO */}
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* Header */}
         <div className="bg-base-100 p-6 rounded-2xl shadow">
-          <h2 className="text-2xl font-bold mb-4">Order Details</h2>
+          <h2 className="text-3xl font-bold">Order Details</h2>
+          <p className="text-sm opacity-60">#{order._id}</p>
 
-          <p>
-            <b>Product:</b> {order.productTitle}
-          </p>
-          <p>
-            <b>Quantity:</b> {order.quantity}
-          </p>
-          <p>
-            <b>Total:</b> ${order.totalPrice}
-          </p>
-          <p>
-            <b>Status:</b> {order.status}
-          </p>
+          <span className={`badge ${statusColor} mt-3 capitalize`}>
+            {status}
+          </span>
         </div>
 
-        {/* ✅ TRACKING TIMELINE */}
-        <div className="bg-base-100 p-6 rounded-2xl shadow">
-          <h3 className="text-xl font-bold mb-4">Tracking Timeline</h3>
+        {/* Summary */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Card title="Quantity" value={`${quantity} pcs`} />
+          <Card title="Unit Price" value={`$${unitPrice}`} />
+          <Card title="Total Price" value={`$${totalPrice}`} />
+          <Card title="Payment" value={order.paymentStatus || "unpaid"} />
+        </div>
 
-          {tracking.length === 0 ? (
-            <p className="text-gray-400">No tracking updates yet.</p>
-          ) : (
-            <div className="space-y-4">
-              {tracking.map((t, index) => (
-                <div key={index} className="flex gap-4">
-                  <div className="flex flex-col items-center">
-                    <div className="w-3 h-3 bg-indigo-600 rounded-full"></div>
-                    {index !== tracking.length - 1 && (
-                      <div className="w-1 h-10 bg-indigo-200"></div>
-                    )}
+        {/* Main grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {/* LEFT */}
+          <div className="md:col-span-2 space-y-6">
+            {/* Customer */}
+            <Section title="Customer Info">
+              <Info label="Name" value={userName} />
+              <Info label="Email" value={email} />
+              <Info label="Contact" value={contact} />
+            </Section>
+
+            {/* Product */}
+            <Section title="Product Info">
+              <Info label="Product" value={productName} />
+              <Info label="Quantity" value={`${quantity} pcs`} />
+              <Info label="Total" value={`$${totalPrice}`} />
+            </Section>
+
+            {/* Delivery */}
+            <Section title="Delivery Info">
+              <Info label="Address" value={address} />
+              <Info label="Notes" value={order.notes || "N/A"} />
+            </Section>
+          </div>
+
+          {/* RIGHT TRACKING */}
+          <div className="bg-base-100 p-6 rounded-2xl shadow">
+            <h3 className="font-bold text-lg mb-4">Order Tracking</h3>
+
+            <ul className="space-y-4">
+              {steps.map((step, index) => (
+                <li key={step} className="flex gap-3 items-center">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                      index <= currentIndex
+                        ? "bg-primary text-white"
+                        : "bg-base-300"
+                    }`}
+                  >
+                    {index <= currentIndex ? "✓" : index + 1}
                   </div>
 
-                  <div>
-                    <h4 className="font-bold">{t.status}</h4>
-                    <p className="text-sm">📍 {t.location}</p>
-                    <p className="text-sm text-gray-500">{t.note}</p>
-                    <p className="text-xs text-gray-400">
-                      {new Date(t.createdAt).toLocaleString()}
-                    </p>
-                  </div>
-                </div>
+                  <span className="capitalize">{step}</span>
+                </li>
               ))}
-            </div>
-          )}
+            </ul>
+
+            <p className="mt-6 text-sm opacity-70">
+              Created: {new Date(order.createdAt).toLocaleString()}
+            </p>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
+const Card = ({ title, value }) => (
+  <div className="bg-base-100 p-4 rounded-xl shadow">
+    <p className="text-xs opacity-50">{title}</p>
+    <h3 className="font-bold text-lg">{value}</h3>
+  </div>
+);
+
+const Section = ({ title, children }) => (
+  <div className="bg-base-100 p-6 rounded-2xl shadow">
+    <h3 className="font-bold mb-4">{title}</h3>
+    <div className="grid md:grid-cols-2 gap-4">{children}</div>
+  </div>
+);
+
+const Info = ({ label, value }) => (
+  <div>
+    <p className="text-xs opacity-50">{label}</p>
+    <p className="font-semibold">{value}</p>
+  </div>
+);
 
 export default DetailsOrder;

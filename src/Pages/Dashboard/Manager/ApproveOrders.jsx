@@ -29,7 +29,7 @@ const ApprovedOrders = () => {
 
   const handleAddTracking = async () => {
     await axiosSecure.post(
-      `/order/${selectedOrder._id}/tracking`,
+      `/orders/${selectedOrder._id}/tracking`,
       trackingData
     );
 

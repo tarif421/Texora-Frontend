@@ -4,63 +4,84 @@ import useAuth from "../../Hooks/useAuth";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+
   const handleLogOut = () => {
     logOut()
-      .then(() => {
-        console.log("logout successfull");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      .then(() => console.log("logout success"))
+      .catch((err) => console.log(err));
+  };
+
+  const handleTheme = (checked) => {
+    const html = document.querySelector("html");
+    const theme = checked ? "dark" : "light";
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   };
 
   const links = (
     <>
       <li>
         <NavLink
-          className={({ isActive }) =>
-            isActive ? "text-[#192586] font-semibold" : "hover:text-[#27379b]"
-          }
           to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#192586] font-semibold"
+              : "hover:text-[#27379b]"
+          }
         >
           Home
         </NavLink>
       </li>
+
       <li>
         <NavLink
           to="/allProducts"
           className={({ isActive }) =>
-            isActive ? "text-[#192586] font-semibold" : "hover:text-[#27379b]"
+            isActive
+              ? "text-[#192586] font-semibold"
+              : "hover:text-[#27379b]"
           }
         >
           All Products
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            isActive ? "text-[#27379b] font-semibold" : "hover:text-[#27379b]"
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li>
+
+      {/*  dashboard if logged in */}
+      {user && (
+        <li>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#192586] font-semibold"
+                : "hover:text-[#27379b]"
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
+
       <li>
         <NavLink
           to="/aboutUS"
           className={({ isActive }) =>
-            isActive ? "text-[#27379b] font-semibold" : "hover:text-[#27379b]"
+            isActive
+              ? "text-[#192586] font-semibold"
+              : "hover:text-[#27379b]"
           }
         >
-          About US
+          About
         </NavLink>
       </li>
+
       <li>
         <NavLink
           to="/contactUS"
           className={({ isActive }) =>
-            isActive ? "text-[#27379b] font-semibold" : "hover:text-[#27379b]"
+            isActive
+              ? "text-[#192586] font-semibold"
+              : "hover:text-[#27379b]"
           }
         >
           Contact
@@ -68,20 +89,16 @@ const Navbar = () => {
       </li>
     </>
   );
-  const handleTheme = (checked) => {
-    const html = document.querySelector("html");
-    if (checked) {
-      html.setAttribute("data-theme", "dark");
-    } else {
-      html.setAttribute("data-theme", "light");
-    }
-  };
+
   return (
-    <div className="navbar bg-base-100 shadow-sm">
-      {/* START */}
+    <div className="navbar bg-base-100 shadow px-3">
+
+      {/*  LEFT */}
       <div className="navbar-start">
+
+        {/* Mobile menu */}
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -89,85 +106,87 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
+              <path strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
             </svg>
           </div>
-          <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-          >
+
+          <ul className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-50">
             {links}
           </ul>
         </div>
 
-        <span className="text-4xl text-[#192586]">
-          <GiRolledCloth />
-        </span>
-        <p className="font-serif text-3xl font-bold text-[#192586]">Texora</p>
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2 ml-2">
+          <GiRolledCloth className="text-3xl text-[#192586]" />
+          <span className="text-2xl font-bold text-[#192586] font-serif">
+            Texora
+          </span>
+        </Link>
       </div>
 
-      {/* CENTER */}
-      <div className="navbar-center  hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+      {/*  CENTER */}
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-2 gap-2">
+          {links}
+        </ul>
       </div>
-  <div className="flex items-center ml-2">
-  <input
-    onChange={(e) => handleTheme(e.target.checked)}
-    type="checkbox"
-    defaultChecked={localStorage.getItem("theme") === "dark"}
-    className="toggle toggle-sm toggle-primary bg-[#f0f1f1]"
-  />
-</div>
 
-      {/* end */}
-      <div className="navbar-end ml-2 flex gap-2">
+      {/*  RIGHT */}
+      <div className="navbar-end flex items-center gap-3">
+
+        {/*  Theme Toggle */}
+        <div className="flex items-center gap-2 bg-base-200 px-2 py-1 rounded-full">
+         
+
+          <input
+            type="checkbox"
+            onChange={(e) => handleTheme(e.target.checked)}
+            defaultChecked={localStorage.getItem("theme") === "dark"}
+            className="toggle toggle-sm toggle-primary"
+          />
+
+         
+        </div>
+
+        {/*  User */}
         {user ? (
           <>
             <button
               onClick={handleLogOut}
-              className="btn bg-blue-800 hover:bg-blue-600 text-white border-none"
+              className="btn btn-sm bg-blue-800 hover:bg-blue-600 text-white border-none"
             >
-              Log Out
+              Logout
             </button>
-            {/* circle/ */}
 
             <div
               className="tooltip tooltip-bottom"
               data-tip={user?.displayName}
             >
-              <div className="w-10 h-10">
-                <img
-                  src={
-                    user?.photoURL ||
-                    "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                  }
-                  alt="User Profile"
-                  className="w-full h-full rounded-full object-cover border-2 border-[#192586]"
-                />
-              </div>
+              <img
+                src={
+                  user?.photoURL ||
+                  "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                }
+                alt="profile"
+                className="w-9 h-9 rounded-full border-2 border-[#192586]"
+              />
             </div>
           </>
         ) : (
           <>
-            <Link
-              to="/login"
-              className="btn btn-ghost text-[#192586] font-semibold border-[#192586] hover:bg-[#19258610]"
-            >
-              Log In
+            <Link to="/login" className="btn btn-ghost text-[#192586]">
+              Login
             </Link>
+
             <Link
-              to="register"
-              className="btn bg-[#192586] hover:bg-[#27379b] text-white border-none"
+              to="/register"
+              className="btn bg-[#192586] hover:bg-[#27379b] text-white"
             >
               Register
             </Link>
           </>
         )}
+
       </div>
     </div>
   );

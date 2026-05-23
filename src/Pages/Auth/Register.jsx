@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import SocialLogin from "./SocialLogin";
 import axios from "axios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const {
@@ -14,13 +15,13 @@ const Register = () => {
   } = useForm();
   const { registerUser, updateUserProfile } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const handleRegistration = (data) => {
     console.log("fter register", data.photo[0]);
 
     const profileImg = data.photo[0];
-    
-   
+
     registerUser(data.email, data.password)
       .then((result) => {
         console.log(result.user);
@@ -28,13 +29,20 @@ const Register = () => {
         const formData = new FormData();
         formData.append("image", profileImg);
 
-        //  2. send the photo  to store and get the ui 
+        //  2. send the photo  to store and get the ui
         const imageAPI_URL = `https://api.imgbb.com/1/upload?expiration=600&key=${import.meta.env.VITE_image_host_key}`;
 
         axios.post(imageAPI_URL, formData).then((res) => {
-          console.log("after image upload", res.data.data.url);
+          Swal.fire({
+            title: "Registration Successful ",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+          navigate("/");
+          // console.log("after image upload", res.data.data.url);
 
-          //  create user in the database // 
+          //  create user in the database //
 
           const userInfo = {
             email: data.email,
@@ -43,7 +51,7 @@ const Register = () => {
           };
           axiosSecure.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
-              console.log("use created in database");
+              // console.log("use created in database");
             }
           });
           // update user profile to firebase
@@ -53,7 +61,7 @@ const Register = () => {
           };
           updateUserProfile(userProfile)
             .then(() => {
-              console.log("User profile updated done");
+              // console.log("User profile updated done");
             })
             .catch((error) => console.log(error));
         });

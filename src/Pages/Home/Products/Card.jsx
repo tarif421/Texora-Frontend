@@ -12,51 +12,52 @@ const Card = ({ product }) => {
   } = product;
   return (
     <>
-      <div className="   p-2 bg-base-100 shadow-md rounded-xl mt-2">
-        {/* Image */}
-        <figure className="relative h-56 overflow-hidden rounded-t-xl">
-          <img
-            src={productImage}
-            alt={productName}
-            className="w-full h-full  object-cover"
-          />
+    <div className="bg-base-100 lg:mx-7 shadow-sm rounded-xl overflow-hidden hover:shadow-md transition flex flex-col h-full">
 
-          {/* Category badge */}
-          <span className="absolute top-3 right-3 badge bg-[#192586] text-[#ffffff] text-xs">
-            {category}
-          </span>
-        </figure>
+  {/* Image */}
+  <figure className="relative h-24 sm:h-32 md:h-40 overflow-hidden">
+    <img
+      src={productImage}
+      alt={productName}
+      className="w-full h-full object-cover"
+    />
 
-        {/* Content */}
-        <div className="card-body p-2">
-          <h2 className="card-title text-[#192586]  h-[40px] overflow-hidden font-bold">
-            {productName}
-          </h2>
+    <span className="absolute top-1 right-1 sm:top-2 sm:right-2 px-2 py-[2px] text-[10px] sm:text-xs bg-[#192586] text-white rounded-full">
+      {category}
+    </span>
+  </figure>
 
-          <p className="text-sm text-start text-gray-500 h-[40px] overflow-hidden">
-            {description}
-          </p>
+  {/* Content */}
+  <div className="p-2  sm:p-3 flex flex-col gap-1 flex-grow">
 
-          {/* Price & stock */}
-          <div className="flex justify-between items-center mt-3">
-            <span className="text-[#5c6dc9] font-bold text-lg ">
-              price: ${price}
-            </span>
+    <h2 className="text-xs sm:text-sm md:text-base font-bold text-[#192586] line-clamp-2">
+      {productName}
+    </h2>
 
-            <span className="text-xs text-gray-500">
-              Stock: {availableQuantity}
-            </span>
-          </div>
+    <p className="text-[10px] sm:text-xs text-gray-500 line-clamp-2">
+      {description}
+    </p>
 
-          {/* Button */}
-          <Link to={`/Details/${product._id}`}>
-            {" "}
-            <button className="btn bg-[#394497] text-[#ffffff] w-full mt-4">
-              View Details →
-            </button>
-          </Link>
-        </div>
-      </div>
+    <div className="flex justify-between items-center mt-1">
+      <span className="text-[#5c6dc9] font-semibold text-[11px] sm:text-sm md:text-base">
+        ${price}
+      </span>
+
+      <span className="text-[10px] sm:text-xs text-gray-500">
+        {availableQuantity}
+      </span>
+    </div>
+
+    {/* ✅ Button always bottom */}
+    <Link to={`/Details/${product._id}`} className="mt-auto">
+      <button className="btn btn-xs sm:btn-sm bg-[#394497] text-white w-full mt-2 rounded-lg">
+        View
+      </button>
+    </Link>
+
+  </div>
+</div>
+
     </>
   );
 };

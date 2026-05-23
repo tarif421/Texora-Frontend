@@ -1,60 +1,94 @@
-import React from 'react';
-import { FaLocationDot } from 'react-icons/fa6';
-import { GiRolledCloth } from 'react-icons/gi';
-import { IoCallSharp } from 'react-icons/io5';
-import { MdEmail } from 'react-icons/md';
+import React from "react";
+import { FaLocationDot } from "react-icons/fa6";
+import { GiRolledCloth } from "react-icons/gi";
+import { IoCallSharp } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
-    return <>
-        <section className='flex justify-between  p-8 bg-[#1A1A1A] mt-12 px-12'>
-            {/* left */}
-            <div >
-                <div className='flex'>
-                    <span className="text-4xl text-[#ffffff]">
-                          <GiRolledCloth/>
-                        </span>
-                        <p className=" font-serif text-3xl font-bold text-[#ffffff]">Texora</p>
-                </div>
-                <p className='text-start text-[#c6cbec] mt-4'>Empowering garment factories  with <br /> digital  tools for  better management, <br />transparency,  and efficiency</p>
-            </div>
-
-
-            {/* center */}
-            <div className='text-[#c6cbec]'>
-                <h2 className='text-[#ffffff] font-bold text-xl'>Quick Links</h2>
-                <div className='flex flex-col text-start mt-4'>
-                    <a href="">All Products</a>
-                <a href="">Home</a>
-                <a href="">Login</a>
-                <a href="">Register</a>
-                </div>
-            </div>
-            {/* right */}
-            <div>
-             
-               
-            <h2 className="text-[#ffffff] text-2xl font-semibold ">Contact</h2>
-           <div className="flex gap-2 mt-4 ">
-            <span className="text-[#ffffff]"><FaLocationDot /></span>
-            <p className='text-[#c6cbec]'>Dhaka, Bangladesh</p>
-           </div>
-           <div  className="flex gap-2 ">
-            <span className="text-[#ffffff]" ><MdEmail /></span>
-            <p className='text-[#c6cbec]' >fabro@gmail.com</p>
-           </div>
-           <div className="flex gap-2 ">
-            <span className="text-[#ffffff]"><IoCallSharp /></span>
-            <p className='text-[#c6cbec]'>+880123837940</p>
-           </div>
+  return (
+    <>
+      {/* Main Footer */}
+      <section className="bg-[#1A1A1A] text-white mt-12 px-4 sm:px-6 md:px-10 py-10">
         
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          
+          {/* Left */}
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-3xl sm:text-4xl">
+                <GiRolledCloth />
+              </span>
+              <p className="font-serif text-2xl sm:text-3xl font-bold">
+                Texora
+              </p>
             </div>
 
-        </section>
-        
-            <div className='bg-[#1A1A1A] text-[#c6cbec]  p-4'>
-                <p>© 2023 Fabrio. All rights reserved</p>
+            <p className="text-sm sm:text-base text-[#c6cbec] mt-4 leading-relaxed">
+              Empowering garment factories with digital tools for better
+              management, transparency, and efficiency.
+            </p>
+          </div>
+
+          {/* Center */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-semibold mb-4">
+              Quick Links
+            </h2>
+
+            <div className="flex flex-col gap-2 text-sm sm:text-base text-[#c6cbec]">
+              <a className="hover:text-white transition" href="">
+                Home
+              </a>
+
+              <a className="hover:text-white transition" href="">
+                All Products
+              </a>
+
+              <a className="hover:text-white transition" href="">
+                Login
+              </a>
+
+              <a className="hover:text-white transition" href="">
+                Register
+              </a>
             </div>
-    </>;
+          </div>
+
+          {/* Right */}
+          <div>
+            <h2 className="text-lg sm:text-xl font-semibold mb-4">
+              Contact
+            </h2>
+
+            <div className="flex flex-col gap-3 text-sm sm:text-base text-[#c6cbec]">
+
+              <div className="flex items-center gap-2">
+                <FaLocationDot className="text-white text-base" />
+                <p>Dhaka, Bangladesh</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <MdEmail className="text-white text-base" />
+                <p>texora@gmail.com</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <IoCallSharp className="text-white text-base" />
+                <p>+880123837940</p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Bottom Footer */}
+      <div className="bg-[#111] text-[#c6cbec] text-center py-4 text-xs sm:text-sm">
+        © {new Date().getFullYear()} Texora. All rights reserved.
+      </div>
+    </>
+  );
 };
 
 export default Footer;
