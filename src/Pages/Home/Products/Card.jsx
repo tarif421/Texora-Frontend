@@ -40,11 +40,11 @@ const Card = ({ product }) => {
 
     <div className="flex justify-between items-center mt-1">
       <span className="text-[#5c6dc9] font-semibold text-[11px] sm:text-sm md:text-base">
-        ${price}
+        <p>Price: ${price} </p>
       </span>
 
       <span className="text-[10px] sm:text-xs text-gray-500">
-        {availableQuantity}
+        <p>stock:  {availableQuantity}</p>
       </span>
     </div>
 

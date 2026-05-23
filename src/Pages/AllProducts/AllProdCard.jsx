@@ -11,10 +11,10 @@ const ProductCard = ({ product }) => {
   } = product;
 
   return (
-    <div className="bg-base-100 shadow-sm rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition duration-300 flex flex-col h-full">
+    <div className="bg-base-100 lg:mx-7 shadow-sm rounded-xl overflow-hidden hover:shadow-md transition flex flex-col h-full">
 
       {/*  Image */}
-      <figure className="relative h-28 overflow-hidden">
+      <figure className="relative h-24 sm:h-32 md:h-40 overflow-hidden">
         <img
           src={productImage}
           alt={productName}
@@ -42,11 +42,11 @@ const ProductCard = ({ product }) => {
         {/* Price + Stock */}
         <div className="flex justify-between items-center mt-2">
           <span className="text-[#5c6dc9] font-bold text-xs sm:text-sm">
-            ${price}
+            <p>Price: ${price}</p>
           </span>
 
           <span className="text-[10px] text-gray-500">
-            {availableQuantity} pcs
+           <p>Stock: {availableQuantity} pcs</p> 
           </span>
         </div>
 
