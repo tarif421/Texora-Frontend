@@ -49,9 +49,9 @@ const ProductCard = ({ product }) => {
           </div>
           {/* Button */}
           <Link to={`/Details/${product._id}`}>
-            <button className="btn bg-[#5c6dc9] text-[#ffffff] w-full mt-4">
-              View Details →
-            </button>
+            <button className="btn btn-xs sm:btn-sm bg-[#394497] text-white w-full mt-2 rounded-lg">
+        View 
+      </button>
           </Link>
         </div>
       </div>
