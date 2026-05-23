@@ -39,28 +39,16 @@ const PendingOrders = () => {
       const res = await axiosSecure.patch(`/orders/${id}/approve`);
 
       if (res.data.modifiedCount > 0) {
-        Swal.fire(
-          "Approved!",
-          "Order has been approved.",
-          "success"
-        );
+        Swal.fire("Approved!", "Order has been approved.", "success");
 
         refetch();
       } else {
-        Swal.fire(
-          "Info",
-          "Order status was not changed.",
-          "info"
-        );
+        Swal.fire("Info", "Order status was not changed.", "info");
       }
     } catch (error) {
       console.error(error);
 
-      Swal.fire(
-        "Error",
-        "Failed to approve order.",
-        "error"
-      );
+      Swal.fire("Error", "Failed to approve order.", "error");
     }
   };
 
@@ -82,28 +70,16 @@ const PendingOrders = () => {
       const res = await axiosSecure.patch(`/orders/${id}/reject`);
 
       if (res.data.modifiedCount > 0) {
-        Swal.fire(
-          "Rejected!",
-          "Order has been rejected.",
-          "success"
-        );
+        Swal.fire("Rejected!", "Order has been rejected.", "success");
 
         refetch();
       } else {
-        Swal.fire(
-          "Info",
-          "Order status was not changed.",
-          "info"
-        );
+        Swal.fire("Info", "Order status was not changed.", "info");
       }
     } catch (error) {
       console.error(error);
 
-      Swal.fire(
-        "Error",
-        "Failed to reject order.",
-        "error"
-      );
+      Swal.fire("Error", "Failed to reject order.", "error");
     }
   };
 
@@ -120,14 +96,10 @@ const PendingOrders = () => {
 
   return (
     <div className="min-h-screen bg-base-200 px-3 py-4 sm:px-5 sm:py-6 lg:px-8">
-
       <div className="max-w-7xl mx-auto">
-
         {/* Header */}
         <div className="bg-base-100 rounded-3xl shadow-sm p-4 sm:p-6 lg:p-8 mb-6">
-
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-
             {/* Left */}
             <div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
@@ -148,39 +120,24 @@ const PendingOrders = () => {
 
         {/* Table Card */}
         <div className="bg-base-100 rounded-3xl shadow-sm overflow-hidden">
-
           <div className="overflow-x-auto">
-
             <table className="table table-zebra min-w-[1050px] lg:min-w-full">
-
               {/* Head */}
               <thead className="bg-base-200 text-gray-700">
                 <tr>
                   <th className="text-xs sm:text-sm">#</th>
 
-                  <th className="text-xs sm:text-sm">
-                    Order ID
-                  </th>
+                  <th className="text-xs sm:text-sm">Order ID</th>
 
-                  <th className="text-xs sm:text-sm">
-                    User
-                  </th>
+                  <th className="text-xs sm:text-sm">User</th>
 
-                  <th className="text-xs sm:text-sm">
-                    Product
-                  </th>
+                  <th className="text-xs sm:text-sm">Product</th>
 
-                  <th className="text-xs sm:text-sm">
-                    Quantity
-                  </th>
+                  <th className="text-xs sm:text-sm">Quantity</th>
 
-                  <th className="text-xs sm:text-sm">
-                    Order Date
-                  </th>
+                  <th className="text-xs sm:text-sm">Order Date</th>
 
-                  <th className="text-center text-xs sm:text-sm">
-                    Actions
-                  </th>
+                  <th className="text-center text-xs sm:text-sm">Actions</th>
                 </tr>
               </thead>
 
@@ -189,7 +146,6 @@ const PendingOrders = () => {
                 {isLoading ? (
                   [1, 2, 3, 4, 5].map((item) => (
                     <tr key={item}>
-
                       <td>
                         <div className="skeleton h-5 w-6 rounded"></div>
                       </td>
@@ -231,15 +187,9 @@ const PendingOrders = () => {
                   ))
                 ) : pendingOrders.length === 0 ? (
                   <tr>
-                    <td
-                      colSpan="7"
-                      className="text-center py-16"
-                    >
+                    <td colSpan="7" className="text-center py-16">
                       <div className="flex flex-col items-center">
-
-                        <div className="text-5xl mb-4">
-                          ✅
-                        </div>
+                        <div className="text-5xl mb-4"></div>
 
                         <h3 className="text-xl sm:text-2xl font-bold text-gray-700">
                           No Pending Orders
@@ -257,11 +207,8 @@ const PendingOrders = () => {
                       key={order._id}
                       className="hover transition duration-200"
                     >
-
                       {/* Index */}
-                      <td className="font-semibold text-sm">
-                        {index + 1}
-                      </td>
+                      <td className="font-semibold text-sm">{index + 1}</td>
 
                       {/* Order ID */}
                       <td>
@@ -270,17 +217,13 @@ const PendingOrders = () => {
                         </div>
 
                         <div className="text-[11px] sm:text-xs text-gray-400 mt-1">
-                          Short: #
-                          {order._id
-                            ?.slice(-6)
-                            .toUpperCase()}
+                          Short: #{order._id?.slice(-6).toUpperCase()}
                         </div>
                       </td>
 
                       {/* User */}
                       <td>
                         <div className="space-y-1">
-
                           <h3 className="font-semibold text-sm sm:text-base text-gray-800">
                             {order.userName ||
                               `${order.firstName || ""} ${
@@ -290,9 +233,7 @@ const PendingOrders = () => {
                           </h3>
 
                           <p className="text-xs sm:text-sm text-gray-500 break-all">
-                            {order.userEmail ||
-                              order.email ||
-                              "No email"}
+                            {order.userEmail || order.email || "No email"}
                           </p>
                         </div>
                       </td>
@@ -323,12 +264,9 @@ const PendingOrders = () => {
                       {/* Actions */}
                       <td>
                         <div className="flex justify-center flex-wrap gap-2">
-
                           {/* Approve */}
                           <button
-                            onClick={() =>
-                              handleApprove(order._id)
-                            }
+                            onClick={() => handleApprove(order._id)}
                             className="
                               btn btn-xs sm:btn-sm
                               btn-success text-white
@@ -340,9 +278,7 @@ const PendingOrders = () => {
 
                           {/* Reject */}
                           <button
-                            onClick={() =>
-                              handleReject(order._id)
-                            }
+                            onClick={() => handleReject(order._id)}
                             className="
                               btn btn-xs sm:btn-sm
                               btn-error text-white
@@ -369,7 +305,6 @@ const PendingOrders = () => {
                   ))
                 )}
               </tbody>
-
             </table>
           </div>
         </div>
