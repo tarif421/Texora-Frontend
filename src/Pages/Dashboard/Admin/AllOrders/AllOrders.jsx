@@ -213,8 +213,14 @@ const AllOrders = () => {
 
                       {/* User */}
                       <td>
-                        <div className="font-semibold text-sm sm:text-base">
-                          {order.userName || "Unknown User"}
+                        <div >
+                             <h3 className="font-semibold text-sm sm:text-base text-gray-800">
+                            {order.userName ||
+                              `${order.firstName || ""} ${
+                                order.lastName || ""
+                              }`.trim() ||
+                              "Unknown User"}
+                          </h3>
                         </div>
 
                         <div className="text-xs opacity-60 break-all">
