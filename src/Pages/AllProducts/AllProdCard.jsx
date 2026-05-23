@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
           {/* Button */}
           <Link to={`/Details/${product._id}`}>
             <button className="btn btn-xs sm:btn-sm bg-[#394497] text-white w-full mt-2 rounded-lg">
-        View 
+        View Details
       </button>
           </Link>
         </div>

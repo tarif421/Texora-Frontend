@@ -51,7 +51,7 @@ const Card = ({ product }) => {
     {/* ✅ Button always bottom */}
     <Link to={`/Details/${product._id}`} className="mt-auto">
       <button className="btn btn-xs sm:btn-sm bg-[#394497] text-white w-full mt-2 rounded-lg">
-        View
+        View Details
       </button>
     </Link>
 
