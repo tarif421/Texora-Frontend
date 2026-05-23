@@ -33,7 +33,7 @@ const Allproduct = () => {
   if (isError) {
     return (
       <div className="text-center py-10 text-red-500">
-        Failed to load products 
+        Failed to load products
       </div>
     );
   }
@@ -53,7 +53,7 @@ const Allproduct = () => {
       </div>
 
       {/*  PRODUCT GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 gap-5">
+      <div className="grid grid-cols-3 gap-3 p-3 sm:p-6">
         {products.map((product) => (
           <AllProdCard key={product._id} product={product} />
         ))}
