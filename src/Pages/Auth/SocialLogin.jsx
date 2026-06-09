@@ -30,8 +30,8 @@ const SocialLogin = () => {
       });
   };
   return (
-    <div className="text-center pb-6 pt-4">
-      <p className="mb-2">OR</p>
+    <div className="text-center pb-6">
+     
       <button
         onClick={handleGoogleSingIn}
         type="button"
