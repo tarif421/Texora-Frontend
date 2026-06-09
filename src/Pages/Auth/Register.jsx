@@ -103,7 +103,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100 px-4 py-10">
+    <div className="min-h-screen flex items-center justify-center  px-4 py-10">
       <div className="w-full max-w-md">
         {/* Main Card */}
         <div className="relative overflow-hidden rounded-[32px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-white/20 backdrop-blur-xl">

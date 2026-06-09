@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import WorkFlow from "./WorkFlow";
 import Reviews from "./Reviews";
 import LatestProducts from "./Products/LatestProducts";
+import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
 
 const reviewsPromise = fetch("/reviews.json").then((res) => res.json());
 
@@ -13,6 +14,7 @@ const HomePage = () => {
       <LatestProducts></LatestProducts>
       <WorkFlow></WorkFlow>
       <Reviews reviewsPromise={reviewsPromise}></Reviews>
+      <WhyChooseUs/>
     </div>
   );
 };

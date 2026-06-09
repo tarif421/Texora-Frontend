@@ -1,75 +1,127 @@
 import React from "react";
+import {
+  ShoppingCart,
+  Factory,
+  BadgeCheck,
+  Truck,
+} from "lucide-react";
+
+const workflowSteps = [
+  {
+    id: "01",
+    title: "Order Placement",
+    description:
+      "Select products and place bulk orders easily with a smooth process.",
+    icon: ShoppingCart,
+    image:
+      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "02",
+    title: "Production",
+    description:
+      "Cutting, sewing, and finishing with real-time production updates.",
+    icon: Factory,
+    image:
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "03",
+    title: "Quality Check",
+    description:
+      "Rigorous inspection to ensure premium export-quality standards.",
+    icon: BadgeCheck,
+    image:
+      "https://images.unsplash.com/photo-1578932750294-f5075e85f44a?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: "04",
+    title: "Delivery",
+    description:
+      "Fast shipping with secure packaging and live tracking integration.",
+    icon: Truck,
+    image:
+      "https://images.unsplash.com/photo-1494412651409-8963ce7935a7?q=80&w=1200&auto=format&fit=crop",
+  },
+];
 
 const WorkFlow = () => {
   return (
-    <>
-      {/* Heading */}
-      <div className="px-4">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center text-[#384bb4] mt-10 sm:mt-12 md:mt-15 font-serif">
-          Production Workflow
-        </h1>
-        <p className="text-xs sm:text-sm mt-2 text-center">
-          Transparent process from order to delivery
-        </p>
+    <section className="py-10 sm:py-16 lg:py-24 px-3 sm:px-6 lg:px-8  rounded-3xl">
+      <div className="max-w-7xl mx-auto">
+
+        {/* Heading Section */}
+        <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
+       
+
+          <h2 className="font-bold text-4xl text-[#384bb4] font-serif">
+            Production Workflow
+          </h2>
+
+          <p className="mt-2 text-[11px] sm:text-sm md:text-base text-black/60 leading-relaxed max-w-xl mx-auto">
+            A transparent and organized production process from order confirmation to final delivery.
+          </p>
+           
+        </div>
+
+        {/* 2 Columns on Mobile, 4 Columns on Desktop */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
+          {workflowSteps.map((step, index) => {
+            const Icon = step.icon;
+
+            return (
+              <div
+                key={index}
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-sky-50/50 border border-sky-100/60 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                <div>
+                  {/* Image  2-column mobile */}
+                  <div className="relative h-28 sm:h-48 md:h-56 lg:h-44 xl:h-52 w-full overflow-hidden">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-sky-950/10 to-transparent"></div>
+
+                    {/* Smaller Badge for Mobile */}
+                    <div className="absolute top-2 right-2 w-7 h-7 sm:w-11 sm:h-11 rounded-full bg-white/95 backdrop-blur-xs flex items-center justify-center text-sky-700 font-bold text-xs sm:text-lg shadow-xs select-none">
+                      {step.id}
+                    </div>
+                  </div>
+
+                  {/* Card Content with reduced padding on mobile */}
+                  <div className="p-3 sm:p-6">
+                    
+                    {/* Fluid Icon Size */}
+                    <div className="w-8 h-8 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-white flex items-center justify-center shadow-xs border border-sky-100/50 mb-2 sm:mb-5">
+                      <Icon className="w-4 h-4 sm:w-6 sm:h-6 text-sky-700" />
+                    </div>
+
+                    {/* Title with smaller font to prevent word-wrap breakdown */}
+                    <h3 className="text-sm sm:text-xl font-bold text-slate-900 mb-1 sm:mb-2 tracking-tight line-clamp-1 sm:line-clamp-none">
+                      {step.title}
+                    </h3>
+
+                    {/* Small crisp description text for mobile */}
+                    <p className="text-[11px] sm:text-xs md:text-sm text-black/65 leading-normal sm:leading-relaxed line-clamp-3 sm:line-clamp-none">
+                      {step.description}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom Bar Container */}
+                <div className="px-3 sm:px-6 pb-3 sm:pb-6">
+                  <div className="h-0.5 sm:h-1 w-8 rounded-full bg-gradient-to-r from-sky-400 to-sky-600 transition-all duration-300 group-hover:w-16"></div>
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
       </div>
-
-      {/* Cards */}
-      <section className="mt-10 sm:mt-12 md:mt-15 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 px-4 sm:px-6 md:px-10">
-        
-        {/* Card 1 */}
-        <div className="flex flex-col items-center sm:items-start text-center sm:text-left bg-[#e0e5fe] rounded-2xl p-4 sm:p-5">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 my-4 bg-[#a0aadf] flex justify-center items-center rounded-full">
-            <p className="text-xl sm:text-2xl md:text-3xl text-[#192586]">1</p>
-          </div>
-          <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[#5c6dc9]">
-            Order Placement
-          </h2>
-          <p className="text-xs sm:text-sm">
-            Select products and place bulk orders easily
-          </p>
-        </div>
-
-        {/* Card 2 */}
-        <div className="flex flex-col items-center sm:items-start text-center sm:text-left bg-[#e0e5fe] rounded-2xl p-4 sm:p-5">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 my-4 bg-[#a0aadf] flex justify-center items-center rounded-full">
-            <p className="text-xl sm:text-2xl md:text-3xl text-[#192586]">2</p>
-          </div>
-          <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[#5c6dc9]">
-            Production
-          </h2>
-          <p className="text-xs sm:text-sm">
-            Cutting, sewing, and finishing with realtime updates
-          </p>
-        </div>
-
-        {/* Card 3 */}
-        <div className="flex flex-col items-center sm:items-start text-center sm:text-left bg-[#e0e5fe] rounded-2xl p-4 sm:p-5">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 my-4 bg-[#a0aadf] flex justify-center items-center rounded-full">
-            <p className="text-xl sm:text-2xl md:text-3xl text-[#192586]">3</p>
-          </div>
-          <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[#5c6dc9]">
-            Quality Check
-          </h2>
-          <p className="text-xs sm:text-sm">
-            Rigorous inspection to ensure premium quality.
-          </p>
-        </div>
-
-        {/* Card 4 */}
-        <div className="flex flex-col items-center sm:items-start text-center sm:text-left bg-[#e0e5fe] rounded-2xl p-4 sm:p-5">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 my-4 bg-[#a0aadf] flex justify-center items-center rounded-full">
-            <p className="text-xl sm:text-2xl md:text-3xl text-[#192586]">4</p>
-          </div>
-          <h2 className="text-base sm:text-lg md:text-xl font-semibold text-[#5c6dc9]">
-            Delivery
-          </h2>
-          <p className="text-xs sm:text-sm">
-            Fast shipping with live tracking integration.
-          </p>
-        </div>
-
-      </section>
-    </>
+    </section>
   );
 };
 

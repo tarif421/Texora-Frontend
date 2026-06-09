@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <section className="relative w-full h-[60vh] sm:h-[50vh] md:h-[70vh] overflow-hidden">
+    <section className="relative mt-5 w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden">
       
       {/* Background Image - optimized with object-center and sublte scale */}
       <img
