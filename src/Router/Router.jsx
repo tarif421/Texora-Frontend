@@ -1,3 +1,7 @@
+const baseURL = window.location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://texora-server-six.vercel.app";
+
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../Layouts/RootLayout";
 
@@ -49,14 +53,18 @@ export const router = createBrowserRouter([
       {
         path: "/Details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/productsDetails/${params.id}`),
+          fetch(
+            `${baseURL}/productsDetails/${params.id}`,
+          ),
         element: <ProductDetails />,
       },
       {
         path: "/booking/:id",
         element: <BookingPage />,
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/productsDetails/${params.id}`),
+          fetch(
+            `${baseURL}/productsDetails/${params.id}`,
+          ),
       },
       {
         path: "/allProducts",
