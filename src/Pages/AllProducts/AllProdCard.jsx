@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="bg-base-100 shadow-sm rounded-lg sm:rounded-xl overflow-hidden hover:shadow-md transition flex flex-col h-full w-full border border-gray-100">
 
-      {/* 🖼️ Image Section - Exactly same responsive height & overflow logic */}
+      {/*  Image Section - Exactly same responsive height & overflow logic */}
       <figure className="relative h-16 sm:h-28 md:h-36 lg:h-40 w-full overflow-hidden bg-gray-50">
         <img
           src={productImage}
@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
         </span>
       </figure>
 
-      {/* 📝 Content Section */}
+      {/*  Content Section */}
       <div className="p-1.5 sm:p-3 flex flex-col flex-grow gap-0.5 sm:gap-1">
 
         {/* Title - Strict sizing and clamping */}
@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
           </span>
         </div>
 
-        {/* 🛍️ View Details Button */}
+        {/*  View Details Button */}
         <Link to={`/Details/${product._id}`} className="w-full mt-1 sm:mt-2">
           <button className="text-[9px] sm:text-xs lg:text-sm font-medium bg-[#394497] hover:bg-[#283175] text-white w-full py-1 sm:py-1.5 md:py-2 rounded md:rounded-lg transition-colors">
             View

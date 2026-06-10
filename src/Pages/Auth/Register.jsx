@@ -41,10 +41,7 @@ const Register = () => {
       const profileImg = data.photo[0];
 
       // Register user
-      const result = await registerUser(
-        data.email,
-        data.password
-      );
+      const result = await registerUser(data.email, data.password);
 
       // Upload image to imgbb
       const formData = new FormData();
@@ -54,10 +51,7 @@ const Register = () => {
         import.meta.env.VITE_image_host_key
       }`;
 
-      const imageRes = await axios.post(
-        imageAPI_URL,
-        formData
-      );
+      const imageRes = await axios.post(imageAPI_URL, formData);
 
       const photoURL = imageRes.data.data.url;
 
@@ -80,7 +74,7 @@ const Register = () => {
 
       Swal.fire({
         icon: "success",
-        title: "Registration Successful 🎉",
+        title: "Registration Successful ",
         text: `Welcome ${result.user?.email}`,
         timer: 1800,
         showConfirmButton: false,
@@ -91,13 +85,9 @@ const Register = () => {
       console.log(error);
 
       if (error.code === "auth/email-already-in-use") {
-        setRegisterError(
-          "This email is already registered"
-        );
+        setRegisterError("This email is already registered");
       } else {
-        setRegisterError(
-          "Something went wrong. Please try again."
-        );
+        setRegisterError("Something went wrong. Please try again.");
       }
     }
   };
@@ -107,7 +97,6 @@ const Register = () => {
       <div className="w-full max-w-md">
         {/* Main Card */}
         <div className=" backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden border border-white/20">
-          
           {/* Top Gradient */}
           <div className="h-2 bg-gradient-to-r from-sky-700 via-blue-500 to-indigo-600"></div>
 
@@ -121,10 +110,7 @@ const Register = () => {
             {/* Header */}
             <div className="text-center mb-8">
               <div className="mx-auto mb-5 flex h-20 w-20 items-center  justify-center rounded-full bg-gradient-to-br from-sky-100 to-blue-100 shadow-inner">
-                <UserPlus
-                  size={34}
-                  className="text-sky-700"
-                />
+                <UserPlus size={34} className="text-sky-700" />
               </div>
 
               <h1 className="text-3xl sm:text-4xl font-bold text-[#384bb4]">
@@ -132,7 +118,7 @@ const Register = () => {
               </h1>
 
               <p className="mt-3 text-sm sm:text-base text-gray-500">
-                Join Texora and start your journey 
+                Join Texora and start your journey
               </p>
             </div>
 
@@ -242,8 +228,7 @@ const Register = () => {
                     required: "Password is required",
                     minLength: {
                       value: 6,
-                      message:
-                        "Password must be at least 6 characters",
+                      message: "Password must be at least 6 characters",
                     },
                     pattern: {
                       value:
@@ -258,16 +243,10 @@ const Register = () => {
                 {/* Eye Toggle */}
                 <button
                   type="button"
-                  onClick={() =>
-                    setShowPassword(!showPassword)
-                  }
+                  onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-sky-700 transition"
                 >
-                  {showPassword ? (
-                    <EyeOff size={20} />
-                  ) : (
-                    <Eye size={20} />
-                  )}
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
 
@@ -280,10 +259,7 @@ const Register = () => {
 
             {/* Security Text */}
             <div className="flex items-center gap-2 mb-5 text-xs text-gray-500">
-              <ShieldCheck
-                size={15}
-                className="text-green-500"
-              />
+              <ShieldCheck size={15} className="text-green-500" />
               Your information is securely protected
             </div>
 
@@ -295,7 +271,7 @@ const Register = () => {
             )}
 
             {/* Register Button */}
-              <button
+            <button
               type="submit"
               disabled={isSubmitting}
               className="w-full h-12 sm:h-13 rounded-xl bg-gradient-to-r from-sky-700 via-blue-500 to-indigo-600 text-white font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 disabled:opacity-70"
@@ -335,7 +311,5 @@ const Register = () => {
     </div>
   );
 };
-
-
 
 export default Register;

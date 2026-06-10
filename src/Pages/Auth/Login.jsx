@@ -41,7 +41,7 @@ const Login = () => {
         title: "Login Successful!",
         text: `Welcome back ${
           result.user?.displayName || "User"
-        } 👋`,
+        } `,
         icon: "success",
         timer: 1800,
         showConfirmButton: false,

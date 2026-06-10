@@ -1,324 +1,358 @@
 import React, { useEffect } from "react";
-import { AiFillProduct, AiOutlineLoading3Quarters } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { RiFunctionAddLine } from "react-icons/ri";
-import { MdManageAccounts } from "react-icons/md";
-import { TbTruckDelivery } from "react-icons/tb";
-import { TiShoppingCart } from "react-icons/ti";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router";
+
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
 
+import { AiFillProduct, AiOutlineLoading3Quarters } from "react-icons/ai";
+
+import { RiFunctionAddLine } from "react-icons/ri";
+
+import { MdManageAccounts } from "react-icons/md";
+
+import { TiShoppingCart } from "react-icons/ti";
+
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
-import { FaMapLocationDot } from "react-icons/fa6";
+
+import { FaMapLocationDot, FaIndustry } from "react-icons/fa6";
+
+import { CgProfile } from "react-icons/cg";
+
 import useRole from "../Hooks/useRole";
+import { GiRolledCloth } from "react-icons/gi";
 
 const DashboardLayout = () => {
-const { role, isLoading } = useRole();
+  const { role, isLoading } = useRole();
+
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Auto-redirect logic
+  // Auto Redirect
   useEffect(() => {
     if (!isLoading && location.pathname === "/dashboard") {
-      if (role === "admin")
-        navigate("/dashboard/manage-users", { replace: true });
-      else if (role === "manager")
-        navigate("/dashboard/add-products", { replace: true });
-      else if (role === "buyer")
-        navigate("/dashboard/my-orders", { replace: true });
+      if (role === "admin") {
+        navigate("/dashboard/manage-users", {
+          replace: true,
+        });
+      } else if (role === "manager") {
+        navigate("/dashboard/add-products", {
+          replace: true,
+        });
+      } else if (role === "buyer") {
+        navigate("/dashboard/my-orders", {
+          replace: true,
+        });
+      }
     }
   }, [role, isLoading, location.pathname, navigate]);
 
+  // Loading State
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      <div className="min-h-screen flex items-center justify-center bg-sky-50">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-14 h-14 border-4 border-sky-200 border-t-sky-700 rounded-full animate-spin"></div>
+
+          <p className="text-sky-700 font-semibold">Loading Dashboard...</p>
+        </div>
       </div>
     );
   }
+
+  // NavLink Style
+  const navLinkClass = ({ isActive }) =>
+    `
+    flex
+    items-center
+    gap-4
+    px-4
+    py-3
+    rounded-2xl
+    transition-all
+    duration-300
+    text-sm
+    font-medium
+    ${
+      isActive
+        ? "bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-lg"
+        : "text-slate-700 hover:bg-sky-100 hover:text-sky-700"
+    }
+  `;
+
   return (
     <>
-      <Navbar></Navbar>
+      <Navbar />
 
-      <div className="">
+      <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-blue-50">
         <div className="drawer lg:drawer-open">
-          <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content">
-            {/* Navbar */}
-            <nav className="navbar w-full bg-base-300">
-              <label
-                htmlFor="my-drawer-4"
-                aria-label="open sidebar"
-                className="btn btn-square btn-ghost"
-              >
-                {/* Sidebar toggle icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2"
-                  fill="none"
-                  stroke="currentColor"
-                  className="my-1.5 inline-block size-4"
-                >
-                  <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path>
-                  <path d="M9 4v16"></path>
-                  <path d="M14 10l2 2l-2 2"></path>
-                </svg>
-              </label>
-              <div className="px-4 text-2xl text-sky-700 font-bold rounded-xl">
-                DASHBOARD
-              </div>
-            </nav>
-            {/* Page content here */}
-            <Outlet></Outlet>
-          </div>
+          <input
+            id="dashboard-drawer"
+            type="checkbox"
+            className="drawer-toggle"
+          />
 
-          <div className="drawer-side is-drawer-close:overflow-visible">
-            <label
-              htmlFor="my-drawer-4"
-              aria-label="close sidebar"
-              className="drawer-overlay"
-            ></label>
-            <div className="flex min-h-full flex-col items-start bg-base-200 is-drawer-close:w-14 is-drawer-open:w-64">
-              {/* Sidebar content here */}
-              <ul className="menu w-full grow">
-                {/* List item */}
-                <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Homepage"
-                    to="/"
+          {/* MAIN CONTENT */}
+          <div className="drawer-content flex flex-col">
+            {/* Top Navbar */}
+            <div
+              className="
+              sticky
+              top-0
+              z-30
+              bg-white/80
+              backdrop-blur-md
+              border-b
+              border-sky-100
+            "
+            >
+              <div className="navbar px-4 sm:px-6">
+                {/* Mobile Menu */}
+                <div className="lg:hidden">
+                  <label
+                    htmlFor="dashboard-drawer"
+                    className="btn btn-ghost btn-circle"
                   >
-                    {/* Home icon */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      strokeWidth="2"
                       fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={2}
                       stroke="currentColor"
-                      className="my-1.5 inline-block size-4"
+                      className="w-6 h-6"
                     >
-                      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
-                      <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M3.75 6.75h16.5m-16.5 5.25h16.5m-16.5 5.25h16.5"
+                      />
                     </svg>
-                    <span className="is-drawer-close:hidden">Homepage</span>
+                  </label>
+                </div>
+
+                {/* Dashboard Title */}
+                <div className="flex items-center gap-3">
+                  <div
+                    className="
+                    w-11
+                    h-11
+                    rounded-2xl
+                    bg-gradient-to-r
+                    from-sky-600
+                    to-blue-700
+                    text-white
+                    flex
+                    items-center
+                    justify-center
+                    shadow-lg
+                  "
+                  >
+                    <FaIndustry className="text-xl" />
+                  </div>
+
+                  <div>
+                    <h1 className="text-xl sm:text-2xl font-bold text-sky-700">
+                       Dashboard
+                    </h1>
+
+                    <p className="text-xs text-slate-500">
+                      Manage garments operations smoothly
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Page Content */}
+            <div className="p-4 sm:p-6 lg:p-8">
+              <div
+                className="
+                bg-white/80
+                backdrop-blur-md
+                rounded-3xl
+                shadow-sm
+                border
+                border-sky-100
+                p-4 sm:p-6
+                min-h-[80vh]
+              "
+              >
+                <Outlet />
+              </div>
+            </div>
+          </div>
+
+          {/* SIDEBAR */}
+          <div className="drawer-side z-40">
+            <label
+              htmlFor="dashboard-drawer"
+              className="drawer-overlay"
+            ></label>
+
+            <aside
+              className="
+              w-72
+              min-h-full
+              bg-white
+              border-r
+              border-sky-100
+              shadow-xl
+              flex
+              flex-col
+            "
+            >
+              {/* Menu */}
+              <ul className="menu p-4 flex-1 space-y-2">
+                {/* Homepage */}
+                <li>
+                  <NavLink to="/" className={navLinkClass}>
+                    <FaIndustry className="text-xl" />
+                    Homepage
                   </NavLink>
                 </li>
+
+                {/* ADMIN */}
                 {role === "admin" && (
                   <>
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Manage Users"
                         to="/dashboard/manage-users"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl">
-                          <MdManageAccounts />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Manage Users
-                        </span>
+                        <MdManageAccounts className="text-2xl" />
+                        Manage Users
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="All Products"
                         to="/dashboard/all-products"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl">
-                          <AiFillProduct />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          All Products
-                        </span>
+                        <AiFillProduct className="text-2xl" />
+                        All Products
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="All Orders"
                         to="/dashboard/all-orders"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl ">
-                          <TiShoppingCart />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          All Orders
-                        </span>
+                        <TiShoppingCart className="text-2xl" />
+                        All Orders
                       </NavLink>
                     </li>
                   </>
                 )}
+
+                {/* MANAGER */}
                 {role === "manager" && (
                   <>
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Add Product"
-                        to="add-products"
+                        to="/dashboard/add-products"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl">
-                          <RiFunctionAddLine />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Add Product
-                        </span>
+                        <RiFunctionAddLine className="text-2xl" />
+                        Add Product
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Manage Products"
-                        to="manage-product"
+                        to="/dashboard/manage-product"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl">
-                          <AiFillProduct />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Manage Products
-                        </span>
+                        <AiFillProduct className="text-2xl" />
+                        Manage Products
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Pending Orders"
-                        to="pending-orders"
+                        to="/dashboard/pending-orders"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl ">
-                          <AiOutlineLoading3Quarters />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Pending Orders
-                        </span>
+                        <AiOutlineLoading3Quarters className="text-2xl" />
+                        Pending Orders
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Approve Orders"
-                        to="approved-orders"
+                        to="/dashboard/approved-orders"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-3xl  ">
-                          <IoCheckmarkDoneCircleSharp />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Approve Orders
-                        </span>
+                        <IoCheckmarkDoneCircleSharp className="text-2xl" />
+                        Approved Orders
                       </NavLink>
                     </li>
+
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="My Profile"
-                        to="my-profile"
+                        to="/dashboard/my-profile"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl ">
-                          <CgProfile />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          My Profile
-                        </span>
+                        <CgProfile className="text-2xl" />
+                        My Profile
                       </NavLink>
                     </li>
                   </>
                 )}
+
+                {/* BUYER */}
                 {role === "buyer" && (
                   <>
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="My Orders"
-                        to="my-orders"
+                        to="/dashboard/my-orders"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl">
-                          <MdManageAccounts />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          My Orders
-                        </span>
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="Track Orders"
-                        to="track-orders"
-                      >
-                        {/* Home icon */}
-                        <span className="text-2xl">
-                          <FaMapLocationDot />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          Track Orders
-                        </span>
+                        <TiShoppingCart className="text-2xl" />
+                        My Orders
                       </NavLink>
                     </li>
 
                     <li>
                       <NavLink
-                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                        data-tip="My Profile"
-                        to="my-profile"
+                        to="/dashboard/track-orders"
+                        className={navLinkClass}
                       >
-                        {/* Home icon */}
-                        <span className="text-2xl ">
-                          <CgProfile />
-                        </span>
-                        <span className="is-drawer-close:hidden">
-                          My Profile
-                        </span>
+                        <FaMapLocationDot className="text-2xl" />
+                        Track Orders
+                      </NavLink>
+                    </li>
+
+                    <li>
+                      <NavLink
+                        to="/dashboard/my-profile"
+                        className={navLinkClass}
+                      >
+                        <CgProfile className="text-2xl" />
+                        My Profile
                       </NavLink>
                     </li>
                   </>
                 )}
-
-                {/* List item */}
-                {/* <li>
-                  <NavLink
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Settings"
-                  >
-                    {/* Settings icon */}
-                {/* <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      strokeWidth="2"
-                      fill="none"
-                      stroke="currentColor"
-                      className="my-1.5 inline-block size-4"
-                    >
-                      <path d="M20 7h-9"></path>
-                      <path d="M14 17H5"></path>
-                      <circle cx="17" cy="17" r="3"></circle>
-                      <circle cx="7" cy="7" r="3"></circle>
-                    </svg> */}
-                {/* <span className="is-drawer-close:hidden">Settings</span> */}
-                {/* </NavLink> */}
-                {/* </li>  */}
               </ul>
-            </div>
+
+              {/* Bottom */}
+              <div
+                className="
+                p-5
+                border-t
+                border-sky-100
+                text-center
+              "
+              >
+                <p className="text-sm text-slate-500">© 2026 TEXORA Industry</p>
+              </div>
+            </aside>
           </div>
         </div>
       </div>
-      <Footer></Footer>
+
+      <Footer />
     </>
   );
 };

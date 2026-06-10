@@ -7,7 +7,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 const Allproduct = () => {
   const axiosSecure = useAxiosSecure();
 
-  //  GET ALL PRODUCTS
+  // GET ALL PRODUCTS
   const {
     data: products = [],
     isLoading,
@@ -20,16 +20,7 @@ const Allproduct = () => {
     },
   });
 
-  //  Loading state
-  if (isLoading) {
-    return (
-      <div className="flex min-h-screen justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
-      </div>
-    );
-  }
-
-  //  Error state
+  // Error state
   if (isError) {
     return (
       <div className="text-center py-10 text-red-500">
@@ -40,7 +31,7 @@ const Allproduct = () => {
 
   return (
     <>
-      {/*  HEADER */}
+      {/* HEADER */}
       <div className="text-center mb-6 mt-8 sm:mt-12 md:mt-15 px-4">
         {/* Title - Responsive font scaling */}
         <h1 className="font-bold text-xl sm:text-3xl md:text-4xl text-[#384bb4] font-serif">
@@ -54,16 +45,40 @@ const Allproduct = () => {
         </p>
       </div>
 
-      {/*  PRODUCT GRID */}
-      <div className="grid grid-cols-4 gap-1.5 sm:gap-4 md:gap-5 w-full">
-        {products.map((product) => (
-          <AllProdCard key={product._id} product={product} />
-        ))}
-      </div>
+      {/* PRODUCT GRID & SKELETON LOADING */}
+     <div className="grid grid-cols-4 gap-1.5 sm:gap-4 md:gap-5 w-full">
+  {isLoading
+    ? 
+      Array.from({ length: 8 }).map((_, index) => (
+        <div
+          key={index}
+          className="border border-gray-200 rounded-md md:rounded-lg p-2 sm:p-4 w-full space-y-3 animate-pulse"
+        >
+          {/* Product Image Skeleton */}
+          <div className="bg-gray-200 rounded-md w-full h-32 sm:h-48 md:h-56"></div>
+          
+          {/* Product Title Skeleton */}
+          <div className="space-y-2">
+            <div className="bg-gray-200 h-4 rounded w-3/4"></div>
+            <div className="bg-gray-200 h-3 rounded w-1/2"></div>
+          </div>
 
-      {/*  EMPTY STATE */}
-      {products.length === 0 && (
-        <div className="text-center text-gray-400 pb-10">
+          {/* Price and Button Skeleton */}
+          <div className="flex justify-between items-center pt-2">
+            <div className="bg-gray-200 h-4 rounded w-1/4"></div>
+            <div className="bg-gray-200 h-6 rounded w-1/3"></div>
+          </div>
+        </div>
+      ))
+    : 
+      products.map((product) => (
+        <AllProdCard key={product._id} product={product} />
+      ))}
+</div>
+
+      {/* EMPTY STATE */}
+      {!isLoading && products.length === 0 && (
+        <div className="text-center text-gray-400 pb-10 mt-6">
           No products available
         </div>
       )}
