@@ -41,19 +41,21 @@ const Allproduct = () => {
   return (
     <>
       {/*  HEADER */}
-      <div className="text-center  mt-10">
-        <h1 className="font-bold text-4xl text-[#384bb4] font-serif">
+      <div className="text-center mb-6 mt-8 sm:mt-12 md:mt-15 px-4">
+        {/* Title - Responsive font scaling */}
+        <h1 className="font-bold text-xl sm:text-3xl md:text-4xl text-[#384bb4] font-serif">
           All Products
         </h1>
 
-        <p className="text-xs mt-2">
-          Discover our high-quality garments ready for bulk production. <br />
-          Customizable to your brand&apos;s needs.
+        <p className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1.5 sm:mt-2 max-w-xl mx-auto leading-relaxed">
+          Discover our high-quality garments ready for bulk production.{" "}
+          <br className="hidden sm:block" />
+          Customizable to your brand's needs.
         </p>
       </div>
 
       {/*  PRODUCT GRID */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-8 grid grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+      <div className="grid grid-cols-4 gap-1.5 sm:gap-4 md:gap-5 w-full">
         {products.map((product) => (
           <AllProdCard key={product._id} product={product} />
         ))}

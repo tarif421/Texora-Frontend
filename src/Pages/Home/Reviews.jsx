@@ -18,7 +18,7 @@ const Reviews = ({ reviewsPromise }) => {
         <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-[#384bb4] mt-10 sm:mt-12 md:mt-15 font-serif">
           Customers Feedback
         </h1>
-        <p className="text-xs sm:text-sm mt-2">
+        <p className="text-xs text-gray-500 sm:text-sm mt-2">
           Crafting excellence through the eyes of our customers
         </p>
       </div>
@@ -29,7 +29,7 @@ const Reviews = ({ reviewsPromise }) => {
         grabCursor={true}
         centeredSlides={true}
         
-        /* ✅ KEY RESPONSIVE FIX */
+        /*  KEY RESPONSIVE FIX */
         breakpoints={{
           0: {
             slidesPerView: 1,

@@ -106,7 +106,7 @@ const Register = () => {
     <div className="min-h-screen flex items-center justify-center  px-4 py-10">
       <div className="w-full max-w-md">
         {/* Main Card */}
-        <div className="relative overflow-hidden rounded-[32px] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] border border-white/20 backdrop-blur-xl">
+        <div className=" backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden border border-white/20">
           
           {/* Top Gradient */}
           <div className="h-2 bg-gradient-to-r from-sky-700 via-blue-500 to-indigo-600"></div>
@@ -120,14 +120,14 @@ const Register = () => {
           >
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="mx-auto mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-sky-100 to-blue-100 shadow-inner">
+              <div className="mx-auto mb-5 flex h-20 w-20 items-center  justify-center rounded-full bg-gradient-to-br from-sky-100 to-blue-100 shadow-inner">
                 <UserPlus
                   size={34}
                   className="text-sky-700"
                 />
               </div>
 
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
+              <h1 className="text-3xl sm:text-4xl font-bold text-[#384bb4]">
                 Create Account
               </h1>
 
@@ -137,7 +137,7 @@ const Register = () => {
             </div>
 
             {/* Name */}
-            <div className="mb-5">
+            <div className="mb-5 text-gray-500">
               <label className="block mb-2 text-sm font-semibold text-gray-700">
                 Full Name
               </label>
@@ -166,7 +166,7 @@ const Register = () => {
             </div>
 
             {/* Photo */}
-            <div className="mb-5">
+            <div className="mb-5 text-gray-500">
               <label className="block mb-2 text-sm font-semibold text-gray-700">
                 Profile Photo
               </label>
@@ -195,12 +195,12 @@ const Register = () => {
             </div>
 
             {/* Email */}
-            <div className="mb-5">
+            <div className=" mb-5">
               <label className="block mb-2 text-sm font-semibold text-gray-700">
                 Email Address
               </label>
 
-              <div className="relative group">
+              <div className=" text-gray-500 relative group">
                 <Mail
                   size={18}
                   className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-sky-600 transition"
@@ -224,7 +224,7 @@ const Register = () => {
             </div>
 
             {/* Password */}
-            <div className="mb-3">
+            <div className="mb-3 text-gray-500">
               <label className="block mb-2 text-sm font-semibold text-gray-700">
                 Password
               </label>

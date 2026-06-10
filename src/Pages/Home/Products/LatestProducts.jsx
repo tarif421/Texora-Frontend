@@ -34,28 +34,29 @@ const LatestProducts = () => {
   return (
     <>
       {/* Title Section */}
-      <div className="mt-10 sm:mt-12 md:mt-15 px-4">
-        <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl text-center text-[#384bb4] font-serif">
+      <div className="text-center mt-8 sm:mt-12 md:mt-15 px-4">
+        <h1 className="font-bold text-xl sm:text-3xl md:text-4xl text-[#384bb4] font-serif">
           Latest Products
         </h1>
-        <p className="text-xs sm:text-sm text-center mt-2 max-w-xl mx-auto">
-          Discover our high-quality garments ready for bulk production.
+
+        <p className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1.5 sm:mt-2 max-w-xl mx-auto leading-relaxed">
+          Discover our high-quality garments ready for bulk production.{" "}
           <br className="hidden sm:block" />
           Customizable to your brand's needs.
         </p>
       </div>
 
-      {/* Products Grid */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-8 grid grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+      {/* 🛠️ Products Grid - Updated to strict 4 columns for mobile, tablet, and desktop */}
+      <div className="max-w-7xl mx-auto px-1.5 sm:px-4 md:px-6 py-8 grid grid-cols-4 gap-1.5 sm:gap-4 md:gap-5 w-full">
         {products.map((product) => (
           <Card key={product._id} product={product} />
         ))}
       </div>
 
       {/* Button */}
-      <div className="text-center mb-10">
+      <div className="text-center ">
         <Link to="/allProducts">
-          <button className="font-semibold text-base sm:text-lg md:text-xl text-[#384bb4] btn">
+          <button className="font-semibold text-xs sm:text-sm md:text-base text-[#384bb4] btn btn-xs sm:btn-sm md:btn-md bg-transparent border-[#384bb4] hover:bg-[#384bb4] hover:text-white transition-colors duration-300 rounded-md md:rounded-lg px-4 sm:px-6">
             View All Products →
           </button>
         </Link>

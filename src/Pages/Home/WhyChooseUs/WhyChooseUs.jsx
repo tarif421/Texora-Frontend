@@ -31,16 +31,16 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-10 sm:py-16 lg:py-24 px-3 sm:px-6 lg:px-8 bg-white rounded-3xl">
+    <section className="py-10 sm:py-16 lg:py-24 px-3 sm:px-6 lg:px-8  rounded-3xl">
       <div className="max-w-7xl mx-auto">
         
         {/* Heading Section  */}
         <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
-          <h2 className="font-bold text-4xl text-[#384bb4] font-serif">
+          <h2 className="font-bold text-xl sm:text-3xl md:text-4xl text-[#384bb4] font-serif">
             Why Choose Us
           </h2>
 
-          <p className="mt-2 text-[11px] sm:text-sm md:text-base text-black/60 leading-relaxed max-w-xl mx-auto">
+          <p className="mt-2 text-[11px] sm:text-sm md:text-base text-gray-500 leading-relaxed max-w-xl mx-auto">
             We provide premium quality products with trusted service and fast delivery for our valuable customers.
           </p>
         </div>

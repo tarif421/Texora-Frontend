@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  ShoppingCart,
-  Factory,
-  BadgeCheck,
-  Truck,
-} from "lucide-react";
+import { ShoppingCart, Factory, BadgeCheck, Truck } from "lucide-react";
 
 const workflowSteps = [
   {
@@ -47,21 +42,18 @@ const workflowSteps = [
 
 const WorkFlow = () => {
   return (
-    <section className="py-10 sm:py-16 lg:py-24 px-3 sm:px-6 lg:px-8  rounded-3xl">
-      <div className="max-w-7xl mx-auto">
-
+    <section className="   px-3 sm:px-6 lg:px-8  rounded-3xl">
+      <div className="max-w-7xl mx-auto ">
         {/* Heading Section */}
-        <div className="text-center mb-8 sm:mb-16 max-w-3xl mx-auto">
-       
-
-          <h2 className="font-bold text-4xl text-[#384bb4] font-serif">
+        <div className="text-center mt-8 sm:mt-12 md:mt-15 px-4 max-w-3xl mx-auto">
+          <h1 className="font-bold text-xl sm:text-3xl md:text-4xl text-[#384bb4] font-serif">
             Production Workflow
-          </h2>
+          </h1>
 
-          <p className="mt-2 text-[11px] sm:text-sm md:text-base text-black/60 leading-relaxed max-w-xl mx-auto">
-            A transparent and organized production process from order confirmation to final delivery.
+          <p className="text-[10px] sm:text-xs md:text-sm text-gray-500 mt-1.5 sm:mt-2 max-w-xl mx-auto leading-relaxed mb-8">
+            A transparent and organized production process from order
+            confirmation to final delivery.
           </p>
-           
         </div>
 
         {/* 2 Columns on Mobile, 4 Columns on Desktop */}
@@ -93,7 +85,6 @@ const WorkFlow = () => {
 
                   {/* Card Content with reduced padding on mobile */}
                   <div className="p-3 sm:p-6">
-                    
                     {/* Fluid Icon Size */}
                     <div className="w-8 h-8 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-white flex items-center justify-center shadow-xs border border-sky-100/50 mb-2 sm:mb-5">
                       <Icon className="w-4 h-4 sm:w-6 sm:h-6 text-sky-700" />
@@ -115,7 +106,6 @@ const WorkFlow = () => {
                 <div className="px-3 sm:px-6 pb-3 sm:pb-6">
                   <div className="h-0.5 sm:h-1 w-8 rounded-full bg-gradient-to-r from-sky-400 to-sky-600 transition-all duration-300 group-hover:w-16"></div>
                 </div>
-
               </div>
             );
           })}

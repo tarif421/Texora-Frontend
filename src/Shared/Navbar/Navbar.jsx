@@ -127,9 +127,9 @@ const Navbar = () => {
 
         {/*  Logo */}
         <Link to="/" className="flex items-center gap-2 ml-1 sm:ml-2">
-          <GiRolledCloth className="text-2xl sm:text-3xl text-[#192586]" />
+          <GiRolledCloth className="text-2xl sm:text-3xl text-[#5c6dc9]" />
 
-          <span className="text-xl sm:text-2xl font-bold text-[#192586] font-serif">
+          <span className="text-xl-[#5c6dc9] sm:text-2xl font-bold text-[#5c6dc9] font-serif">
             Texora
           </span>
         </Link>
@@ -187,7 +187,7 @@ const Navbar = () => {
             {/*  Login */}
             <Link
               to="/login"
-              className="btn btn-xs sm:btn-sm btn-ghost text-[#192586]"
+              className="btn btn-xs sm:btn-sm btn-ghost text-[#5c6dc9]"
             >
               Login
             </Link>

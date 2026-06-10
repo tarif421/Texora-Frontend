@@ -68,7 +68,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center  px-4 sm:px-6 lg:px-8 py-8">
       <div className="w-full max-w-md">
         {/* Card */}
-        <div className="bg-white/95 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden border border-white/20">
+        <div className=" backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden border border-white/20">
           {/* Top Design */}
           <div className="bg-gradient-to-r from-sky-700 via-blue-500 to-indigo-600 h-3"></div>
 
@@ -82,7 +82,7 @@ const Login = () => {
                 <LogIn className="text-sky-700" size={30} />
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#384bb4]">
                 Welcome Back
               </h2>
 
@@ -92,7 +92,7 @@ const Login = () => {
             </div>
 
             {/* Email */}
-            <div className="mb-5">
+            <div className="mb-5 text-gray-500">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Email Address
               </label>
@@ -121,7 +121,7 @@ const Login = () => {
             </div>
 
             {/* Password */}
-            <div className="mb-3">
+            <div className="mb-3 text-gray-500">
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Password
               </label>
