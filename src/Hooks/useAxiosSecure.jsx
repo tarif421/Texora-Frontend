@@ -2,11 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import useAuth from "../Hooks/useAuth";
 
-const baseURL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:3000"
-    : "https://texora-server-six.vercel.app";
-
+const baseURL = import.meta.env.VITE_API_URL || "https://texora-server-six.vercel.app";
 const axiosSecure = axios.create({
   baseURL: baseURL,
 });
