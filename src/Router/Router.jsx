@@ -39,6 +39,7 @@ import AboutUs from "../AboutUs/AboutUs";
 import ContactUs from "../ContactUs/ContactUs";
 import UpdateProduct from "../Pages/Dashboard/Admin/UpdateProduct";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import Blog from "../ContactUs/Blog/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: "/contactUS",
         Component: ContactUs,
+      },
+      {
+        path: "/blog",
+        Component: Blog,
       },
     ],
   },

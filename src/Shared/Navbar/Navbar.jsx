@@ -65,6 +65,20 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
+      {user && (
+        <li>
+          <NavLink
+            to="/blog"
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#192586] font-semibold"
+                : "hover:text-[#27379b] transition"
+            }
+          >
+            Blog
+          </NavLink>
+        </li>
+      )}
 
       <li>
         <NavLink
