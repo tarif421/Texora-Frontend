@@ -1,5 +1,5 @@
 import React from "react";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaFacebook, FaInstagram, FaLinkedin, FaLocationDot, FaXTwitter } from "react-icons/fa6";
 import { GiRolledCloth } from "react-icons/gi";
 import { IoCallSharp } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
@@ -8,11 +8,10 @@ const Footer = () => {
   return (
     <>
       {/* Main Footer */}
-      <section className="bg-[#1A1A1A] text-white mt-12 px-4 sm:px-6 md:px-10 py-10">
-        
+      <section className="bg-[#1e2238] text-white py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           
-          {/* Left */}
+          {/* Left - Brand & Socials */}
           <div>
             <div className="flex items-center gap-2">
               <span className="text-3xl sm:text-4xl">
@@ -27,9 +26,45 @@ const Footer = () => {
               Empowering garment factories with digital tools for better
               management, transparency, and efficiency.
             </p>
+
+            {/* Social Media Links */}
+            <div className="flex items-center gap-4 mt-6">
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-[#c6cbec] hover:text-white text-xl sm:text-2xl transition-all duration-300 transform hover:scale-110"
+              >
+                <FaFacebook />
+              </a>
+              <a 
+                href="https://twitter.com" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-[#c6cbec] hover:text-white text-xl sm:text-2xl transition-all duration-300 transform hover:scale-110"
+              >
+                <FaXTwitter />
+              </a>
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-[#c6cbec] hover:text-white text-xl sm:text-2xl transition-all duration-300 transform hover:scale-110"
+              >
+                <FaInstagram />
+              </a>
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="text-[#c6cbec] hover:text-white text-xl sm:text-2xl transition-all duration-300 transform hover:scale-110"
+              >
+                <FaLinkedin />
+              </a>
+            </div>
           </div>
 
-          {/* Center */}
+          {/* Center - Quick Links */}
           <div>
             <h2 className="text-lg sm:text-xl font-semibold mb-4">
               Quick Links
@@ -39,29 +74,25 @@ const Footer = () => {
               <a className="hover:text-white transition" href="">
                 Home
               </a>
-
               <a className="hover:text-white transition" href="">
                 All Products
               </a>
-
               <a className="hover:text-white transition" href="">
                 Login
               </a>
-
               <a className="hover:text-white transition" href="">
                 Register
               </a>
             </div>
           </div>
 
-          {/* Right */}
+          {/* Right - Contact */}
           <div>
             <h2 className="text-lg sm:text-xl font-semibold mb-4">
               Contact
             </h2>
 
             <div className="flex flex-col gap-3 text-sm sm:text-base text-[#c6cbec]">
-
               <div className="flex items-center gap-2">
                 <FaLocationDot className="text-white text-base" />
                 <p>Dhaka, Bangladesh</p>
@@ -76,7 +107,6 @@ const Footer = () => {
                 <IoCallSharp className="text-white text-base" />
                 <p>+880123837940</p>
               </div>
-
             </div>
           </div>
 
