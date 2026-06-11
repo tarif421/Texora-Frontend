@@ -86,7 +86,7 @@ const Blog = () => {
     : filteredPosts;
 
   return (
-    <div className="bg-gray-50 min-h-screen text-gray-800 font-sans antialiased">
+    <div className=" min-h-screen text-gray-800 font-sans antialiased">
       
       {/* Header Section */}
       <header className="bg-[#1e2238] text-white py-12 px-4 sm:py-20 sm:px-6 lg:px-8 text-center relative overflow-hidden">
@@ -103,7 +103,7 @@ const Blog = () => {
           </p>
 
           {/* Search Bar */}
-          <div className="mt-8 max-w-md mx-auto relative px-2 sm:px-0">
+          <div className="mt-8 max-w-md mx-auto relative border rounded-2xl px-2 sm:px-0">
             <FiSearch className="absolute left-6 sm:left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
             <input
               type="text"
